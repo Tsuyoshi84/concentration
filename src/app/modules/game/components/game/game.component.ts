@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.sass']
 })
 export class GameComponent implements OnInit {
+  cardCount: number;
 
   constructor() { }
 
   ngOnInit() {
+    // TODO: Change the fixed number
+    this.cardCount = 16;
   }
 
 }
