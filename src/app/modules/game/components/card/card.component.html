@@ -1,3 +1,8 @@
-<p>
-  {{card | json}}
-</p>
+<div class="container" (click)="flip()">
+  <div class="card" [ngClass]="{'flipped': flipped}">
+    <div class="front">F</div>
+    <div class="back">
+      {{card.number}}
+    </div>
+  </div>
+</div>

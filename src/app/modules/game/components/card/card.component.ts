@@ -8,10 +8,20 @@ import { Card } from '../../models/card';
 })
 export class CardComponent implements OnInit {
   @Input() card: Card;
+  flipped: boolean;
 
-  constructor() { }
+  constructor() {
+    this.flipped = false;
+  }
 
   ngOnInit() {
+  }
+
+  /**
+   * Flip card.
+   */
+  flip(): void {
+    this.flipped = !this.flipped;
   }
 
 }
