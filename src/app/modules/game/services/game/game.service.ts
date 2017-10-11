@@ -31,6 +31,12 @@ export class GameService {
     return this.cards;
   }
 
+  /**
+   * Store flipped card and check if flipped cards have the same number when two cards are flipped.
+   *
+   * @param card Flipped card.
+   * @returns Result and total number of flipping.
+   */
   flipCard(card: Card): { result: Result, flippedCount: number } {
     this.flippedCount++;
     card.flip();
@@ -46,6 +52,7 @@ export class GameService {
 
   private check(): Result {
     if (this.flippedCards[0].number === this.flippedCards[1].number) {
+      this.flippedCards.forEach(card => card.done = true);
       this.correctCards.concat(this.flippedCards);
       this.flippedCards.length = 0;
       return Result.Correct;
