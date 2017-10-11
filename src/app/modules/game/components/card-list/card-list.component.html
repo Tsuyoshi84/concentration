@@ -1,3 +1,5 @@
-<p>
-  <co-card *ngFor="let card of cards" [card]="card" (flipped)="onFlipped($event)"></co-card>
-</p>
+<div class="container">
+  <div class="card-box" *ngFor="let card of cards">
+    <co-card [card]="card" (flipped)="onFlipped($event)"></co-card>
+  </div>
+</div>
