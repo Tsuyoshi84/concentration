@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+import { NavigationModule } from './modules/navigation/navigation.module';
 import { GameModule } from './modules/game/game.module';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -13,6 +14,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    NavigationModule,
     GameModule
   ],
   providers: [],
