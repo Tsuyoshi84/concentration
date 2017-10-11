@@ -1,2 +1,14 @@
 .container
   text-align: center
+  height: 70px
+  .result
+    font-size: 60px
+    font-weight: bold
+    &.correct
+      background: -webkit-linear-gradient(#d3ff93, #019109)
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent
+    &.wrong
+      background: -webkit-linear-gradient(#fafafa, #ff0000)
+      -webkit-background-clip: text
+      -webkit-text-fill-color: transparent

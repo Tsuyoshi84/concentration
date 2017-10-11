@@ -19,6 +19,7 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "co",
       "styles": [
+        "../node_modules/animate.css/animate.min.css",
         "styles.sass"
       ],
       "scripts": [],

@@ -9,6 +9,7 @@ import { Result } from '../../enums/result.enum';
 })
 export class FlipResultComponent implements OnInit {
   message: string;
+  animateClasses: string[];
 
   constructor() { }
 
@@ -16,17 +17,27 @@ export class FlipResultComponent implements OnInit {
   }
 
   showResult(result: Result): void {
+    if (result === Result.None) { return; }
+
+    let fadeOutClass: string;
+
     switch (result) {
       case Result.Correct:
         this.message = 'Correct!';
+        this.animateClasses =  ['correct', 'animated', 'tada'];
+        fadeOutClass = 'fadeOutUp';
         break;
       case Result.Wrong:
         this.message = 'Wrong...';
-        break;
-      default:
-        this.message = '';
+        this.animateClasses = ['wrong', 'animated', 'shake'];
+        fadeOutClass = 'fadeOutDown';
         break;
     }
+
+    setTimeout(() => {
+      this.animateClasses.pop();
+      this.animateClasses.push(fadeOutClass);
+    }, 1500);
   }
 
 }
