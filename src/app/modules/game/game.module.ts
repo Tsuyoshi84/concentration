@@ -7,6 +7,7 @@ import { CardListComponent } from './components/card-list/card-list.component';
 import { GameComponent } from './components/game/game.component';
 import { CardComponent } from './components/card/card.component';
 import { GameService } from './services/game/game.service';
+import { FlipResultComponent } from './components/flip-result/flip-result.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,7 @@ import { GameService } from './services/game/game.service';
     GameRoutingModule,
     MatButtonModule
   ],
-  declarations: [CardListComponent, GameComponent, CardComponent],
+  declarations: [CardListComponent, GameComponent, CardComponent, FlipResultComponent],
   exports: [GameComponent],
   providers: [GameService]
 })

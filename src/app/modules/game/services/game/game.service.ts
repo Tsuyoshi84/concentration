@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Card } from '../../models/card';
+import { Result } from '../../enums/result.enum';
 
 @Injectable()
 export class GameService {
@@ -8,6 +9,7 @@ export class GameService {
   private correctCards: Card[] = [];
   /** Flipped card array */
   private flippedCards: Card[] = [];
+  private flippedCount: number;
 
   constructor() { }
 
@@ -19,6 +21,7 @@ export class GameService {
   startGame(): Card[] {
     this.correctCards.length = 0;
     this.flippedCards.length = 0;
+    this.flippedCount = 0;
 
     this.cards.push(new Card(1));
     this.cards.push(new Card(1));
@@ -28,24 +31,29 @@ export class GameService {
     return this.cards;
   }
 
-  flipCard(card: Card) {
+  flipCard(card: Card): Result {
+    this.flippedCount++;
     card.flip();
     this.flippedCards.push(card);
 
     // When a user flipped two cards, check if the number is same
     if (this.flippedCards.length === 2) {
-      this.check();
+      return this.check();
+    } else {
+      return Result.None;
     }
   }
 
-  private check(): void {
+  private check(): Result {
     if (this.flippedCards[0].number === this.flippedCards[1].number) {
       this.correctCards.concat(this.flippedCards);
+      this.flippedCards.length = 0;
+      return Result.Correct;
     } else {
       this.flippedCards.forEach(card => card.setBack());
+      this.flippedCards.length = 0;
+      return Result.Wrong;
     }
-
-    this.flippedCards.length = 0;
   }
 
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Card } from '../../models/card';
+import { Result } from '../../enums/result.enum';
 import { GameService } from '../../services/game/game.service';
+import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
 
 @Component({
   selector: 'co-game',
@@ -8,6 +10,8 @@ import { GameService } from '../../services/game/game.service';
   styleUrls: ['./game.component.sass'],
 })
 export class GameComponent implements OnInit {
+  @ViewChild(FlipResultComponent)
+  flipResult: FlipResultComponent;
   cardCount: number;
   cards: Card[] = [];
 
@@ -23,7 +27,15 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onFlipped(card: Card): void {
-    this.gameService.flipCard(card);
+    const result = this.gameService.flipCard(card);
+
+    if (result === Result.Correct) {
+      console.log('Correct!');
+    } else if (result === Result.Wrong) {
+      console.log('Wrong!');
+    }
+
+    this.flipResult.showResult(result);
   }
 
 }
