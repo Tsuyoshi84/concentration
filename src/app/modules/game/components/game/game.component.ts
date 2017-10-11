@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Card } from '../../models/card';
+import { GameService } from '../../services/game/game.service';
 
 @Component({
   selector: 'co-game',
@@ -7,12 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameComponent implements OnInit {
   cardCount: number;
+  cards: Card[] = [];
 
-  constructor() { }
+  constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    // TODO: Change the fixed number
-    this.cardCount = 16;
+    this.cards = this.gameService.startGame();
+  }
+
+  /**
+   * Handler that is called when a card is flipped.
+   *
+   * @param card Flipped card.
+   */
+  onFlipped(card: Card): void {
+    this.gameService.flipCard(card);
   }
 
 }

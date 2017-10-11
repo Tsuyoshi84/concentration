@@ -2,5 +2,5 @@
   game works!
 
   <button mat-button>Click me!</button>
-  <co-card-list [cardCount]="cardCount"></co-card-list>
+  <co-card-list [cards]="cards" (flipped)="onFlipped($event)"></co-card-list>
 </p>

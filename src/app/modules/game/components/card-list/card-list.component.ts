@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Card } from '../../models/card';
 
 @Component({
@@ -8,14 +8,21 @@ import { Card } from '../../models/card';
 })
 export class CardListComponent implements OnInit {
   @Input() cardCount: number;
-  cards: Card[] = [];
+  @Input() cards: Card[];
+  @Output() flipped = new EventEmitter<Card>();
 
   constructor() { }
 
   ngOnInit() {
-    for (let i = 0; i < this.cardCount; i++) {
-      this.cards.push(new Card(i));
-    }
+  }
+
+  /**
+   * Notify to the parent component that the given card is flipped.
+   *
+   * @param card Flipped card.
+   */
+  onFlipped(card: Card): void {
+    this.flipped.emit(card);
   }
 
 }

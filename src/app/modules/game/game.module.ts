@@ -6,6 +6,7 @@ import { GameRoutingModule } from './game-routing.module';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { GameComponent } from './components/game/game.component';
 import { CardComponent } from './components/card/card.component';
+import { GameService } from './services/game/game.service';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { CardComponent } from './components/card/card.component';
     MatButtonModule
   ],
   declarations: [CardListComponent, GameComponent, CardComponent],
-  exports: [GameComponent]
+  exports: [GameComponent],
+  providers: [GameService]
 })
 export class GameModule { }
