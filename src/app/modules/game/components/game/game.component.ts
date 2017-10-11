@@ -12,7 +12,8 @@ import { FlipResultComponent } from '../../components/flip-result/flip-result.co
 export class GameComponent implements OnInit {
   @ViewChild(FlipResultComponent)
   flipResult: FlipResultComponent;
-  cardCount: number;
+
+  flippedCount: number;
   cards: Card[] = [];
 
   constructor(private gameService: GameService) { }
@@ -27,14 +28,9 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onFlipped(card: Card): void {
-    const result = this.gameService.flipCard(card);
+    const { result, flippedCount } = this.gameService.flipCard(card);
 
-    if (result === Result.Correct) {
-      console.log('Correct!');
-    } else if (result === Result.Wrong) {
-      console.log('Wrong!');
-    }
-
+    this.flippedCount = flippedCount;
     this.flipResult.showResult(result);
   }
 

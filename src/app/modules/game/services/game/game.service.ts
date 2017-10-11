@@ -31,16 +31,16 @@ export class GameService {
     return this.cards;
   }
 
-  flipCard(card: Card): Result {
+  flipCard(card: Card): { result: Result, flippedCount: number } {
     this.flippedCount++;
     card.flip();
     this.flippedCards.push(card);
 
     // When a user flipped two cards, check if the number is same
     if (this.flippedCards.length === 2) {
-      return this.check();
+      return { result: this.check(), flippedCount: this.flippedCount };
     } else {
-      return Result.None;
+      return { result: Result.None, flippedCount: this.flippedCount };
     }
   }
 
