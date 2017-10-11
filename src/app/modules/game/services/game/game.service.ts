@@ -2,13 +2,27 @@ import { Injectable } from '@angular/core';
 import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 
+/**
+ * Bundle information related to card flipping.
+ */
+interface FlipResult {
+  /** Result of flipping card. */
+  result: Result;
+  /** Total number of flipping cards. */
+  flippedCount: number;
+}
+
 @Injectable()
 export class GameService {
+  /** Flipping card speed in ms. */
+  private readonly FLIPPING_PERIOD = 500;
+  /** Cards of the game */
   private cards: Card[] = [];
-  /** Cards that are */
+  /** Cards which a user flipped correctly */
   private correctCards: Card[] = [];
   /** Flipped card array */
   private flippedCards: Card[] = [];
+  /** Total number of flipping cards. */
   private flippedCount: number;
 
   constructor() { }
@@ -37,16 +51,22 @@ export class GameService {
    * @param card Flipped card.
    * @returns Result and total number of flipping.
    */
-  flipCard(card: Card): { result: Result, flippedCount: number } {
-    this.flippedCount++;
+  flipCard(card: Card): Promise<FlipResult> {
     card.flip();
+    this.flippedCount++;
     this.flippedCards.push(card);
 
     // When a user flipped two cards, check if the number is same
     if (this.flippedCards.length === 2) {
-      return { result: this.check(), flippedCount: this.flippedCount };
+      const promise = new Promise<FlipResult>((resolve) => {
+        // Wait for flipping card
+        setTimeout(() => {
+          resolve({ result: this.check(), flippedCount: this.flippedCount });
+        }, this.FLIPPING_PERIOD);
+      });
+      return promise;
     } else {
-      return { result: Result.None, flippedCount: this.flippedCount };
+      return Promise.resolve({ result: Result.None, flippedCount: this.flippedCount });
     }
   }
 

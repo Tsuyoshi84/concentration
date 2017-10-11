@@ -28,10 +28,10 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onFlipped(card: Card): void {
-    const { result, flippedCount } = this.gameService.flipCard(card);
-
-    this.flippedCount = flippedCount;
-    this.flipResult.showResult(result);
+    this.gameService.flipCard(card).then(({ result, flippedCount }) => {
+      this.flippedCount = flippedCount;
+      this.flipResult.showResult(result);
+    });
   }
 
 }
