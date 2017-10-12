@@ -7,7 +7,6 @@ import { Card } from '../../models/card';
   styleUrls: ['./card-list.component.sass']
 })
 export class CardListComponent implements OnInit {
-  @Input() cardCount: number;
   @Input() cards: Card[];
   @Output() flipped = new EventEmitter<Card>();
 
