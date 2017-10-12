@@ -98,6 +98,8 @@ export class GameComponent implements OnInit {
    * Flip all the unflipped card.
    */
   cheat(): void {
+    if (!this.canFlip) { return; }
+
     this.canFlip = false;
     this.gameService.cheat().then((cheatedCount) => {
       this.numOfCheating = cheatedCount;
