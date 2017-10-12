@@ -1,6 +1,8 @@
 # Concentration
 [![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration)
 
+This is a small project to play the concentration game (神経衰弱). You can play the game [here](https://tsuyoshi84.github.io/concentration/).
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
 
 ## Development server
@@ -25,7 +27,7 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 ## Deploy
 
-Run `npm run-script deploy` to deploy to the github page.
+Run `npm run-script deploy` to deploy the app to the github page.
 
 ## Further help
 
