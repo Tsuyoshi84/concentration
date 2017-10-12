@@ -36,6 +36,6 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # run tests!
-      - run: ng test --watch=false
+      - run: npm run-script test_without_watch
 
 
