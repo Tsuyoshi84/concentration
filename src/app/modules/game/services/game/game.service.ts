@@ -17,14 +17,18 @@ interface FlipResult {
 
 @Injectable()
 export class GameService {
-  /** Flipping card speed in ms. */
+  /** Flipping card speed in ms */
   private readonly FLIPPING_PERIOD = 500;
+  /** Cheating duration in ms */
+  private readonly CHEAT_DURATION = 1000;
   /** Cards of the game */
   private cards: Card[] = [];
   /** Flipped card array */
   private flippedCards: Card[] = [];
-  /** Total number of flipping cards. */
+  /** Total number of flipping cards */
   private flippedCount: number;
+  /** Total number of cheating */
+  private cheatedCount: number;
   /** Game status */
   private gameStatus: GameStatus;
 
@@ -41,11 +45,13 @@ export class GameService {
   startGame(numOfCard: number): Card[] {
     this.flippedCards.length = 0;
     this.flippedCount = 0;
+    this.cheatedCount = 0;
     this.gameStatus = GameStatus.Playing;
 
+    let id = 0;
     for (let i = 1; i <= numOfCard / 2; i++) {
-      this.cards.push(new Card(i));
-      this.cards.push(new Card(i));
+      this.cards.push(new Card(++id, i));
+      this.cards.push(new Card(++id, i));
     }
 
     this.cards = this.shuffle(this.cards);
@@ -94,6 +100,30 @@ export class GameService {
         gameStatus: this.gameStatus
       });
     }
+  }
+
+  /**
+   * Flip all the unflipped cards temporarily.
+   * This returns the number of cheating after unflipping via promise.
+   */
+  cheat(): Promise<number> {
+    this.cheatedCount++;
+
+    // Flip unflipped cards
+    const unflippedCards = this.cards.filter(card => {
+      return !this.flippedCards.find(c => c.id === card.id) && !card.done;
+    });
+    unflippedCards.forEach(c => c.flip());
+
+    const promise = new Promise<number>(resolve => {
+      setTimeout(() => {
+        // Unflip the cards to get the game condition back
+        unflippedCards.forEach(c => c.flip());
+        resolve(this.cheatedCount);
+      }, this.CHEAT_DURATION);
+    });
+
+    return promise;
   }
 
   /**

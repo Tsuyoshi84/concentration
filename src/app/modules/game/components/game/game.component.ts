@@ -28,18 +28,31 @@ export class GameComponent implements OnInit {
   @ViewChild(FlipResultComponent)
   flipResult: FlipResultComponent;
 
+  /** Store GameStatus enum to a variable so that it can be accessed from the view */
+  readonly GameStatus = GameStatus;
+
+  /** Number of flipping card */
   numOfFlipping: number;
+  /** Number of cheating */
+  numOfCheating: number;
+  /** Game status */
   gameStatus: GameStatus;
+  /** Cards used for the game */
   cards: Card[] = [];
-  showController: boolean;
-  showCards: boolean;
+  /** Indicates if the controller should be shown */
+  showsController: boolean;
+  /** Indicates if cards should be shown */
+  showsCards: boolean;
+  /** Indicate if a user can flip cards  */
+  canFlip: boolean;
 
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
-    this.numOfFlipping = 0;
-    this.showController = true;
+    this.canFlip = true;
+    this.showsController = true;
     this.gameStatus = this.gameService.getGameStatus();
+    this.initializeConditions();
   }
 
   /**
@@ -50,8 +63,8 @@ export class GameComponent implements OnInit {
   onStarted(numOfCard: number): void {
     this.cards = this.gameService.startGame(numOfCard);
     this.gameStatus = this.gameService.getGameStatus();
-    this.showController = false;
-    this.showCards = true;
+    this.showsController = false;
+    this.showsCards = true;
   }
 
   /**
@@ -59,9 +72,9 @@ export class GameComponent implements OnInit {
    */
   onRestarted(): void {
     this.gameService.reset();
-    this.showController = true;
-    this.showCards = false;
-    this.numOfFlipping = 0;
+    this.showsController = true;
+    this.showsCards = false;
+    this.initializeConditions();
   }
 
   /**
@@ -70,11 +83,33 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onFlipped(card: Card): void {
+    if (!this.canFlip) { return; }
+
+    this.canFlip = false;
     this.gameService.flipCard(card).then(({ result, flippedCount, gameStatus }) => {
       this.numOfFlipping = flippedCount;
       this.gameStatus = gameStatus;
       this.flipResult.showResult(result);
+      this.canFlip = true;
     });
   }
 
+  /**
+   * Flip all the unflipped card.
+   */
+  cheat(): void {
+    this.canFlip = false;
+    this.gameService.cheat().then((cheatedCount) => {
+      this.numOfCheating = cheatedCount;
+      this.canFlip = true;
+    });
+  }
+
+  /**
+   * Initialize game conditions.
+   */
+  private initializeConditions(): void {
+    this.numOfFlipping = 0;
+    this.numOfCheating = 0;
+  }
 }

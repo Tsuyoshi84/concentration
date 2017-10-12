@@ -1,9 +1,11 @@
 export class Card {
+  private _id: number;
   private _number: number;
   private _flipped: boolean;
   private _done: boolean;
 
-  constructor(number: number) {
+  constructor(id: number, number: number) {
+    this._id = id;
     this._number = number;
     this._flipped = false;
     this._done = false;
@@ -21,6 +23,13 @@ export class Card {
    */
   setBack(): void {
     this._flipped = false;
+  }
+
+  /**
+   * ID
+   */
+  get id(): number {
+    return this._id;
   }
 
   /**

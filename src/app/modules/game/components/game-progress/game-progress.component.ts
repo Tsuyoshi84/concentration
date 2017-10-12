@@ -8,6 +8,7 @@ import { GameStatus } from '../../enums/game-status.enum';
 })
 export class GameProgressComponent implements OnInit, OnChanges {
   @Input() numOfFlipping: number;
+  @Input() numOfCheating: number;
   @Input() gameStatus: GameStatus;
   @Output() restarted = new EventEmitter();
   restartBtnLabel: string;
