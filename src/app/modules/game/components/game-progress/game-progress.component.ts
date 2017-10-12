@@ -33,6 +33,9 @@ export class GameProgressComponent implements OnInit, OnChanges {
     this.restarted.emit();
   }
 
+  /**
+   * Change each variable values to update the view based on the game status.
+   */
   private updateView(): void {
     if (this.gameStatus === GameStatus.Clear) {
       this.isFinished = true;

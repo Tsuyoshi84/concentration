@@ -78,7 +78,7 @@ export class GameComponent implements OnInit {
   }
 
   /**
-   * Handler that is called when a card is flipped.
+   * Handler that is called when a user attempted to flip card.
    *
    * @param card Flipped card.
    */
