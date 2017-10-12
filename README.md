@@ -1,4 +1,5 @@
 # Concentration
+[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.4.4.
 
