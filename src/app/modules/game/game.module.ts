@@ -12,6 +12,7 @@ import { CardComponent } from './components/card/card.component';
 import { GameService } from './services/game/game.service';
 import { FlipResultComponent } from './components/flip-result/flip-result.component';
 import { GameControllerComponent } from './components/game-controller/game-controller.component';
+import { GameProgressComponent } from './components/game-progress/game-progress.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import { GameControllerComponent } from './components/game-controller/game-contr
     MatButtonModule,
     MatSelectModule
   ],
-  declarations: [CardListComponent, GameComponent, CardComponent, FlipResultComponent, GameControllerComponent],
+  declarations: [CardListComponent, GameComponent, CardComponent, FlipResultComponent, GameControllerComponent, GameProgressComponent],
   exports: [GameComponent],
   providers: [GameService]
 })

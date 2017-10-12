@@ -8,13 +8,21 @@ import { Result } from '../../enums/result.enum';
   styleUrls: ['./flip-result.component.sass']
 })
 export class FlipResultComponent implements OnInit {
+  /** Animation duration in ms */
+  private readonly ANIMATION_DURATION = 1000;
+  /** Result message */
   message: string;
+  /** Classes that controll animation */
   animateClasses: string[] = [];
+  /** Indicate if the result messsage should be shown */
+  showsMessage: boolean;
+  /** Timer */
   timer;
 
   constructor(private ref: ChangeDetectorRef) { }
 
   ngOnInit() {
+    this.reset();
   }
 
   /**
@@ -31,6 +39,7 @@ export class FlipResultComponent implements OnInit {
 
     // Rest animation classes. Use detectChanges to notify that the classes were changed.
     this.reset();
+    this.showsMessage = true;
     this.ref.detectChanges();
 
     let fadeOutClass: string;
@@ -39,13 +48,18 @@ export class FlipResultComponent implements OnInit {
     switch (result) {
       case Result.Correct:
         this.message = 'Correct!';
-        this.animateClasses =  ['correct', 'animated', 'tada'];
+        this.animateClasses =  ['correct', 'animated', 'pulse'];
         fadeOutClass = 'fadeOutUp';
         break;
       case Result.Wrong:
         this.message = 'Wrong...';
         this.animateClasses = ['wrong', 'animated', 'shake'];
         fadeOutClass = 'fadeOutDown';
+        break;
+      case Result.Finish:
+        this.message = `Congrats!\nYou've finished!!`;
+        this.animateClasses =  ['finish', 'animated', 'tada'];
+        fadeOutClass = 'fadeOutUp';
         break;
     }
 
@@ -54,7 +68,11 @@ export class FlipResultComponent implements OnInit {
       this.animateClasses.pop();
       this.animateClasses.push(fadeOutClass);
       this.timer = undefined;
-    }, 1000);
+
+      this.timer = setTimeout(() => {
+        this.showsMessage = false;
+      }, this.ANIMATION_DURATION);
+    }, this.ANIMATION_DURATION);
   }
 
   /**
@@ -63,6 +81,7 @@ export class FlipResultComponent implements OnInit {
   private reset(): void {
     this.animateClasses.length = 0;
     this.message = '';
+    this.showsMessage = false;
   }
 
 }

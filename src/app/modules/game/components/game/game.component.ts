@@ -5,6 +5,7 @@ import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameService } from '../../services/game/game.service';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
+import { GameStatus } from '../../enums/game-status.enum';
 
 @Component({
   selector: 'co-game',
@@ -27,7 +28,8 @@ export class GameComponent implements OnInit {
   @ViewChild(FlipResultComponent)
   flipResult: FlipResultComponent;
 
-  flippedCount: number;
+  numOfFlipping: number;
+  gameStatus: GameStatus;
   cards: Card[] = [];
   showController: boolean;
   showCards: boolean;
@@ -35,13 +37,31 @@ export class GameComponent implements OnInit {
   constructor(private gameService: GameService) { }
 
   ngOnInit() {
+    this.numOfFlipping = 0;
     this.showController = true;
+    this.gameStatus = this.gameService.getGameStatus();
   }
 
+  /**
+   * Handler that is called when a user starts the game.
+   *
+   * @param numOfCard Specified number of cards.
+   */
   onStarted(numOfCard: number): void {
     this.cards = this.gameService.startGame(numOfCard);
+    this.gameStatus = this.gameService.getGameStatus();
     this.showController = false;
     this.showCards = true;
+  }
+
+  /**
+   * Handler that is called when resetting the game.
+   */
+  onRestarted(): void {
+    this.gameService.reset();
+    this.showController = true;
+    this.showCards = false;
+    this.numOfFlipping = 0;
   }
 
   /**
@@ -50,8 +70,9 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onFlipped(card: Card): void {
-    this.gameService.flipCard(card).then(({ result, flippedCount }) => {
-      this.flippedCount = flippedCount;
+    this.gameService.flipCard(card).then(({ result, flippedCount, gameStatus }) => {
+      this.numOfFlipping = flippedCount;
+      this.gameStatus = gameStatus;
       this.flipResult.showResult(result);
     });
   }

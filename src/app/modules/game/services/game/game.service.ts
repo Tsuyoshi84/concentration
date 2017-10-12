@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
+import { GameStatus } from '../../enums/game-status.enum';
 
 /**
  * Bundle information related to card flipping.
@@ -10,6 +11,8 @@ interface FlipResult {
   result: Result;
   /** Total number of flipping cards. */
   flippedCount: number;
+  /** Game status. */
+  gameStatus: GameStatus;
 }
 
 @Injectable()
@@ -18,14 +21,16 @@ export class GameService {
   private readonly FLIPPING_PERIOD = 500;
   /** Cards of the game */
   private cards: Card[] = [];
-  /** Cards which a user flipped correctly */
-  private correctCards: Card[] = [];
   /** Flipped card array */
   private flippedCards: Card[] = [];
   /** Total number of flipping cards. */
   private flippedCount: number;
+  /** Game status */
+  private gameStatus: GameStatus;
 
-  constructor() { }
+  constructor() {
+    this.gameStatus = GameStatus.NotPlaying;
+   }
 
   /**
    * Reset the game state and generate cards to play the game.
@@ -34,9 +39,9 @@ export class GameService {
    * @returns Generated cards.
    */
   startGame(numOfCard: number): Card[] {
-    this.correctCards.length = 0;
     this.flippedCards.length = 0;
     this.flippedCount = 0;
+    this.gameStatus = GameStatus.Playing;
 
     for (let i = 1; i <= numOfCard / 2; i++) {
       this.cards.push(new Card(i));
@@ -46,6 +51,16 @@ export class GameService {
     this.cards = this.shuffle(this.cards);
 
     return this.cards;
+  }
+
+  /**
+   * Reset the game conditions.
+   */
+  reset(): void {
+    this.cards.length = 0;
+    this.flippedCards.length = 0;
+    this.flippedCount = 0;
+    this.gameStatus = GameStatus.NotPlaying;
   }
 
   /**
@@ -64,13 +79,28 @@ export class GameService {
       const promise = new Promise<FlipResult>((resolve) => {
         // Wait for flipping card
         setTimeout(() => {
-          resolve({ result: this.check(), flippedCount: this.flippedCount });
+          resolve({
+            result: this.check(),
+            flippedCount: this.flippedCount,
+            gameStatus: this.gameStatus
+          });
         }, this.FLIPPING_PERIOD);
       });
       return promise;
     } else {
-      return Promise.resolve({ result: Result.None, flippedCount: this.flippedCount });
+      return Promise.resolve({
+        result: Result.None,
+        flippedCount: this.flippedCount,
+        gameStatus: this.gameStatus
+      });
     }
+  }
+
+  /**
+   * Get the current game status.
+   */
+  getGameStatus(): GameStatus {
+    return this.gameStatus;
   }
 
   private shuffle<T>(items: T[]): T[] {
@@ -90,9 +120,13 @@ export class GameService {
   private check(): Result {
     if (this.flippedCards[0].number === this.flippedCards[1].number) {
       this.flippedCards.forEach(card => card.done = true);
-      this.correctCards.concat(this.flippedCards);
       this.flippedCards.length = 0;
-      return Result.Correct;
+
+      if (this.cards.filter(c => !c.done).length === 0) {
+        this.gameStatus = GameStatus.Clear;
+      }
+
+      return this.gameStatus === GameStatus.Clear ? Result.Finish : Result.Correct;
     } else {
       this.flippedCards.forEach(card => card.setBack());
       this.flippedCards.length = 0;

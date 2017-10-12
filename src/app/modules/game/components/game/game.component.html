@@ -4,7 +4,9 @@
   </div>
 
   <div *ngIf="showCards" [@switchView]>
-    Flipping: {{flippedCount}}
+    <div class="progress-container">
+      <co-game-progress [numOfFlipping]="numOfFlipping" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
+    </div>
     <co-flip-result></co-flip-result>
     <co-card-list [cards]="cards" (flipped)="onFlipped($event)"></co-card-list>
   </div>
