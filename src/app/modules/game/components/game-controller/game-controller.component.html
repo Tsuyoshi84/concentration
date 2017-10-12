@@ -1,0 +1,13 @@
+<div class="container">
+  <p class="mat-display-1">Select the number of cards and click Start button :)</p>
+
+  <mat-form-field>
+    <mat-select placeholder="Difficulty" [(ngModel)]="numOfCard">
+      <mat-option *ngFor="let diff of difficulties" [value]="diff.num">
+        {{ diff.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="start-button" (click)="start()" >Start!</button>
+</div>

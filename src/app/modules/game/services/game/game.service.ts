@@ -30,17 +30,20 @@ export class GameService {
   /**
    * Reset the game state and generate cards to play the game.
    *
+   * @param numOfCard Number of cards to generate.
    * @returns Generated cards.
    */
-  startGame(): Card[] {
+  startGame(numOfCard: number): Card[] {
     this.correctCards.length = 0;
     this.flippedCards.length = 0;
     this.flippedCount = 0;
 
-    this.cards.push(new Card(1));
-    this.cards.push(new Card(1));
-    this.cards.push(new Card(2));
-    this.cards.push(new Card(2));
+    for (let i = 1; i <= numOfCard / 2; i++) {
+      this.cards.push(new Card(i));
+      this.cards.push(new Card(i));
+    }
+
+    this.cards = this.shuffle(this.cards);
 
     return this.cards;
   }
@@ -68,6 +71,20 @@ export class GameService {
     } else {
       return Promise.resolve({ result: Result.None, flippedCount: this.flippedCount });
     }
+  }
+
+  private shuffle<T>(items: T[]): T[] {
+    let temp: T;
+    let randIndex: number;
+
+    for (let i = 0; i < items.length; i++) {
+      randIndex = Math.floor(Math.random() * items.length);
+      temp = items[i];
+      items[i] = items[randIndex];
+      items[randIndex] = temp;
+    }
+
+    return items;
   }
 
   private check(): Result {
