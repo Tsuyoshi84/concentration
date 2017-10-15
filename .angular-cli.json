@@ -20,6 +20,7 @@
       "prefix": "co",
       "styles": [
         "../node_modules/animate.css/animate.min.css",
+        "../node_modules/font-awesome/css/font-awesome.min.css",
         "styles.sass"
       ],
       "scripts": [],
