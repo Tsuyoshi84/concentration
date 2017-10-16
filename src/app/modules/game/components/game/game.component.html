@@ -1,5 +1,5 @@
 <div>
-  <div class="controller" *ngIf="showsController" [@switchView]>
+  <div *ngIf="showsController" [@switchView]>
     <co-game-controller (started)="onStarted($event)"></co-game-controller>
   </div>
 
