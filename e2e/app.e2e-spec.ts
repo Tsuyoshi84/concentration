@@ -5,10 +5,14 @@ describe('concentration App', () => {
 
   beforeEach(() => {
     page = new AppPage();
+    page.navigateTo();
   });
 
-  it('should display welcome message', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to co!');
+  it('should have navigation text', () => {
+    expect(page.getNav().getText()).toEqual('Concentration');
+  });
+
+  it('should have footer text', () => {
+    expect(page.getFooter().getText()).toEqual('Concentration');
   });
 });
