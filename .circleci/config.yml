@@ -38,4 +38,11 @@ jobs:
       # run tests!
       - run: npm run-script test_without_watch
 
+      - run: npm run-script e2e
+
+      - store_artifacts:
+          path: ~/repo/coverage
+          destination: coverage
+
+
 
