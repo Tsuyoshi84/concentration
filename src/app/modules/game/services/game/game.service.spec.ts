@@ -127,7 +127,18 @@ describe('GameService', () => {
         result: Result.Finish
       });
     })));
+  });
 
+  describe('#cheat', () => {
+    it('should increase the number of cheating', async(inject([GameService], async (service: GameService) => {
+      const cards = service.startGame(4);
+
+      let numOfCheating = await service.cheat();
+      expect(numOfCheating).toBe(1);
+
+      numOfCheating = await service.cheat();
+      expect(numOfCheating).toBe(2);
+    })));
   });
 
 });
