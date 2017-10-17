@@ -1,5 +1,5 @@
 # Concentration
-[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration) [![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg?branch=feature%2F4_coverage)](https://coveralls.io/github/Tsuyoshi84/concentration?branch=feature%2F4_coverage)
+[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration) [![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg)](https://coveralls.io/github/Tsuyoshi84/concentration)
 
 This is a small project to play the concentration game (神経衰弱). You can play the game [here](https://tsuyoshi84.github.io/concentration/).
 
