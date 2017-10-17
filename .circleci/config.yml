@@ -39,7 +39,7 @@ jobs:
       - run: npm run-script test_without_watch
 
       - store_artifacts:
-          paths: ~/repo/coverage
+          path: ~/repo/coverage
           destination: coverage
 
 
