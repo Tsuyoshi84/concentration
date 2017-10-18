@@ -78,13 +78,14 @@ export class GameComponent implements OnInit {
   }
 
   /**
-   * Handler that is called when a user attempted to flip card.
+   * Handler that is called when a user clicked a card.
    *
    * @param card Flipped card.
    */
-  onFlipped(card: Card): void {
+  onCardClicked(card: Card): void {
     if (!this.canFlip) { return; }
 
+    // If the given card is not flipped, flip it
     this.canFlip = false;
     this.gameService.flipCard(card).then(({ result, flippedCount, gameStatus }) => {
       this.numOfFlipping = flippedCount;

@@ -8,7 +8,7 @@ import { Card } from '../../models/card';
 })
 export class CardComponent implements OnInit {
   @Input() card: Card;
-  @Output() flipped = new EventEmitter<Card>();
+  @Output() clicked = new EventEmitter<Card>();
 
   constructor() {
   }
@@ -17,11 +17,12 @@ export class CardComponent implements OnInit {
   }
 
   /**
-   * Flip card.
+   * Handler called when a card is clicked.
+   * Raise an event to notify the click event.
    */
-  flip(): void {
+  onClicked(): void {
     if (!this.card.flipped) {
-      this.flipped.emit(this.card);
+      this.clicked.emit(this.card);
     }
   }
 

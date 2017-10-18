@@ -35,7 +35,7 @@ describe('CardComponent', () => {
 
   it('should raise flipped event when clicked', () => {
     let clickedCard;
-    component.flipped.subscribe(c => clickedCard = c);
+    component.clicked.subscribe(c => clickedCard = c);
 
     cardEl.triggerEventHandler('click', null);
     expect(clickedCard).toBe(card);
