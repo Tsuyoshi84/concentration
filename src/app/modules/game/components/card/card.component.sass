@@ -1,6 +1,11 @@
+@import '~variables.sass'
+
+$card-size-sm: 60px
+$card-size-md: 100px
+
 .container
-  width: 100px
-  height: 100px
+  width: $card-size-md
+  height: $card-size-md
   position: relative
   perspective: 800px
 .card
@@ -28,13 +33,13 @@
     display: block
     height: 100%
     width: 100%
-    line-height: 100px
+    line-height: $card-size-md
     text-align: center
     font-weight: bold
     font-size: 50px
     position: absolute
     backface-visibility: hidden
-    transition: all 0.3s ease-in-out
+    transition: transform, color 0.3s ease-in-out
   .front
     background-color: #f0f0f0
     cursor: pointer
@@ -42,3 +47,11 @@
     transform: rotateY(180deg)
     &.done
       color: #8fd08f
+
+@media only screen and (max-width : $device-size-md)
+  .container
+    width: $card-size-sm
+    height: $card-size-sm
+  .card
+    .front, .back
+      line-height: $card-size-sm
