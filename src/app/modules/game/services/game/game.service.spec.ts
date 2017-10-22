@@ -153,15 +153,17 @@ describe('GameService', () => {
   });
 
   describe('#cheat', () => {
-    it('should increase the number of cheating', async(inject([GameService], async (service: GameService) => {
+    it('should increase the number of cheating', inject([GameService], (service: GameService) => {
       const cards = service.startGame(4);
 
-      let numOfCheating = await service.cheat();
-      expect(numOfCheating).toBe(1);
+      service.cheat().subscribe(numOfCheating => {
+        expect(numOfCheating).toBe(1);
+      });
 
-      numOfCheating = await service.cheat();
-      expect(numOfCheating).toBe(2);
-    })));
+      service.cheat().subscribe(numOfCheating => {
+        expect(numOfCheating).toBe(2);
+      });
+    }));
   });
 
 });
