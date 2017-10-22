@@ -3,12 +3,14 @@ import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameStatus } from '../../enums/game-status.enum';
 
+import { Observable } from 'rxjs/Observable';
+
 /**
  * Bundle information related to card flipping.
  */
 interface FlipResult {
   /** Result of flipping card. */
-  result: Result;
+  result?: Result;
   /** Total number of flipping cards. */
   flippedCount: number;
   /** Game status. */
@@ -17,8 +19,10 @@ interface FlipResult {
 
 @Injectable()
 export class GameService {
-  /** Flipping card speed in ms */
-  private readonly FLIPPING_PERIOD = 500;
+  /** Flipping card time duration in ms */
+  private readonly FLIPPING_DURATION = 300;
+  /** Time duration before unflipping when flipped cards are wrong */
+  private readonly CARD_HOLD_DURATION = 500;
   /** Cheating duration in ms */
   private readonly CHEAT_DURATION = 1000;
   /** Cards of the game */
@@ -75,55 +79,66 @@ export class GameService {
    * @param card Flipped card.
    * @returns Result and total number of flipping.
    */
-  flipCard(card: Card): Promise<FlipResult> {
+  flipCard(card: Card): Observable<FlipResult> {
     card.flip();
     this.flippedCount++;
     this.flippedCards.push(card);
 
-    // When a user flipped two cards, check if the number is same
-    if (this.flippedCards.length === 2) {
-      const promise = new Promise<FlipResult>((resolve) => {
-        // Wait for flipping card
-        setTimeout(() => {
-          resolve({
-            result: this.check(),
-            flippedCount: this.flippedCount,
-            gameStatus: this.gameStatus
-          });
-        }, this.FLIPPING_PERIOD);
-      });
-      return promise;
-    } else {
-      return Promise.resolve({
-        result: Result.None,
+    return Observable.create(observer => {
+      observer.next({
         flippedCount: this.flippedCount,
         gameStatus: this.gameStatus
       });
-    }
+
+      if (this.flippedCards.length === 2) {
+        setTimeout(() => {
+          const result = this.check();
+          observer.next({
+            result: result,
+            flippedCount: this.flippedCount,
+            gameStatus: this.gameStatus
+          });
+
+          if (result === Result.Wrong) {
+            setTimeout(() => {
+              // If wrong, wait certain time before unflipping cards
+              this.flippedCards.forEach(c => c.setBack());
+              this.flippedCards.length = 0;
+              observer.complete();
+            }, this.CARD_HOLD_DURATION);
+          } else {
+            this.flippedCards.length = 0;
+            observer.complete();
+          }
+        }, this.FLIPPING_DURATION);
+      } else {
+        observer.complete();
+      }
+    });
   }
 
   /**
    * Flip all the unflipped cards temporarily.
    * This returns the number of cheating after unflipping via promise.
    */
-  cheat(): Promise<number> {
+  cheat(): Observable<number> {
     this.cheatedCount++;
-
     // Flip unflipped cards
     const unflippedCards = this.cards.filter(card => {
       return !this.flippedCards.find(c => c.id === card.id) && !card.done;
     });
     unflippedCards.forEach(c => c.flip());
 
-    const promise = new Promise<number>(resolve => {
+    return Observable.create(observer => {
+      observer.next(this.cheatedCount);
+
       setTimeout(() => {
         // Unflip the cards to get the game condition back
         unflippedCards.forEach(c => c.flip());
-        resolve(this.cheatedCount);
+
+        setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
       }, this.CHEAT_DURATION);
     });
-
-    return promise;
   }
 
   /**
@@ -150,16 +165,12 @@ export class GameService {
   private check(): Result {
     if (this.flippedCards[0].number === this.flippedCards[1].number) {
       this.flippedCards.forEach(card => card.done = true);
-      this.flippedCards.length = 0;
-
       if (this.cards.filter(c => !c.done).length === 0) {
         this.gameStatus = GameStatus.Clear;
       }
 
       return this.gameStatus === GameStatus.Clear ? Result.Finish : Result.Correct;
     } else {
-      this.flippedCards.forEach(card => card.setBack());
-      this.flippedCards.length = 0;
       return Result.Wrong;
     }
   }

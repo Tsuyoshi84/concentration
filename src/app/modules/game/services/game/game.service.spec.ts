@@ -58,37 +58,45 @@ describe('GameService', () => {
       expect(cards[0].flipped).toBeTruthy();
     }));
 
-    it('should return appropriate result when flipping the first card', async(inject([GameService], async (service: GameService) => {
+    it('should return appropriate result when flipping the first card', inject([GameService], (service: GameService) => {
       const cards = service.startGame(4);
 
-      const result = await service.flipCard(cards[0]);
+      const subscription = service.flipCard(cards[0]);
 
-      expect(result).toEqual({
-        flippedCount: 1,
-        gameStatus: GameStatus.Playing,
-        result: Result.None
+      subscription.subscribe((result) => {
+        expect(result).toEqual({
+          flippedCount: 1,
+          gameStatus: GameStatus.Playing,
+        });
       });
-    })));
+    }));
 
-    it('should return appropriate result when flipping two correct cards', async(inject([GameService], async (service: GameService) => {
+    it('should return appropriate result when flipping two correct cards', inject([GameService], (service: GameService) => {
       const cards = service.startGame(4);
 
       const sameCards = cards.filter(card => card.number === 1);
 
       // Flip first card
-      await service.flipCard(sameCards[0]);
+      service.flipCard(sameCards[0]);
 
       // Flip second card
-      const result = await service.flipCard(sameCards[1]);
+      const subscription = service.flipCard(sameCards[1]);
 
-      expect(result).toEqual({
-        flippedCount: 2,
-        gameStatus: GameStatus.Playing,
-        result: Result.Correct
+      let count = 0;
+      subscription.subscribe(result => {
+        count++;
+        // Check the value when the second event comes
+        if (count === 2) {
+          expect(result).toEqual({
+            flippedCount: 2,
+            gameStatus: GameStatus.Playing,
+            result: Result.Correct
+          });
+        }
       });
-    })));
+    }));
 
-    it('should return appropriate result when flipping two wrong cards', async(inject([GameService], async (service: GameService) => {
+    it('should return appropriate result when flipping two wrong cards', inject([GameService],  (service: GameService) => {
       const cards = service.startGame(4);
 
       // Get two different cards
@@ -96,37 +104,52 @@ describe('GameService', () => {
       const card2 = cards.filter(card => card.number === 2)[0];
 
       // Flip a card which has 1
-      await service.flipCard(card1);
+      service.flipCard(card1);
 
       // Flip a card which has 2
-      const result = await service.flipCard(card2);
+      const subscription = service.flipCard(card2);
 
-      expect(result).toEqual({
-        flippedCount: 2,
-        gameStatus: GameStatus.Playing,
-        result: Result.Wrong
+      let count = 0;
+      subscription.subscribe(result => {
+        count++;
+        // Check the value when the second event comes
+        if (count === 2) {
+          expect(result).toEqual({
+            flippedCount: 2,
+            gameStatus: GameStatus.Playing,
+            result: Result.Wrong
+          });
+        }
       });
-    })));
+    }));
 
-    it('should return appropriate result when finishing the game', async(inject([GameService], async (service: GameService) => {
+    it('should return appropriate result when finishing the game', inject([GameService], (service: GameService) => {
       const cards = service.startGame(4);
 
       const cards1 = cards.filter(card => card.number === 1);
       const cards2 = cards.filter(card => card.number === 2);
 
-      await service.flipCard(cards1[0]);
-      await service.flipCard(cards1[1]);
-      await service.flipCard(cards2[0]);
+      service.flipCard(cards1[0]);
+      service.flipCard(cards1[1]);
+      service.flipCard(cards2[0]);
 
       // Flip the last card
-      const result = await service.flipCard(cards2[1]);
+      const subscription = service.flipCard(cards2[1]);
 
-      expect(result).toEqual({
-        flippedCount: 4,
-        gameStatus: GameStatus.Clear,
-        result: Result.Finish
+      let count = 0;
+      subscription.subscribe(result => {
+        count++;
+        // Check the value when the second event comes
+        if (count === 2) {
+          expect(result).toEqual({
+            flippedCount: 4,
+            gameStatus: GameStatus.Clear,
+            result: Result.Finish
+          });
+        }
       });
-    })));
+
+    }));
   });
 
   describe('#cheat', () => {
