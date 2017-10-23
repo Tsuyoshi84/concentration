@@ -78,20 +78,26 @@ export class GameComponent implements OnInit {
   }
 
   /**
-   * Handler that is called when a user attempted to flip card.
+   * Handler that is called when a user clicked a card.
    *
    * @param card Flipped card.
    */
-  onFlipped(card: Card): void {
+  onCardClicked(card: Card): void {
     if (!this.canFlip) { return; }
 
+    // If the given card is not flipped, flip it
     this.canFlip = false;
-    this.gameService.flipCard(card).then(({ result, flippedCount, gameStatus }) => {
-      this.numOfFlipping = flippedCount;
-      this.gameStatus = gameStatus;
-      this.flipResult.showResult(result);
-      this.canFlip = true;
-    });
+    this.gameService.flipCard(card).subscribe(
+      ({ result, flippedCount, gameStatus }) => {
+        this.numOfFlipping = flippedCount;
+        this.gameStatus = gameStatus;
+
+        if (result) {
+          this.flipResult.showResult(result);
+        }
+      },
+      e => console.error(e),
+      () => { this.canFlip = true; console.log('complete'); });
   }
 
   /**
@@ -101,10 +107,11 @@ export class GameComponent implements OnInit {
     if (!this.canFlip) { return; }
 
     this.canFlip = false;
-    this.gameService.cheat().then((cheatedCount) => {
-      this.numOfCheating = cheatedCount;
-      this.canFlip = true;
-    });
+    this.gameService.cheat().subscribe(
+      cheatedCount => {
+        this.numOfCheating = cheatedCount;
+      }, e => console.error(e),
+      () => this.canFlip = true);
   }
 
   /**

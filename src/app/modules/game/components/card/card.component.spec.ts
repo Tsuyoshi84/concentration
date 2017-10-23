@@ -2,10 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CardComponent } from './card.component';
 import { Card } from '../../models/card';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 describe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
+  let cardEl: DebugElement;
+  let card;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,11 +21,23 @@ describe('CardComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
-    component.card = new Card(1, 1);
+
+    card = new Card(1, 1);
+    component.card = card;
     fixture.detectChanges();
+
+    cardEl = fixture.debugElement.query(By.css('.container'));
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should raise flipped event when clicked', () => {
+    let clickedCard;
+    component.clicked.subscribe(c => clickedCard = c);
+
+    cardEl.triggerEventHandler('click', null);
+    expect(clickedCard).toBe(card);
   });
 });

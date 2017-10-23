@@ -12,17 +12,16 @@ export class GameProgressComponent implements OnInit, OnChanges {
   @Input() gameStatus: GameStatus;
   @Output() restarted = new EventEmitter();
   restartBtnLabel: string;
-  isFinished: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    this.updateView();
+    this.updateView(this.gameStatus);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.gameStatus && changes.gameStatus.currentValue) {
-      this.updateView();
+    if (changes.gameStatus && typeof changes.gameStatus.currentValue === 'number') {
+      this.updateView(changes.gameStatus.currentValue);
     }
   }
 
@@ -35,13 +34,13 @@ export class GameProgressComponent implements OnInit, OnChanges {
 
   /**
    * Change each variable values to update the view based on the game status.
+   *
+   * @param gameStatus Game status.
    */
-  private updateView(): void {
-    if (this.gameStatus === GameStatus.Clear) {
-      this.isFinished = true;
+  private updateView(gameStatus: GameStatus): void {
+    if (gameStatus === GameStatus.Clear) {
       this.restartBtnLabel = 'Play again';
     } else {
-      this.isFinished = false;
       this.restartBtnLabel = 'Restart';
     }
   }

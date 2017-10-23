@@ -5,11 +5,12 @@
   },
   "apps": [
     {
+      "serviceWorker": true,
       "root": "src",
       "outDir": "dist",
       "assets": [
         "assets",
-        "favicon.ico"
+        "manifest.json"
       ],
       "index": "index.html",
       "main": "main.ts",
@@ -20,7 +21,8 @@
       "prefix": "co",
       "styles": [
         "../node_modules/animate.css/animate.min.css",
-        "styles.sass"
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "style/styles.sass"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

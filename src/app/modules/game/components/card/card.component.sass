@@ -1,6 +1,11 @@
+@import '~style/_variables.sass'
+
+$card-size-sm: 60px
+$card-size-md: 100px
+
 .container
-  width: 100px
-  height: 100px
+  width: $card-size-md
+  height: $card-size-md
   position: relative
   perspective: 800px
 .card
@@ -12,12 +17,11 @@
   -webkit-transition: -webkit-transform 1s
   -moz-transition: -moz-transform 1s
   -o-transition: -o-transform 1s
-  transition: all 0.5s
+  transition: box-shadow, transform 0.5s
   transform-style: preserve-3d
   &:not(.flipped):hover
     box-shadow: 5px 5px 10px #ccc
     transform: scale(1.1, 1.1)
-    z-index: 100
   &:not(.flipped)
     box-shadow: 1px 1px 2px #ccc
   &.flipped
@@ -29,14 +33,13 @@
     display: block
     height: 100%
     width: 100%
-    line-height: 100px
+    line-height: $card-size-md
     text-align: center
     font-weight: bold
     font-size: 50px
     position: absolute
     backface-visibility: hidden
-    z-index: 0
-    transition: all 0.3s ease-in-out
+    transition: transform, color 0.3s ease-in-out
   .front
     background-color: #f0f0f0
     cursor: pointer
@@ -44,3 +47,11 @@
     transform: rotateY(180deg)
     &.done
       color: #8fd08f
+
+@media only screen and (max-width : $device-size-md)
+  .container
+    width: $card-size-sm
+    height: $card-size-sm
+  .card
+    .front, .back
+      line-height: $card-size-sm

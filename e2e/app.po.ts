@@ -5,7 +5,11 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('co-root h1')).getText();
+  getNav() {
+    return element(by.css('nav'));
+  }
+
+  getFooter() {
+    return element(by.css('footer'));
   }
 }

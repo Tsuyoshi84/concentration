@@ -1,5 +1,5 @@
 <div>
-  <div class="controller" *ngIf="showsController" [@switchView]>
+  <div *ngIf="showsController" [@switchView]>
     <co-game-controller (started)="onStarted($event)"></co-game-controller>
   </div>
 
@@ -8,7 +8,7 @@
       <co-game-progress [numOfFlipping]="numOfFlipping" [numOfCheating]="numOfCheating" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
     </div>
     <co-flip-result></co-flip-result>
-    <co-card-list [cards]="cards" (flipped)="onFlipped($event)"></co-card-list>
+    <co-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></co-card-list>
 
     <div class="functions">
       <button mat-button (click)="cheat()" *ngIf="gameStatus === GameStatus.Playing">Cheat</button>

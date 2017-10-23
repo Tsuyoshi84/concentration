@@ -1,4 +1,4 @@
-<div class="container" (click)="flip()">
+<div class="container" (click)="onClicked()">
   <div class="card" [ngClass]="{'flipped': card.flipped}">
     <div class="front"></div>
     <div class="back" [ngClass]="{'done': card.done}">
