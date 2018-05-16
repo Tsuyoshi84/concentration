@@ -3,7 +3,7 @@ import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameStatus } from '../../enums/game-status.enum';
 
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 
 /**
  * Bundle information related to card flipping.
