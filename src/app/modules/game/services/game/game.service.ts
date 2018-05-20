@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameStatus } from '../../enums/game-status.enum';
+import { shuffle } from 'lodash';
 
 import { Observable } from 'rxjs';
 
@@ -35,10 +36,12 @@ export class GameService {
   private cheatedCount: number;
   /** Game status */
   private gameStatus: GameStatus;
+  /** Emojis */
+  private emo = '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️';
 
   constructor() {
     this.gameStatus = GameStatus.NotPlaying;
-   }
+  }
 
   /**
    * Reset the game state and generate cards to play the game.
@@ -53,9 +56,10 @@ export class GameService {
     this.gameStatus = GameStatus.Playing;
 
     let id = 0;
+    const emojis = this.getEmojiArray(numOfCard / 2);
     for (let i = 1; i <= numOfCard / 2; i++) {
-      this.cards.push(new Card(++id, i));
-      this.cards.push(new Card(++id, i));
+      this.cards.push(new Card(++id, emojis[i - 1]));
+      this.cards.push(new Card(++id, emojis[i - 1]));
     }
 
     this.cards = this.shuffle(this.cards);
@@ -163,16 +167,34 @@ export class GameService {
   }
 
   private check(): Result {
-    if (this.flippedCards[0].number === this.flippedCards[1].number) {
-      this.flippedCards.forEach(card => card.done = true);
+    if (this.flippedCards[0].character === this.flippedCards[1].character) {
+      this.flippedCards.forEach(card => (card.done = true));
       if (this.cards.filter(c => !c.done).length === 0) {
         this.gameStatus = GameStatus.Clear;
       }
 
-      return this.gameStatus === GameStatus.Clear ? Result.Finish : Result.Correct;
+      return this.gameStatus === GameStatus.Clear
+        ? Result.Finish
+        : Result.Correct;
     } else {
       return Result.Wrong;
     }
   }
 
+  private getEmojiArray(length: number): Array<string> {
+    const emojiArray = this.emojiStringToArray(this.emo);
+    return shuffle(emojiArray).slice(0, length);
+  }
+
+  private emojiStringToArray(str: string): Array<string> {
+    const split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
+    const arr = [];
+    for (let i = 0; i < split.length; i++) {
+      const char = split[i];
+      if (char !== '') {
+        arr.push(char);
+      }
+    }
+    return arr;
+  }
 }
