@@ -1,4 +1,12 @@
-import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnChanges,
+  Input,
+  Output,
+  EventEmitter,
+  SimpleChanges
+} from '@angular/core';
 import { GameStatus } from '../../enums/game-status.enum';
 
 @Component({
@@ -13,14 +21,17 @@ export class GameProgressComponent implements OnInit, OnChanges {
   @Output() restarted = new EventEmitter();
   restartBtnLabel: string;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.updateView(this.gameStatus);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.gameStatus && typeof changes.gameStatus.currentValue === 'number') {
+    if (
+      changes.gameStatus &&
+      typeof changes.gameStatus.currentValue === 'number'
+    ) {
       this.updateView(changes.gameStatus.currentValue);
     }
   }
@@ -39,10 +50,9 @@ export class GameProgressComponent implements OnInit, OnChanges {
    */
   private updateView(gameStatus: GameStatus): void {
     if (gameStatus === GameStatus.Clear) {
-      this.restartBtnLabel = 'Play again';
+      this.restartBtnLabel = 'もう一度';
     } else {
-      this.restartBtnLabel = 'Restart';
+      this.restartBtnLabel = 'リスタート';
     }
   }
-
 }

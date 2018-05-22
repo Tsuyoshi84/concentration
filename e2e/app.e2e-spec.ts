@@ -9,10 +9,6 @@ describe('concentration App', () => {
   });
 
   it('should have navigation text', () => {
-    expect(page.getNav().getText()).toEqual('Concentration');
-  });
-
-  it('should have footer text', () => {
-    expect(page.getFooter().getText()).toEqual('Concentration');
+    expect(page.getNav().getText()).toEqual('神経衰弱');
   });
 });
