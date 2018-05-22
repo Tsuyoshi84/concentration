@@ -16,9 +16,8 @@ describe('GameProgressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameProgressComponent ]
-    })
-    .compileComponents();
+      declarations: [GameProgressComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -40,19 +39,18 @@ describe('GameProgressComponent', () => {
   });
 
   it('should show scores', () => {
-    expect(flippingEl.nativeElement.textContent).toBe('Flipping: 10');
-    expect(cheatingEl.nativeElement.textContent).toBe('Cheating: 20');
+    expect(flippingEl.nativeElement.textContent).toBe('めくり回数: 10');
+    expect(cheatingEl.nativeElement.textContent).toBe('カンニング: 20');
   });
 
   it('should show button label', () => {
-    expect(playBtn.nativeElement.textContent).toBe('Restart');
+    expect(playBtn.nativeElement.textContent).toBe('リスタート');
 
     component.ngOnChanges({
       gameStatus: new SimpleChange(GameStatus.Playing, GameStatus.Clear, false)
     });
     fixture.detectChanges();
 
-    expect(playBtn.nativeElement.textContent).toBe('Play again');
+    expect(playBtn.nativeElement.textContent).toBe('もう一度');
   });
-
 });
