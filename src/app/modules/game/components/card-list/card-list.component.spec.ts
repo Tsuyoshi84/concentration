@@ -10,15 +10,14 @@ describe('CardListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CardListComponent, CardComponent ]
-    })
-    .compileComponents();
+      declarations: [CardListComponent, CardComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardListComponent);
     component = fixture.componentInstance;
-    component.cards = [new Card(1, 1), new Card(2, 2)];
+    component.cards = [new Card(1, 'A'), new Card(2, 'B')];
     fixture.detectChanges();
   });
 

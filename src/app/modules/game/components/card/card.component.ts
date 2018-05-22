@@ -10,11 +10,9 @@ export class CardComponent implements OnInit {
   @Input() card: Card;
   @Output() clicked = new EventEmitter<Card>();
 
-  constructor() {
-  }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * Handler called when a card is clicked.
@@ -25,5 +23,4 @@ export class CardComponent implements OnInit {
       this.clicked.emit(this.card);
     }
   }
-
 }
