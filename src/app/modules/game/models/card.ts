@@ -1,12 +1,12 @@
 export class Card {
   private _id: number;
-  private _number: number;
+  private _character: string;
   private _flipped: boolean;
   private _done: boolean;
 
-  constructor(id: number, number: number) {
+  constructor(id: number, character: string) {
     this._id = id;
-    this._number = number;
+    this._character = character;
     this._flipped = false;
     this._done = false;
   }
@@ -40,10 +40,10 @@ export class Card {
   }
 
   /**
-   * Get card number.
+   * Get card character.
    */
-  get number(): number {
-    return this._number;
+  get character(): string {
+    return this._character;
   }
 
   set done(done: boolean) {
