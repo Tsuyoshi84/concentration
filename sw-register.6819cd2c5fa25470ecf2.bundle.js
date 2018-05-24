@@ -1,2 +1,0 @@
-webpackJsonp([3],{3:function(r,e,o){r.exports=o("EUKP")},EUKP:function(r,e){"serviceWorker"in navigator&&navigator.serviceWorker.register("worker-basic.min.js").catch(function(r){console.error("Error registering service worker:",r)})}},[3]);
-//# sourceMappingURL=sw-register.6819cd2c5fa25470ecf2.bundle.js.map
