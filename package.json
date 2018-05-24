@@ -11,7 +11,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build -prod -sm -ec -bh /concentration/ && gh-pages -d dist"
+    "deploy": "ng build --prod --base-href \"https://tsuyoshi84.github.io/concentration/\" && angular-cli-ghpages"
   },
   "private": true,
   "dependencies": {
@@ -26,6 +26,7 @@
     "@angular/platform-browser": "^6.0.2",
     "@angular/platform-browser-dynamic": "^6.0.2",
     "@angular/platform-server": "^6.0.2",
+    "@angular/pwa": "^0.6.3",
     "@angular/router": "^6.0.2",
     "@angular/service-worker": "^6.0.2",
     "animate.css": "^3.6.1",
@@ -43,9 +44,9 @@
     "@types/jasmine": "^2.8.7",
     "@types/jasminewd2": "^2.0.2",
     "@types/node": "^10.1.0",
+    "angular-cli-ghpages": "^0.5.2",
     "codelyzer": "^4.3.0",
     "coveralls": "^3.0.1",
-    "gh-pages": "^1.1.0",
     "jasmine-core": "^3.1.0",
     "jasmine-spec-reporter": "^4.2.1",
     "karma": "^2.0.2",
