@@ -8,8 +8,9 @@
       <co-game-progress [numOfFlipping]="numOfFlipping" [numOfCheating]="numOfCheating" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
     </div>
     <co-flip-result></co-flip-result>
-    <co-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></co-card-list>
-
+    <div class="cards-board">
+      <co-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></co-card-list>
+    </div>
     <div class="functions">
       <button mat-button (click)="cheat()" *ngIf="gameStatus === GameStatus.Playing">Cheat</button>
     </div>

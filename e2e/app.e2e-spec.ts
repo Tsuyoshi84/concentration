@@ -7,8 +7,4 @@ describe('concentration App', () => {
     page = new AppPage();
     page.navigateTo();
   });
-
-  it('should have navigation text', () => {
-    expect(page.getNav().getText()).toEqual('神経衰弱');
-  });
 });
