@@ -1,6 +1,20 @@
+@import '~style/_variables.sass'
+
+$cards-board-size-sm: 100%
+$cards-board-size-md: 800px
+
 .progress-container
   margin-bottom: 15px
 
 .functions
   margin-top: 15px
   text-align: right
+
+.cards-board
+  max-width: $cards-board-size-md
+  margin-right: auto
+  margin-left: auto
+
+@media only screen and (max-width : $device-size-md)
+  .cards-board
+    max-width: $cards-board-size-sm
