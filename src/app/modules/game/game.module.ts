@@ -24,8 +24,15 @@ import { GameProgressComponent } from './components/game-progress/game-progress.
     MatButtonModule,
     MatSelectModule
   ],
-  declarations: [CardListComponent, GameComponent, CardComponent, FlipResultComponent, GameControllerComponent, GameProgressComponent],
+  declarations: [
+    CardListComponent,
+    GameComponent,
+    CardComponent,
+    FlipResultComponent,
+    GameControllerComponent,
+    GameProgressComponent
+  ],
   exports: [GameComponent],
   providers: [GameService]
 })
-export class GameModule { }
+export class GameModule {}

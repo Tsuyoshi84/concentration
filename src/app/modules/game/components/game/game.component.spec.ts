@@ -17,12 +17,22 @@ describe('GameComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, MatButtonModule, MatSelectModule, BrowserAnimationsModule],
+      imports: [
+        FormsModule,
+        MatButtonModule,
+        MatSelectModule,
+        BrowserAnimationsModule
+      ],
       declarations: [
-        GameComponent, GameControllerComponent, GameProgressComponent, FlipResultComponent, CardListComponent, CardComponent],
+        GameComponent,
+        GameControllerComponent,
+        GameProgressComponent,
+        FlipResultComponent,
+        CardListComponent,
+        CardComponent
+      ],
       providers: [GameService]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -19,7 +19,7 @@ export class FlipResultComponent implements OnInit {
   /** Timer */
   timer;
 
-  constructor(private ref: ChangeDetectorRef) { }
+  constructor(private ref: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.reset();
@@ -31,7 +31,9 @@ export class FlipResultComponent implements OnInit {
    * @param result Flipped result.
    */
   showResult(result: Result): void {
-    if (result === Result.None) { return; }
+    if (result === Result.None) {
+      return;
+    }
 
     if (this.timer) {
       clearTimeout(this.timer);
@@ -48,7 +50,7 @@ export class FlipResultComponent implements OnInit {
     switch (result) {
       case Result.Correct:
         this.message = 'Correct!';
-        this.animateClasses =  ['correct', 'animated', 'pulse'];
+        this.animateClasses = ['correct', 'animated', 'pulse'];
         fadeOutClass = 'fadeOutUp';
         break;
       case Result.Wrong:
@@ -58,7 +60,7 @@ export class FlipResultComponent implements OnInit {
         break;
       case Result.Finish:
         this.message = `Congrats!\nYou've finished!!`;
-        this.animateClasses =  ['finish', 'animated', 'tada'];
+        this.animateClasses = ['finish', 'animated', 'tada'];
         fadeOutClass = 'fadeOutUp';
         break;
     }
@@ -83,5 +85,4 @@ export class FlipResultComponent implements OnInit {
     this.message = '';
     this.showsMessage = false;
   }
-
 }
