@@ -6,7 +6,11 @@ import { GameProgressComponent } from '../game-progress/game-progress.component'
 import { FlipResultComponent } from '../flip-result/flip-result.component';
 import { CardListComponent } from '../card-list/card-list.component';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatSelectModule,
+  MatGridListModule
+} from '@angular/material';
 import { CardComponent } from '../card/card.component';
 import { GameService } from '../../services/game/game.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,6 +25,7 @@ describe('GameComponent', () => {
         FormsModule,
         MatButtonModule,
         MatSelectModule,
+        MatGridListModule,
         BrowserAnimationsModule
       ],
       declarations: [
