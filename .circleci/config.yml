@@ -61,6 +61,8 @@ jobs:
           - v1-dependencies-
 
       # deploy
+      - run: git config --global user.email $GIT_USER_EMAIL
+      - run: git config --global user.name $GIT_USER_NAME
       - run: npm run-script deploy
 
 workflows:
