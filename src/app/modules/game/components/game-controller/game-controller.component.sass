@@ -1,5 +1,21 @@
 .container
   text-align: center
 
+  .rotate
+    display: inline-block
+    padding-left: 3px
+    padding-right: 3px
+    &:nth-child(even)
+      animation: rotate-anime 1.5s ease-in-out infinite alternate-reverse forwards
+    &:nth-child(odd)
+      animation: rotate-anime 1.5s ease-in-out infinite alternate forwards
+
+    @keyframes rotate-anime
+      0% 
+        transform: rotate(-20deg)
+      100% 
+        transform: rotate(20deg)
+
+
   .start-button
     margin-left: 10px
