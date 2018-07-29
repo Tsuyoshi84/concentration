@@ -6,7 +6,11 @@ import { GameProgressComponent } from '../game-progress/game-progress.component'
 import { FlipResultComponent } from '../flip-result/flip-result.component';
 import { CardListComponent } from '../card-list/card-list.component';
 import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatSelectModule,
+  MatGridListModule
+} from '@angular/material';
 import { CardComponent } from '../card/card.component';
 import { GameService } from '../../services/game/game.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -17,12 +21,23 @@ describe('GameComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [FormsModule, MatButtonModule, MatSelectModule, BrowserAnimationsModule],
+      imports: [
+        FormsModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatGridListModule,
+        BrowserAnimationsModule
+      ],
       declarations: [
-        GameComponent, GameControllerComponent, GameProgressComponent, FlipResultComponent, CardListComponent, CardComponent],
+        GameComponent,
+        GameControllerComponent,
+        GameProgressComponent,
+        FlipResultComponent,
+        CardListComponent,
+        CardComponent
+      ],
       providers: [GameService]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

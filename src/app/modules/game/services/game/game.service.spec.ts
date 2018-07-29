@@ -12,32 +12,26 @@ describe('GameService', () => {
     });
   });
 
-  it(
-    'should be created',
-    inject([GameService], (service: GameService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([GameService], (service: GameService) => {
+    expect(service).toBeTruthy();
+  }));
 
-  it(
-    'should be created',
-    inject([GameService], (service: GameService) => {
-      expect(service).toBeTruthy();
-    })
-  );
+  it('should be created', inject([GameService], (service: GameService) => {
+    expect(service).toBeTruthy();
+  }));
 
   describe('#startGame', () => {
-    it(
-      'should generate specified number of cards',
-      inject([GameService], (service: GameService) => {
+    it('should generate specified number of cards', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(10);
         expect(cards.length).toBe(10);
-      })
-    );
+      }
+    ));
 
-    it(
-      'should generate pairs of cards which have the same numbers',
-      inject([GameService], (service: GameService) => {
+    it('should generate pairs of cards which have the same numbers', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
 
         expect(
@@ -52,14 +46,14 @@ describe('GameService', () => {
         expect(
           cards.filter(card => card.character === cards[3].character).length
         ).toBe(2);
-      })
-    );
+      }
+    ));
   });
 
   describe('#getGameStatus', () => {
-    it(
-      'should return correct game status',
-      inject([GameService], (service: GameService) => {
+    it('should return correct game status', inject(
+      [GameService],
+      (service: GameService) => {
         expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
 
         const cards = service.startGame(10);
@@ -67,24 +61,24 @@ describe('GameService', () => {
 
         service.reset();
         expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
-      })
-    );
+      }
+    ));
   });
 
   describe('#flipCard', () => {
-    it(
-      'should change card flipped value',
-      inject([GameService], (service: GameService) => {
+    it('should change card flipped value', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
         service.flipCard(cards[0]);
 
         expect(cards[0].flipped).toBeTruthy();
-      })
-    );
+      }
+    ));
 
-    it(
-      'should return appropriate result when flipping the first card',
-      inject([GameService], (service: GameService) => {
+    it('should return appropriate result when flipping the first card', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
 
         const subscription = service.flipCard(cards[0]);
@@ -95,12 +89,12 @@ describe('GameService', () => {
             gameStatus: GameStatus.Playing
           });
         });
-      })
-    );
+      }
+    ));
 
-    it(
-      'should return appropriate result when flipping two correct cards',
-      inject([GameService], (service: GameService) => {
+    it('should return appropriate result when flipping two correct cards', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
 
         const sameCards = cards.filter(
@@ -125,12 +119,12 @@ describe('GameService', () => {
             });
           }
         });
-      })
-    );
+      }
+    ));
 
-    it(
-      'should return appropriate result when flipping two wrong cards',
-      inject([GameService], (service: GameService) => {
+    it('should return appropriate result when flipping two wrong cards', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
 
         // Get two different cards
@@ -159,14 +153,14 @@ describe('GameService', () => {
             });
           }
         });
-      })
-    );
+      }
+    ));
   });
 
   describe('#cheat', () => {
-    it(
-      'should increase the number of cheating',
-      inject([GameService], (service: GameService) => {
+    it('should increase the number of cheating', inject(
+      [GameService],
+      (service: GameService) => {
         const cards = service.startGame(4);
 
         service.cheat().subscribe(numOfCheating => {
@@ -176,7 +170,7 @@ describe('GameService', () => {
         service.cheat().subscribe(numOfCheating => {
           expect(numOfCheating).toBe(2);
         });
-      })
-    );
+      }
+    ));
   });
 });

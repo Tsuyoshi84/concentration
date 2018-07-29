@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatSelectModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatSelectModule,
+  MatGridListModule
+} from '@angular/material';
 
 import { GameRoutingModule } from './game-routing.module';
 import { CardListComponent } from './components/card-list/card-list.component';
@@ -22,10 +26,18 @@ import { GameProgressComponent } from './components/game-progress/game-progress.
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatGridListModule
   ],
-  declarations: [CardListComponent, GameComponent, CardComponent, FlipResultComponent, GameControllerComponent, GameProgressComponent],
+  declarations: [
+    CardListComponent,
+    GameComponent,
+    CardComponent,
+    FlipResultComponent,
+    GameControllerComponent,
+    GameProgressComponent
+  ],
   exports: [GameComponent],
   providers: [GameService]
 })
-export class GameModule { }
+export class GameModule {}

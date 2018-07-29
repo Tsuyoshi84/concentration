@@ -1,7 +1,10 @@
 @import '~style/_variables.sass'
 
-$card-size-sm: 60px
+$card-size-sm: 50px
+$font-size-sm: 40px
+
 $card-size-md: 100px
+$font-size-md: 50px
 
 .container
   width: $card-size-md
@@ -36,7 +39,7 @@ $card-size-md: 100px
     line-height: $card-size-md
     text-align: center
     font-weight: bold
-    font-size: 50px
+    font-size: $font-size-md
     position: absolute
     backface-visibility: hidden
     transition: transform, color 0.3s ease-in-out
@@ -54,4 +57,5 @@ $card-size-md: 100px
     height: $card-size-sm
   .card
     .front, .back
-      line-height: $card-size-sm
+      font-size: $font-size-sm
+      line-height: $card-size-sm + 5px

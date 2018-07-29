@@ -10,10 +10,9 @@ export class CardListComponent implements OnInit {
   @Input() cards: Card[];
   @Output() cardClicked = new EventEmitter<Card>();
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   /**
    * Notify to the parent component that the given card is clicked.
@@ -23,5 +22,4 @@ export class CardListComponent implements OnInit {
   onClicked(card: Card): void {
     this.cardClicked.emit(card);
   }
-
 }

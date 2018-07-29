@@ -25,8 +25,7 @@ import { GameStatus } from '../../enums/game-status.enum';
   ]
 })
 export class GameComponent implements OnInit {
-  @ViewChild(FlipResultComponent)
-  flipResult: FlipResultComponent;
+  @ViewChild(FlipResultComponent) flipResult: FlipResultComponent;
 
   /** Store GameStatus enum to a variable so that it can be accessed from the view */
   readonly GameStatus = GameStatus;
@@ -46,7 +45,7 @@ export class GameComponent implements OnInit {
   /** Indicate if a user can flip cards  */
   canFlip: boolean;
 
-  constructor(private gameService: GameService) { }
+  constructor(private gameService: GameService) {}
 
   ngOnInit() {
     this.canFlip = true;
@@ -83,7 +82,9 @@ export class GameComponent implements OnInit {
    * @param card Flipped card.
    */
   onCardClicked(card: Card): void {
-    if (!this.canFlip) { return; }
+    if (!this.canFlip) {
+      return;
+    }
 
     // If the given card is not flipped, flip it
     this.canFlip = false;
@@ -97,21 +98,26 @@ export class GameComponent implements OnInit {
         }
       },
       e => console.error(e),
-      () => { this.canFlip = true; console.log('complete'); });
+      () => (this.canFlip = true)
+    );
   }
 
   /**
    * Flip all the unflipped card.
    */
   cheat(): void {
-    if (!this.canFlip) { return; }
+    if (!this.canFlip) {
+      return;
+    }
 
     this.canFlip = false;
     this.gameService.cheat().subscribe(
       cheatedCount => {
         this.numOfCheating = cheatedCount;
-      }, e => console.error(e),
-      () => this.canFlip = true);
+      },
+      e => console.error(e),
+      () => (this.canFlip = true)
+    );
   }
 
   /**

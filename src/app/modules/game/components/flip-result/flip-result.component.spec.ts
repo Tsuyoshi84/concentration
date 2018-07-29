@@ -11,8 +11,7 @@ describe('FlipResultComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [FlipResultComponent]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -56,9 +55,10 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
-      expect(resultElement.nativeElement.textContent).toEqual(`Congrats!\nYou've finished!!`);
+      expect(resultElement.nativeElement.textContent).toEqual(
+        `Congrats!\nYou've finished!!`
+      );
       expect(resultElement.classes['finish']).toBeTruthy();
     });
   });
-
 });

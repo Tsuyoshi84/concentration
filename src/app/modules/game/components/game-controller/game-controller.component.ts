@@ -1,5 +1,10 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
+interface Difficulty {
+  label: string;
+  num: number;
+}
+
 @Component({
   selector: 'co-game-controller',
   templateUrl: './game-controller.component.html',
@@ -8,31 +13,28 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 export class GameControllerComponent implements OnInit {
   @Output() started = new EventEmitter<number>();
   /** List of difficulties that user can select from */
-  difficulties: { label: string, num: number }[];
+  difficulties: Difficulty[];
   /** Number of cards selected by a user */
   numOfCard: number;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    // TODO: It might be better to pass difficulty array from GameService...
     this.difficulties = [
-      { label: 'Super Easy', num: 4 },
-      { label: 'Easy', num: 8 },
-      { label: 'Normal', num: 16 },
-      { label: 'Hard', num: 32 },
-      { label: 'Super Hard', num: 64 },
-      { label: 'Insane', num: 128 },
+      { label: 'やさしい😀', num: 8 },
+      { label: 'ふつう🙂', num: 16 },
+      { label: 'むずかしい🙁', num: 32 },
+      { label: 'げろむず🤮', num: 50 }
     ];
 
-    this.numOfCard = this.difficulties[2].num;
+    this.numOfCard = this.difficulties[1].num;
   }
 
   /**
    * Notify parent component that starting the game.
    */
-  start(): void {
+  start(diff: Difficulty): void {
+    this.numOfCard = diff.num;
     this.started.emit(this.numOfCard);
   }
-
 }

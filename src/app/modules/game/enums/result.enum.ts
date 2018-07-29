@@ -9,5 +9,5 @@ export enum Result {
   /** Indicate that a user flipped wrong card */
   Wrong,
   /** Indicate that a user finished the game */
-  Finish,
+  Finish
 }
