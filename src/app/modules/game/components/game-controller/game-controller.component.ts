@@ -19,7 +19,7 @@ export class GameControllerComponent implements OnInit {
       { label: 'やさしい😀', num: 8 },
       { label: 'ふつう🙂', num: 16 },
       { label: 'むずかしい🙁', num: 32 },
-      { label: 'げろむず🤮', num: 64 }
+      { label: 'げろむず🤮', num: 50 }
     ];
 
     this.numOfCard = this.difficulties[2].num;
