@@ -11,7 +11,7 @@
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng build --prod --base-href \"https://tsuyoshi84.github.io/concentration/\" && angular-cli-ghpages"
+    "deploy": "ng build --prod --base-href \"https://tsuyoshi84.github.io/concentration/\" && angular-cli-ghpages --no-silent"
   },
   "private": true,
   "dependencies": {
