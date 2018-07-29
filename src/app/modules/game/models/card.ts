@@ -40,12 +40,15 @@ export class Card {
   }
 
   /**
-   * Get card character.
+   * Gets card character.
    */
   get character(): string {
     return this._character;
   }
 
+  /**
+   * Sets if a card is done.
+   */
   set done(done: boolean) {
     this._done = done;
   }
