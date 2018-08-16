@@ -7,8 +7,10 @@ import { Card } from '../../models/card';
   styleUrls: ['./card.component.sass']
 })
 export class CardComponent implements OnInit {
-  @Input() card: Card;
-  @Output() clicked = new EventEmitter<Card>();
+  @Input()
+  card: Card;
+  @Output()
+  clicked = new EventEmitter<Card>();
 
   constructor() {}
 

@@ -11,7 +11,8 @@ interface Difficulty {
   styleUrls: ['./game-controller.component.sass']
 })
 export class GameControllerComponent implements OnInit {
-  @Output() started = new EventEmitter<number>();
+  @Output()
+  started = new EventEmitter<number>();
   /** List of difficulties that user can select from */
   difficulties: Difficulty[];
   /** Number of cards selected by a user */
@@ -23,8 +24,8 @@ export class GameControllerComponent implements OnInit {
     this.difficulties = [
       { label: 'やさしい😀', num: 8 },
       { label: 'ふつう🙂', num: 16 },
-      { label: 'むずかしい🙁', num: 32 },
-      { label: 'げろむず🤮', num: 50 }
+      { label: 'むずかしい🙁', num: 30 },
+      { label: 'げろむず🤮', num: 54 }
     ];
 
     this.numOfCard = this.difficulties[1].num;

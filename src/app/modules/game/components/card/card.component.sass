@@ -1,14 +1,11 @@
 @import '~style/_variables.sass'
 
 $card-size-sm: 50px
-$font-size-sm: 40px
-
 $card-size-md: 100px
-$font-size-md: 50px
 
 .container
-  width: $card-size-md
-  height: $card-size-md
+  width: 100%
+  height: 100%
   position: relative
   perspective: 800px
 .card
@@ -36,10 +33,8 @@ $font-size-md: 50px
     display: block
     height: 100%
     width: 100%
-    line-height: $card-size-md
     text-align: center
     font-weight: bold
-    font-size: $font-size-md
     position: absolute
     backface-visibility: hidden
     transition: transform, color 0.3s ease-in-out
@@ -52,10 +47,5 @@ $font-size-md: 50px
       color: #8fd08f
 
 @media only screen and (max-width : $device-size-md)
-  .container
-    width: $card-size-sm
-    height: $card-size-sm
   .card
     .front, .back
-      font-size: $font-size-sm
-      line-height: $card-size-sm + 5px

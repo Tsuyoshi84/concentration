@@ -25,7 +25,8 @@ import { GameStatus } from '../../enums/game-status.enum';
   ]
 })
 export class GameComponent implements OnInit {
-  @ViewChild(FlipResultComponent) flipResult: FlipResultComponent;
+  @ViewChild(FlipResultComponent)
+  flipResult: FlipResultComponent;
 
   /** Store GameStatus enum to a variable so that it can be accessed from the view */
   readonly GameStatus = GameStatus;

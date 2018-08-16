@@ -15,10 +15,14 @@ import { GameStatus } from '../../enums/game-status.enum';
   styleUrls: ['./game-progress.component.sass']
 })
 export class GameProgressComponent implements OnInit, OnChanges {
-  @Input() numOfFlipping: number;
-  @Input() numOfCheating: number;
-  @Input() gameStatus: GameStatus;
-  @Output() restarted = new EventEmitter();
+  @Input()
+  numOfFlipping: number;
+  @Input()
+  numOfCheating: number;
+  @Input()
+  gameStatus: GameStatus;
+  @Output()
+  restarted = new EventEmitter();
   restartBtnLabel: string;
 
   constructor() {}

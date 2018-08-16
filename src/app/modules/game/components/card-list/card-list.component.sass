@@ -1,9 +1,42 @@
+@import '~style/_variables.sass'
+
+$four-grid-item-size-sm: 80px
+$six-grid-item-size-sm: 55px
+
+$four-grid-item-size-md: 100px
+$six-grid-item-size-md: 80px
+
 .container
-  display: flex
-  flex-direction: row
-  flex-wrap: wrap
-  align-items: center
-  justify-content: center
+  display: grid
+
+  &.four-cards
+    grid-template-columns: repeat(4, $four-grid-item-size-md)
+    grid-auto-rows: $four-grid-item-size-md
+    font-size: 4rem
+
+  &.six-cards
+    grid-template-columns: repeat(6, $six-grid-item-size-md)
+    grid-auto-rows: $six-grid-item-size-md
+    font-size: 3rem
+
   .card-box
     margin: 5px
+
+@media only screen and (max-width : $device-size-md)
+  .container
+    &.four-cards
+      grid-template-columns: repeat(4, $four-grid-item-size-sm)
+      grid-auto-rows: $four-grid-item-size-sm
+      font-size: 3rem
+
+      .card-box
+        margin: 5px
+
+    &.six-cards
+      grid-template-columns: repeat(6, $six-grid-item-size-sm)
+      grid-auto-rows: $six-grid-item-size-sm
+      font-size: 2rem
+    
+      .card-box
+        margin: 3px
 
