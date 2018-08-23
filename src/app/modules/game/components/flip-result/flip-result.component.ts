@@ -44,26 +44,37 @@ export class FlipResultComponent implements OnInit {
     this.showsMessage = true;
     this.ref.detectChanges();
 
-    let fadeOutClass: string;
+    let message: string, animateClasses: string[], fadeOutClass: string;
 
     // Decide message, animation classes based on the result
     switch (result) {
       case Result.Correct:
-        this.message = 'Correct!';
-        this.animateClasses = ['correct', 'animated', 'pulse'];
+        message = 'Correct!';
+        animateClasses = ['correct', 'animated', 'swing'];
         fadeOutClass = 'fadeOutUp';
         break;
       case Result.Wrong:
-        this.message = 'Wrong...';
-        this.animateClasses = ['wrong', 'animated', 'shake'];
+        message = '';
+        animateClasses = [];
         fadeOutClass = 'fadeOutDown';
         break;
       case Result.Finish:
-        this.message = `Congrats!\nYou've finished!!`;
-        this.animateClasses = ['finish', 'animated', 'tada'];
+        message = `Congrats!\nYou've finished!!`;
+        animateClasses = ['finish', 'animated', 'tada'];
         fadeOutClass = 'fadeOutUp';
         break;
     }
+
+    this.showAnimationMessage(message, animateClasses, fadeOutClass);
+  }
+
+  private showAnimationMessage(
+    message: string,
+    animateClasses: string[],
+    fadeOutClass: string
+  ): void {
+    this.message = message;
+    this.animateClasses = animateClasses;
 
     // Fade out the message after certain time
     this.timer = setTimeout(() => {
