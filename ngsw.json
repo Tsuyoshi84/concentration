@@ -8,7 +8,7 @@
       "updateMode": "prefetch",
       "urls": [
         "https://tsuyoshi84.github.io/concentration/index.html",
-        "https://tsuyoshi84.github.io/concentration/main.c8a8e4b4874b9caa30ba.js",
+        "https://tsuyoshi84.github.io/concentration/main.e38f49f51d17ec72f7ee.js",
         "https://tsuyoshi84.github.io/concentration/polyfills.0301d92e9f8fa3e47ec4.js",
         "https://tsuyoshi84.github.io/concentration/runtime.a66f828dca56eeb90e02.js",
         "https://tsuyoshi84.github.io/concentration/styles.73af7a4f9a5b3ee404db.css"
@@ -44,8 +44,8 @@
     "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-72x72.png": "777567641b325cfacc831db90da7bf1c846cd3ee",
     "https://tsuyoshi84.github.io/concentration/assets/icons/icon-192x192.png": "4881e503b4d16b61373017d50259d29d3362fd09",
     "https://tsuyoshi84.github.io/concentration/assets/icons/icon-512x512.png": "cb2fb92797b2e4c82f77818cad6fba023cbe1be5",
-    "https://tsuyoshi84.github.io/concentration/index.html": "1b2c40d099f334d9f5738ebf602a3df8ff2016ae",
-    "https://tsuyoshi84.github.io/concentration/main.c8a8e4b4874b9caa30ba.js": "1ec1611f412b5f0f5d49013e9faf35b71294ee83",
+    "https://tsuyoshi84.github.io/concentration/index.html": "32362352ae25318111762cfff5bbbe7e8a386ee0",
+    "https://tsuyoshi84.github.io/concentration/main.e38f49f51d17ec72f7ee.js": "95b0b47b27e8f00988a63409d4d1b87230318890",
     "https://tsuyoshi84.github.io/concentration/polyfills.0301d92e9f8fa3e47ec4.js": "1fd8215569f6bbf03df04bde3bf98b1c9ef41190",
     "https://tsuyoshi84.github.io/concentration/runtime.a66f828dca56eeb90e02.js": "078e320cc6fdaf355836c3b1c52b059cdd33fc7e",
     "https://tsuyoshi84.github.io/concentration/styles.73af7a4f9a5b3ee404db.css": "9e944179a47195db554bc2d0b35e75cc6759bee8"
