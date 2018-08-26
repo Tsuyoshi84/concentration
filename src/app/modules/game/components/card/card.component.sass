@@ -19,9 +19,10 @@ $card-size-md: 100px
   -o-transition: -o-transform 1s
   transition: box-shadow, transform 0.5s
   transform-style: preserve-3d
-  &:not(.flipped):hover
-    box-shadow: 5px 5px 10px #ccc
-    transform: scale(1.1, 1.1)
+  @media (hover: hover)
+    &:not(.flipped):hover
+      box-shadow: 5px 5px 10px #ccc
+      transform: scale(1.1, 1.1)
   &:not(.flipped)
     box-shadow: 1px 1px 2px #ccc
   &.flipped
