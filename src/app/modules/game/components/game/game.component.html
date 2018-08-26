@@ -5,14 +5,16 @@
 
   <div class="game-container" *ngIf="showsCards" [@switchView]>
     <div class="progress-container">
-      <co-game-progress [numOfFlipping]="numOfFlipping" [numOfCheating]="numOfCheating" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
+      <co-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
     </div>
     <co-flip-result></co-flip-result>
     <div class="cards-board">
       <co-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></co-card-list>
     </div>
-    <div class="functions">
-      <button mat-button (click)="cheat()" *ngIf="gameStatus === GameStatus.Playing">Cheat</button>
-    </div>
+    <!-- <div class="functions">
+      <a class="cheat-icon" (click)="cheat()" *ngIf="gameStatus === GameStatus.Playing">
+        <i class="fa fa-eye"></i>
+      </a>
+    </div> -->
   </div>
 </div>

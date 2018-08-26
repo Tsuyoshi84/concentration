@@ -31,8 +31,8 @@ export class GameComponent implements OnInit {
   /** Store GameStatus enum to a variable so that it can be accessed from the view */
   readonly GameStatus = GameStatus;
 
-  /** Number of flipping card */
-  numOfFlipping: number;
+  /** Number of try */
+  numOfTry: number;
   /** Number of cheating */
   numOfCheating: number;
   /** Game status */
@@ -90,8 +90,8 @@ export class GameComponent implements OnInit {
     // If the given card is not flipped, flip it
     this.canFlip = false;
     this.gameService.flipCard(card).subscribe(
-      ({ result, flippedCount, gameStatus }) => {
-        this.numOfFlipping = flippedCount;
+      ({ result, tryCount, gameStatus }) => {
+        this.numOfTry = tryCount;
         this.gameStatus = gameStatus;
 
         if (result) {
@@ -125,7 +125,7 @@ export class GameComponent implements OnInit {
    * Initialize game conditions.
    */
   private initializeConditions(): void {
-    this.numOfFlipping = 0;
+    this.numOfTry = 0;
     this.numOfCheating = 0;
   }
 }

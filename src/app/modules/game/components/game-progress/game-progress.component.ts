@@ -16,9 +16,7 @@ import { GameStatus } from '../../enums/game-status.enum';
 })
 export class GameProgressComponent implements OnInit, OnChanges {
   @Input()
-  numOfFlipping: number;
-  @Input()
-  numOfCheating: number;
+  numOfTry: number;
   @Input()
   gameStatus: GameStatus;
   @Output()

@@ -14,6 +14,8 @@ interface FlipResult {
   result?: Result;
   /** Total number of flipping cards. */
   flippedCount: number;
+  /** トライ回数 */
+  tryCount: number;
   /** Game status. */
   gameStatus: GameStatus;
 }
@@ -32,6 +34,8 @@ export class GameService {
   private flippedCards: Card[] = [];
   /** Total number of flipping cards */
   private flippedCount: number;
+  /** トライした回数 */
+  private tryCount: number;
   /** Total number of cheating */
   private cheatedCount: number;
   /** Game status */
@@ -52,6 +56,7 @@ export class GameService {
   startGame(numOfCard: number): Card[] {
     this.flippedCards.length = 0;
     this.flippedCount = 0;
+    this.tryCount = 0;
     this.cheatedCount = 0;
     this.gameStatus = GameStatus.Playing;
 
@@ -74,6 +79,7 @@ export class GameService {
     this.cards.length = 0;
     this.flippedCards.length = 0;
     this.flippedCount = 0;
+    this.tryCount = 0;
     this.gameStatus = GameStatus.NotPlaying;
   }
 
@@ -91,15 +97,18 @@ export class GameService {
     return Observable.create(observer => {
       observer.next({
         flippedCount: this.flippedCount,
+        tryCount: this.tryCount,
         gameStatus: this.gameStatus
       });
 
       if (this.flippedCards.length === 2) {
         setTimeout(() => {
+          this.tryCount = Math.floor(this.flippedCount / 2);
           const result = this.check();
           observer.next({
             result: result,
             flippedCount: this.flippedCount,
+            tryCount: this.tryCount,
             gameStatus: this.gameStatus
           });
 

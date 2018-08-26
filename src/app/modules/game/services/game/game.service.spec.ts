@@ -85,6 +85,7 @@ describe('GameService', () => {
 
         subscription.subscribe(result => {
           expect(result).toEqual({
+            tryCount: 0,
             flippedCount: 1,
             gameStatus: GameStatus.Playing
           });
@@ -113,6 +114,7 @@ describe('GameService', () => {
           // Check the value when the second event comes
           if (count === 2) {
             expect(result).toEqual({
+              tryCount: 1,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
               result: Result.Correct
@@ -147,6 +149,7 @@ describe('GameService', () => {
           // Check the value when the second event comes
           if (count === 2) {
             expect(result).toEqual({
+              tryCount: 1,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
               result: Result.Wrong

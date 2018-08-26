@@ -32,13 +32,12 @@ describe('FlipResultComponent', () => {
       expect(resultElement).toBeNull();
     });
 
-    it('should show "Wrong" message when Result.Wrong is passed', () => {
+    it('should show nothing message when Result.Wrong is passed', () => {
       component.showResult(Result.Wrong);
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
-      expect(resultElement.nativeElement.textContent).toEqual('Wrong...');
-      expect(resultElement.classes['wrong']).toBeTruthy();
+      expect(resultElement.nativeElement.textContent).toEqual('');
     });
 
     it('should show "Correct" message when Result.Correct is passed', () => {
