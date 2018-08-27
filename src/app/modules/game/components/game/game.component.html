@@ -1,7 +1,7 @@
 <div class="container">
   <div class="game-container" [@switchView]>
     <div class="progress-container">
-      <co-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
+      <co-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus"></co-game-progress>
     </div>
     <co-flip-result></co-flip-result>
     <div class="cards-board">
