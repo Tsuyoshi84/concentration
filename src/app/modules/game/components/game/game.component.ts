@@ -1,11 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 import { Card } from '../../models/card';
-import { Result } from '../../enums/result.enum';
 import { GameService } from '../../services/game/game.service';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
 import { GameStatus } from '../../enums/game-status.enum';
+import { Router, ActivatedRoute } from '@angular/router';
+import gameDifficulty from '../../constants/game-difficulty';
 
 @Component({
   selector: 'co-game',
@@ -24,7 +25,7 @@ import { GameStatus } from '../../enums/game-status.enum';
     ])
   ]
 })
-export class GameComponent implements OnInit {
+export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent)
   flipResult: FlipResultComponent;
 
@@ -39,42 +40,38 @@ export class GameComponent implements OnInit {
   gameStatus: GameStatus;
   /** Cards used for the game */
   cards: Card[] = [];
-  /** Indicates if the controller should be shown */
-  showsController: boolean;
-  /** Indicates if cards should be shown */
-  showsCards: boolean;
   /** Indicate if a user can flip cards  */
   canFlip: boolean;
+  sub: any;
 
-  constructor(private gameService: GameService) {}
+  constructor(
+    private gameService: GameService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.canFlip = true;
-    this.showsController = true;
-    this.gameStatus = this.gameService.getGameStatus();
-    this.initializeConditions();
+    this.sub = this.route.params.subscribe(params => {
+      this.canFlip = true;
+      this.gameStatus = this.gameService.getGameStatus();
+      this.initializeConditions();
+      const level = +params['level'];
+      const difficulty = gameDifficulty.find(d => d.level === level);
+      this.cards = this.gameService.startGame(difficulty.num);
+      this.gameStatus = this.gameService.getGameStatus();
+    });
   }
 
-  /**
-   * Handler that is called when a user starts the game.
-   *
-   * @param numOfCard Specified number of cards.
-   */
-  onStarted(numOfCard: number): void {
-    this.cards = this.gameService.startGame(numOfCard);
-    this.gameStatus = this.gameService.getGameStatus();
-    this.showsController = false;
-    this.showsCards = true;
+  ngOnDestroy(): void {
+    this.gameService.reset();
+    this.initializeConditions();
   }
 
   /**
    * Handler that is called when resetting the game.
    */
   onRestarted(): void {
-    this.gameService.reset();
-    this.showsController = true;
-    this.showsCards = false;
-    this.initializeConditions();
+    this.router.navigate(['']);
   }
 
   /**

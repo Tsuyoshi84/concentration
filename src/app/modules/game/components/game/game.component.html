@@ -1,9 +1,5 @@
 <div class="container">
-  <div class="controller-container" *ngIf="showsController" [@switchView]>
-    <co-game-controller (started)="onStarted($event)"></co-game-controller>
-  </div>
-
-  <div class="game-container" *ngIf="showsCards" [@switchView]>
+  <div class="game-container" [@switchView]>
     <div class="progress-container">
       <co-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus" (restarted)="onRestarted($event)"></co-game-progress>
     </div>

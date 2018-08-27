@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="text-block">
+    <div class="title">
+      <div>
+        <span class="rotate">🤔</span>
+        <span class="rotate">え</span>
+        <span class="rotate">も</span>
+        <span class="rotate">じ</span>
+        <span class="rotate">🤔</span>
+      </div>
+      <div>
+        <span class="rotate">🤔</span>
+        <span class="rotate">神</span>
+        <span class="rotate">経</span>
+        <span class="rotate">衰</span>
+        <span class="rotate">弱</span>
+        <span class="rotate">🤔</span>
+      </div>
+    </div>
+
+    <mat-grid-list cols="1" rowHeight="60px">
+      <mat-grid-tile *ngFor="let diff of difficulties" colspan="1" rowspan="1">
+        <button mat-raised-button class="start-button" (click)="start(diff)">{{diff.label}}</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </div>
+</div>

@@ -10,6 +10,7 @@ import {
 } from '@angular/material';
 
 import { GameRoutingModule } from './game-routing.module';
+import { TopComponent } from './components/top/top.component';
 import { CardListComponent } from './components/card-list/card-list.component';
 import { GameComponent } from './components/game/game.component';
 import { CardComponent } from './components/card/card.component';
@@ -30,6 +31,7 @@ import { GameProgressComponent } from './components/game-progress/game-progress.
     MatGridListModule
   ],
   declarations: [
+    TopComponent,
     CardListComponent,
     GameComponent,
     CardComponent,
