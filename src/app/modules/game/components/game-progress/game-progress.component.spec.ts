@@ -37,15 +37,4 @@ describe('GameProgressComponent', () => {
   it('should show scores', () => {
     expect(flippingEl.nativeElement.textContent).toBe('めくり回数: 10');
   });
-
-  it('should show button label', () => {
-    expect(playBtn.nativeElement.textContent).toBe('リスタート');
-
-    component.ngOnChanges({
-      gameStatus: new SimpleChange(GameStatus.Playing, GameStatus.Clear, false)
-    });
-    fixture.detectChanges();
-
-    expect(playBtn.nativeElement.textContent).toBe('もう一度');
-  });
 });
