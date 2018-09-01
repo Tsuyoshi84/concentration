@@ -15,7 +15,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule,
     GameModule,
     AppRoutingModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
+    ServiceWorkerModule.register('/concentration/ngsw-worker.js', {
       enabled: environment.production
     })
   ],
