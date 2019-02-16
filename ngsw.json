@@ -8,10 +8,10 @@
       "updateMode": "prefetch",
       "urls": [
         "https://tsuyoshi84.github.io/concentration/index.html",
-        "https://tsuyoshi84.github.io/concentration/main.546798a45d9053cd2427.js",
-        "https://tsuyoshi84.github.io/concentration/polyfills.bf7fbe4e1d9c53994a23.js",
-        "https://tsuyoshi84.github.io/concentration/runtime.ec2944dd8b20ec099bf3.js",
-        "https://tsuyoshi84.github.io/concentration/styles.2ab7041eb5bdece504a1.css"
+        "https://tsuyoshi84.github.io/concentration/main.805a6c983da5528f9e23.js",
+        "https://tsuyoshi84.github.io/concentration/polyfills.8a1fc87a4fea493fe871.js",
+        "https://tsuyoshi84.github.io/concentration/runtime.a5dd35324ddfd942bef1.js",
+        "https://tsuyoshi84.github.io/concentration/styles.4353c21da3ce291f3521.css"
       ],
       "patterns": []
     },
@@ -23,10 +23,6 @@
         "https://tsuyoshi84.github.io/concentration/assets/apple-touch-icon.png",
         "https://tsuyoshi84.github.io/concentration/assets/favicon-16x16.png",
         "https://tsuyoshi84.github.io/concentration/assets/favicon-32x32.png",
-        "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-128x128.png",
-        "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-144x144.png",
-        "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-152x152.png",
-        "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-72x72.png",
         "https://tsuyoshi84.github.io/concentration/assets/icons/icon-192x192.png",
         "https://tsuyoshi84.github.io/concentration/assets/icons/icon-512x512.png"
       ],
@@ -35,20 +31,16 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://tsuyoshi84.github.io/concentration/assets/apple-touch-icon.png": "b4cf9f3a2ff673837adab03607e0550e3cfff1c3",
-    "https://tsuyoshi84.github.io/concentration/assets/favicon-16x16.png": "3582570243cf35c84e84c3aaf3c9ae4ad8885c92",
-    "https://tsuyoshi84.github.io/concentration/assets/favicon-32x32.png": "255c5e1ec4f184f8752d2ecd0cc31caf2c761fa6",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-128x128.png": "60de16b88897afb8560d0b6cdc8784edff013418",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-144x144.png": "56f4810865b509307d94a9fbbaaa55b263e19348",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-152x152.png": "0552d414a9a74d6d7a0770be0abbc6c5edce2a68",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/Icon-72x72.png": "777567641b325cfacc831db90da7bf1c846cd3ee",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/icon-192x192.png": "4881e503b4d16b61373017d50259d29d3362fd09",
-    "https://tsuyoshi84.github.io/concentration/assets/icons/icon-512x512.png": "cb2fb92797b2e4c82f77818cad6fba023cbe1be5",
-    "https://tsuyoshi84.github.io/concentration/index.html": "71dbc7c8564b43560f353eb5cdddec16fa9eb094",
-    "https://tsuyoshi84.github.io/concentration/main.546798a45d9053cd2427.js": "105a63f9a4fa06faed43ab8cfcc0049081111e22",
-    "https://tsuyoshi84.github.io/concentration/polyfills.bf7fbe4e1d9c53994a23.js": "1341c45a101e66f1da5a4483fb148febdb434e50",
-    "https://tsuyoshi84.github.io/concentration/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "https://tsuyoshi84.github.io/concentration/styles.2ab7041eb5bdece504a1.css": "a672ab56aa4866fec9e2664dfa664f50b7a6608c"
+    "https://tsuyoshi84.github.io/concentration/assets/apple-touch-icon.png": "f486f93c36e34558c1f04b5de570f6da8a4b98ab",
+    "https://tsuyoshi84.github.io/concentration/assets/favicon-16x16.png": "4194376ccdc3b35905d957f0a2385a1dd3775820",
+    "https://tsuyoshi84.github.io/concentration/assets/favicon-32x32.png": "a23ae737996f7103f511ae2bbe85963e09f0518e",
+    "https://tsuyoshi84.github.io/concentration/assets/icons/icon-192x192.png": "cdb6e1a670d5038ab6f713cd2372d248324df7ce",
+    "https://tsuyoshi84.github.io/concentration/assets/icons/icon-512x512.png": "4da0ce22379f72ec5e9a44421583b5477e21b6aa",
+    "https://tsuyoshi84.github.io/concentration/index.html": "2731d6c48062fb0a0316d18dd17e2083c9d414a5",
+    "https://tsuyoshi84.github.io/concentration/main.805a6c983da5528f9e23.js": "3fe10972d6dded526efe224e427940608e3b9573",
+    "https://tsuyoshi84.github.io/concentration/polyfills.8a1fc87a4fea493fe871.js": "b21a4dfb808aba72502ca77b6b443ccd3051ad35",
+    "https://tsuyoshi84.github.io/concentration/runtime.a5dd35324ddfd942bef1.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
+    "https://tsuyoshi84.github.io/concentration/styles.4353c21da3ce291f3521.css": "27357cceeb9a925aca37db29188934224ce404da"
   },
   "navigationUrls": [
     {
