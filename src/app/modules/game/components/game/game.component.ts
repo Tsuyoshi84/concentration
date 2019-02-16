@@ -51,15 +51,7 @@ export class GameComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.canFlip = true;
-      this.gameStatus = this.gameService.getGameStatus();
-      this.initializeConditions();
-      const level = +params['level'];
-      const difficulty = gameDifficulty.find(d => d.level === level);
-      this.cards = this.gameService.startGame(difficulty.num);
-      this.gameStatus = this.gameService.getGameStatus();
-    });
+    this.setupGame();
   }
 
   ngOnDestroy(): void {
@@ -100,6 +92,26 @@ export class GameComponent implements OnInit, OnDestroy {
     );
   }
 
+  setupGame() {
+    this.sub = this.route.params.subscribe(params => {
+      this.canFlip = true;
+      this.gameStatus = this.gameService.getGameStatus();
+      this.initializeConditions();
+      const level = +params['level'];
+      const difficulty = gameDifficulty.find(d => d.level === level);
+      this.cards = this.gameService.startGame(difficulty.num);
+      this.gameStatus = this.gameService.getGameStatus();
+    });
+  }
+
+  back() {
+    this.router.navigate(['']);
+  }
+
+  replay() {
+    this.setupGame();
+  }
+
   /**
    * Flip all the unflipped card.
    */
@@ -116,6 +128,10 @@ export class GameComponent implements OnInit, OnDestroy {
       e => console.error(e),
       () => (this.canFlip = true)
     );
+  }
+
+  get isGameClear(): boolean {
+    return this.gameStatus === GameStatus.Clear;
   }
 
   /**
