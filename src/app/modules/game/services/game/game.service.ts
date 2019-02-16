@@ -41,7 +41,8 @@ export class GameService {
   /** Game status */
   private gameStatus: GameStatus;
   /** Emojis */
-  private emo = '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️';
+  private emo =
+    '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️🐞💣❤️🐸🍎';
 
   constructor() {
     this.gameStatus = GameStatus.NotPlaying;
@@ -61,6 +62,7 @@ export class GameService {
     this.gameStatus = GameStatus.Playing;
 
     let id = 0;
+    this.cards.length = 0;
     const emojis = this.getEmojiArray(numOfCard / 2);
     for (let i = 1; i <= numOfCard / 2; i++) {
       this.cards.push(new Card(++id, emojis[i - 1]));

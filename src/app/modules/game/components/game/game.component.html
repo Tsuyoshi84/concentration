@@ -1,16 +1,29 @@
 <div class="container">
   <div class="game-container" [@switchView]>
     <div class="progress-container">
-      <co-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus"></co-game-progress>
+      <co-game-progress
+        [numOfTry]="numOfTry"
+        [gameStatus]="gameStatus"
+      ></co-game-progress>
     </div>
     <co-flip-result></co-flip-result>
     <div class="cards-board">
-      <co-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></co-card-list>
+      <co-card-list
+        [cards]="cards"
+        (cardClicked)="onCardClicked($event)"
+      ></co-card-list>
     </div>
-    <!-- <div class="functions">
-      <a class="cheat-icon" (click)="cheat()" *ngIf="gameStatus === GameStatus.Playing">
-        <i class="fa fa-eye"></i>
-      </a>
-    </div> -->
+
+    <div
+      class="icon-container"
+      [style.visibility]="isGameClear ? 'visible' : 'hidden'"
+    >
+      <button mat-raised-button class="icon-btn" (click)="back()">
+        <i class="fa fa-arrow-left"></i>
+      </button>
+      <button mat-raised-button class="icon-btn" (click)="replay()">
+        <i class="fa fa-redo"></i>
+      </button>
+    </div>
   </div>
 </div>
