@@ -53,15 +53,15 @@ workflows:
   build-and-deploy:
     jobs:
       - build:
-          filters:
-            branches:
-              ignore: gh-pages
+          branches:
+            ignore:
+              - gh-pages
       - test:
           requires:
             - build
-      # - deploy:
-      #     requires:
-      #       - test
-      #     filters:
-      #       branches:
-      #         only: master
+      - deploy:
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
