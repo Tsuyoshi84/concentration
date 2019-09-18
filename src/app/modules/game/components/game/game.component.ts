@@ -26,7 +26,7 @@ import gameDifficulty from '../../constants/game-difficulty';
   ]
 })
 export class GameComponent implements OnInit, OnDestroy {
-  @ViewChild(FlipResultComponent)
+  @ViewChild(FlipResultComponent, { static: true })
   flipResult: FlipResultComponent;
 
   /** Store GameStatus enum to a variable so that it can be accessed from the view */
