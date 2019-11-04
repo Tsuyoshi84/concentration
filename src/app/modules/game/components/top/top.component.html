@@ -20,7 +20,10 @@
 
     <mat-grid-list cols="1" rowHeight="60px">
       <mat-grid-tile *ngFor="let diff of difficulties" colspan="1" rowspan="1">
-        <button mat-raised-button class="start-button" (click)="start(diff)">{{diff.label}}</button>
+        <button mat-raised-button class="start-button" (click)="start(diff)">
+          <span>{{ diff.label }}</span>
+          <span class="icon">{{ diff.icon }}</span>
+        </button>
       </mat-grid-tile>
     </mat-grid-list>
   </div>
