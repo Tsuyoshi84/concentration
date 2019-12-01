@@ -1,36 +1,43 @@
 version: 2.1
 
-jobs:
-  build:
-    parallelism: 1
-    docker:
-      - image: circleci/node:latest-browsers
-
-    working_directory: ~/repo
+commands:
+  restore_npm_cache:
+    description: "Restore npm cache"
     steps:
-      - checkout
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
-      - run: npm install
-      - run: npm audit
-      - run: npm rebuild node-sass
+  save_npm_cache:
+    description: "Save npm cache"
+    steps:
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-  test:
+jobs:
+  build:
+    parallelism: 1
     docker:
       - image: circleci/node:latest-browsers
     working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+      - restore_npm_cache
+      - run: npm install
+      - run: npm audit
+      - run: npm rebuild node-sass
+      - save_npm_cache
+
+  test:
+    parallelism: 1
+    docker:
+      - image: circleci/node:latest-browsers
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_npm_cache
       - run: npm run-script test_without_watch
       - run: npm run-script e2e
       - run: npm run-script coveralls
@@ -39,15 +46,13 @@ jobs:
           destination: coverage
 
   deploy:
+    parallelism: 1
     docker:
       - image: circleci/node:latest-browsers
     working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+      - restore_npm_cache
       - run: npm run-script deploy
 
 workflows:
