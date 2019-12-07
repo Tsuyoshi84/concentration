@@ -30,7 +30,7 @@
     "@angular/service-worker": "^8.2.14",
     "animate.css": "^3.7.2",
     "core-js": "^2.6.10",
-    "lodash": "^4.17.15",
+    "lodash-es": "^4.17.15",
     "rxjs": "^6.5.3",
     "zone.js": "~0.9.1"
   },
@@ -42,6 +42,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "@types/jasmine": "^3.5.0",
     "@types/jasminewd2": "^2.0.8",
+    "@types/lodash-es": "^4.17.3",
     "@types/node": "^10.17.6",
     "angular-cli-ghpages": "^0.5.3",
     "codelyzer": "^5.2.0",

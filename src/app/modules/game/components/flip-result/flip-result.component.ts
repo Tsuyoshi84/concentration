@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-
 import { Result } from '../../enums/result.enum';
 
 @Component({
@@ -17,7 +16,7 @@ export class FlipResultComponent implements OnInit {
   /** Indicate if the result messsage should be shown */
   showsMessage: boolean;
   /** Timer */
-  timer;
+  timer: NodeJS.Timeout;
 
   constructor(private ref: ChangeDetectorRef) {}
 

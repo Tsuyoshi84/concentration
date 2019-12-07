@@ -9,7 +9,7 @@ describe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
   let cardEl: DebugElement;
-  let card;
+  let card: Card;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
