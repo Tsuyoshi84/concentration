@@ -16,7 +16,7 @@ export class FlipResultComponent implements OnInit {
   /** Indicate if the result messsage should be shown */
   showsMessage: boolean;
   /** Timer */
-  timer: NodeJS.Timeout;
+  timer: any;
 
   constructor(private ref: ChangeDetectorRef) {}
 
