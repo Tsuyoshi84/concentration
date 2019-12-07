@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameStatus } from '../../enums/game-status.enum';
-import { shuffle } from 'lodash';
-
+import { shuffle } from 'lodash-es';
 import { Observable } from 'rxjs';
 
 /**
@@ -96,7 +95,7 @@ export class GameService {
     this.flippedCount++;
     this.flippedCards.push(card);
 
-    return Observable.create(observer => {
+    return Observable.create((observer: any) => {
       observer.next({
         flippedCount: this.flippedCount,
         tryCount: this.tryCount,
@@ -144,16 +143,18 @@ export class GameService {
     });
     unflippedCards.forEach(c => c.flip());
 
-    return Observable.create(observer => {
-      observer.next(this.cheatedCount);
+    return Observable.create(
+      (observer: { next: (arg0: number) => void; complete: () => void }) => {
+        observer.next(this.cheatedCount);
 
-      setTimeout(() => {
-        // Unflip the cards to get the game condition back
-        unflippedCards.forEach(c => c.flip());
+        setTimeout(() => {
+          // Unflip the cards to get the game condition back
+          unflippedCards.forEach(c => c.flip());
 
-        setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
-      }, this.CHEAT_DURATION);
-    });
+          setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
+        }, this.CHEAT_DURATION);
+      }
+    );
   }
 
   /**

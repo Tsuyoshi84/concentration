@@ -9,7 +9,7 @@ describe('CardComponent', () => {
   let component: CardComponent;
   let fixture: ComponentFixture<CardComponent>;
   let cardEl: DebugElement;
-  let card;
+  let card: Card;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -34,7 +34,7 @@ describe('CardComponent', () => {
 
   it('should raise flipped event when clicked', () => {
     let clickedCard;
-    component.clicked.subscribe(c => (clickedCard = c));
+    component.clicked.subscribe((c: Card) => (clickedCard = c));
 
     cardEl.triggerEventHandler('click', null);
     expect(clickedCard).toBe(card);

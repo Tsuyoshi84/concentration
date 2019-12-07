@@ -1,14 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { GameProgressComponent } from './game-progress.component';
 import { By } from '@angular/platform-browser';
 import { GameStatus } from '../../enums/game-status.enum';
-import { SimpleChange } from '@angular/core';
+import { DebugElement } from '@angular/core';
 
 describe('GameProgressComponent', () => {
   let component: GameProgressComponent;
   let fixture: ComponentFixture<GameProgressComponent>;
-  let flippingEl;
+  let flippingEl: DebugElement;
   let playBtn;
   const expectedNumOfFlipping = 10;
 
