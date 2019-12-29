@@ -2,14 +2,14 @@ version: 2.1
 
 commands:
   restore_npm_cache:
-    description: "Restore npm cache"
+    description: 'Restore npm cache'
     steps:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
   save_npm_cache:
-    description: "Save npm cache"
+    description: 'Save npm cache'
     steps:
       - save_cache:
           paths:
@@ -38,6 +38,7 @@ jobs:
     steps:
       - checkout
       - restore_npm_cache
+      - run: npx webdriver-manager update
       - run: npm run-script test_without_watch
       - run: npm run-script e2e
       - run: npm run-script coveralls
