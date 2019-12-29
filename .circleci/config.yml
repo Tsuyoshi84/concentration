@@ -17,7 +17,7 @@ commands:
           key: v1-dependencies-{{ checksum "package.json" }}
 
 jobs:
-  build:
+  build_test:
     parallelism: 1
     docker:
       - image: circleci/node:12.13-browsers
@@ -28,16 +28,6 @@ jobs:
       - run: npm install
       - run: npm audit
       - run: npm rebuild node-sass
-      - save_npm_cache
-
-  test:
-    parallelism: 1
-    docker:
-      - image: circleci/node:12.13-browsers
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_npm_cache
       - run: npm run-script test_without_watch
       # - run: npm run-script e2e
       - run: npm run-script coveralls
@@ -53,24 +43,22 @@ jobs:
     steps:
       - checkout
       - restore_npm_cache
+      - run: git config --global user.name $GIT_USER_NAME
+      - run: git config --global user.email $GIT_USER_EMAIL
       - run: npm run-script build:prod
-      - run: npm run-script deploy:ci
+      - run: npm run-script deploy
 
 workflows:
   version: 2
   build-and-deploy:
     jobs:
-      - build:
+      - build_test:
           filters:
             branches:
               ignore:
+                - master
                 - gh-pages
-      - test:
-          requires:
-            - build
       - deploy:
-          requires:
-            - test
           filters:
             branches:
               only: master
