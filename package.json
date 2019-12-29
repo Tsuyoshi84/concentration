@@ -13,7 +13,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "deploy": "ng deploy --repo=https://github.com/Tsuyoshi84/concentration.git",
-    "build_deploy": "npm run build:prod && npm run deploy"
+    "ghpage": "angular-cli-ghpages"
   },
   "private": true,
   "dependencies": {

@@ -28,9 +28,9 @@ jobs:
       - run: npm install
       - run: npm audit
       - run: npm rebuild node-sass
-      - run: npm run-script test_without_watch
-      # - run: npm run-script e2e
-      - run: npm run-script coveralls
+      - run: npm run test_without_watch
+      # - run: npm run e2e
+      - run: npm run coveralls
       - store_artifacts:
           path: ~/repo/coverage
           destination: coverage
@@ -45,8 +45,8 @@ jobs:
       - restore_npm_cache
       - run: git config --global user.name $GIT_USER_NAME
       - run: git config --global user.email $GIT_USER_EMAIL
-      - run: npm run-script build:prod
-      - run: npm run-script deploy
+      - run: npm run build:prod
+      - run: npm run deploy
 
 workflows:
   version: 2
