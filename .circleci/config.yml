@@ -45,7 +45,6 @@ jobs:
       - restore_npm_cache
       - run: git config --global user.name $GIT_USER_NAME
       - run: git config --global user.email $GIT_USER_EMAIL
-      - run: npm run build:prod
       - run: npm run deploy
 
 workflows:
