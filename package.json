@@ -11,6 +11,8 @@
     "test_without_watch": "ng test --watch=false --code-coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "ng lint",
+    "fmt": "prettier --write './src/**/*.{ts,js,html}' --ignore-path .prettierignore",
+    "fmt:check": "prettier --list-different './src/**/*.{ts,js,html}' --ignore-path .prettierignore ",
     "e2e": "ng e2e",
     "deploy": "ng deploy --repo=https://github.com/Tsuyoshi84/concentration.git --base-href \"/concentration/\"",
     "ghpage": "angular-cli-ghpages"
