@@ -1,19 +1,19 @@
 {
   "configVersion": 1,
-  "timestamp": 1577600088180,
-  "index": "/index.html",
+  "timestamp": 1577603513363,
+  "index": "/concentration/index.html",
   "assetGroups": [
     {
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "/index.html",
-        "/main-latest.ff081dedf8ffe6329d97.js",
-        "/polyfills-es5-latest.0f209f6dd2e37d1dd295.js",
-        "/polyfills-latest.1b18de5719597ed40a42.js",
-        "/runtime-latest.edb2fcf2778e7bf1d426.js",
-        "/styles.686533c058f97eea1272.css"
+        "/concentration/index.html",
+        "/concentration/main-latest.ff081dedf8ffe6329d97.js",
+        "/concentration/polyfills-es5-latest.0f209f6dd2e37d1dd295.js",
+        "/concentration/polyfills-latest.1b18de5719597ed40a42.js",
+        "/concentration/runtime-latest.edb2fcf2778e7bf1d426.js",
+        "/concentration/styles.686533c058f97eea1272.css"
       ],
       "patterns": []
     },
@@ -22,36 +22,36 @@
       "installMode": "lazy",
       "updateMode": "prefetch",
       "urls": [
-        "/assets/apple-touch-icon.png",
-        "/assets/favicon-16x16.png",
-        "/assets/favicon-32x32.png",
-        "/assets/icons/icon-128x128.png",
-        "/assets/icons/icon-144x144.png",
-        "/assets/icons/icon-152x152.png",
-        "/assets/icons/icon-192x192.png",
-        "/assets/icons/icon-512x512.png",
-        "/assets/icons/icon-72x72.png"
+        "/concentration/assets/apple-touch-icon.png",
+        "/concentration/assets/favicon-16x16.png",
+        "/concentration/assets/favicon-32x32.png",
+        "/concentration/assets/icons/icon-128x128.png",
+        "/concentration/assets/icons/icon-144x144.png",
+        "/concentration/assets/icons/icon-152x152.png",
+        "/concentration/assets/icons/icon-192x192.png",
+        "/concentration/assets/icons/icon-512x512.png",
+        "/concentration/assets/icons/icon-72x72.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
-    "/assets/apple-touch-icon.png": "f486f93c36e34558c1f04b5de570f6da8a4b98ab",
-    "/assets/favicon-16x16.png": "4194376ccdc3b35905d957f0a2385a1dd3775820",
-    "/assets/favicon-32x32.png": "a23ae737996f7103f511ae2bbe85963e09f0518e",
-    "/assets/icons/icon-128x128.png": "76bbee0f273b8333faa4334cd2a11d1a158d4c24",
-    "/assets/icons/icon-144x144.png": "13b59937b2af8b307b39b2d6413ce84511cd4783",
-    "/assets/icons/icon-152x152.png": "064d7e970ea2d5d2238e593abbf5fef344a068f9",
-    "/assets/icons/icon-192x192.png": "cdb6e1a670d5038ab6f713cd2372d248324df7ce",
-    "/assets/icons/icon-512x512.png": "4da0ce22379f72ec5e9a44421583b5477e21b6aa",
-    "/assets/icons/icon-72x72.png": "8708ae396f9089c1022d0ec53b848ceb5da1cd42",
-    "/index.html": "29cc7248a9932040a497859d93696b4d73683a15",
-    "/main-latest.ff081dedf8ffe6329d97.js": "9498a6a48bee35339c3802a8849c602a40a565b7",
-    "/polyfills-es5-latest.0f209f6dd2e37d1dd295.js": "9d36683ffe6a97c30104eb3bcc156b15a1fc6dfe",
-    "/polyfills-latest.1b18de5719597ed40a42.js": "abafd476e4489afbb50e54da0d5736c59c859952",
-    "/runtime-latest.edb2fcf2778e7bf1d426.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
-    "/styles.686533c058f97eea1272.css": "01f04b6cc6a625f98e21a777c0b549590c170948"
+    "/concentration/assets/apple-touch-icon.png": "f486f93c36e34558c1f04b5de570f6da8a4b98ab",
+    "/concentration/assets/favicon-16x16.png": "4194376ccdc3b35905d957f0a2385a1dd3775820",
+    "/concentration/assets/favicon-32x32.png": "a23ae737996f7103f511ae2bbe85963e09f0518e",
+    "/concentration/assets/icons/icon-128x128.png": "76bbee0f273b8333faa4334cd2a11d1a158d4c24",
+    "/concentration/assets/icons/icon-144x144.png": "13b59937b2af8b307b39b2d6413ce84511cd4783",
+    "/concentration/assets/icons/icon-152x152.png": "064d7e970ea2d5d2238e593abbf5fef344a068f9",
+    "/concentration/assets/icons/icon-192x192.png": "cdb6e1a670d5038ab6f713cd2372d248324df7ce",
+    "/concentration/assets/icons/icon-512x512.png": "4da0ce22379f72ec5e9a44421583b5477e21b6aa",
+    "/concentration/assets/icons/icon-72x72.png": "8708ae396f9089c1022d0ec53b848ceb5da1cd42",
+    "/concentration/index.html": "e14bf32a93711afd60f2f3c5dee0b475de91422c",
+    "/concentration/main-latest.ff081dedf8ffe6329d97.js": "9498a6a48bee35339c3802a8849c602a40a565b7",
+    "/concentration/polyfills-es5-latest.0f209f6dd2e37d1dd295.js": "9d36683ffe6a97c30104eb3bcc156b15a1fc6dfe",
+    "/concentration/polyfills-latest.1b18de5719597ed40a42.js": "abafd476e4489afbb50e54da0d5736c59c859952",
+    "/concentration/runtime-latest.edb2fcf2778e7bf1d426.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/concentration/styles.686533c058f97eea1272.css": "01f04b6cc6a625f98e21a777c0b549590c170948"
   },
   "navigationUrls": [
     {
