@@ -38,7 +38,7 @@ jobs:
     steps:
       - checkout
       - run: npm install
-      - run: node_modules/protractor/bin/webdriver-manager update
+      - run: node_modules/protractor/bin/webdriver-manager update --versions.chrome 79.0.3945.36
       - run: npm run-script test_without_watch
       - run: npm run-script e2e
       - run: npm run-script coveralls
