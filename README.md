@@ -1,6 +1,8 @@
 # Concentration
 
-[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration) [![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg)](https://coveralls.io/github/Tsuyoshi84/concentration)
+[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration)
+[![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg)](https://coveralls.io/github/Tsuyoshi84/concentration)
+[![codebeat badge](https://codebeat.co/badges/4f17cdc6-e6be-42ea-907a-c4e4164f2588)](https://codebeat.co/projects/github-com-tsuyoshi84-concentration-master)
 
 神経衰弱ゲームです。[ここで](https://tsuyoshi84.github.io/concentration/)プレイできます。
 
