@@ -13,7 +13,7 @@ describe('GameProgressComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [GameProgressComponent]
+      declarations: [GameProgressComponent],
     }).compileComponents();
   }));
 

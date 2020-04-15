@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule,
   MatSelectModule,
-  MatGridListModule
+  MatGridListModule,
 } from '@angular/material';
 
 import { GameRoutingModule } from './game-routing.module';
@@ -27,7 +27,7 @@ import { GameProgressComponent } from './components/game-progress/game-progress.
     BrowserAnimationsModule,
     MatButtonModule,
     MatSelectModule,
-    MatGridListModule
+    MatGridListModule,
   ],
   declarations: [
     TopComponent,
@@ -35,9 +35,9 @@ import { GameProgressComponent } from './components/game-progress/game-progress.
     GameComponent,
     CardComponent,
     FlipResultComponent,
-    GameProgressComponent
+    GameProgressComponent,
   ],
   exports: [GameComponent],
-  providers: [GameService]
+  providers: [GameService],
 })
 export class GameModule {}

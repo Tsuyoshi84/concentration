@@ -7,5 +7,5 @@ export enum GameStatus {
   /** User is playing the game */
   Playing,
   /** User has flipped all the cards correctly */
-  Clear
+  Clear,
 }

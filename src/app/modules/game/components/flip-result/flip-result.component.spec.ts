@@ -10,7 +10,7 @@ describe('FlipResultComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [FlipResultComponent]
+      declarations: [FlipResultComponent],
     }).compileComponents();
   }));
 

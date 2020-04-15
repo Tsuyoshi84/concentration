@@ -6,17 +6,17 @@ import { TopComponent } from './modules/game/components/top/top.component';
 const routes: Routes = [
   {
     path: '',
-    component: TopComponent
+    component: TopComponent,
   },
   {
     path: 'game/:level',
-    component: GameComponent
+    component: GameComponent,
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { useHash: true })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

@@ -8,7 +8,7 @@ import { Result } from '../../enums/result.enum';
 describe('GameService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [GameService]
+      providers: [GameService],
     });
   });
 
@@ -35,16 +35,16 @@ describe('GameService', () => {
         const cards = service.startGame(4);
 
         expect(
-          cards.filter(card => card.character === cards[0].character).length
+          cards.filter((card) => card.character === cards[0].character).length
         ).toBe(2);
         expect(
-          cards.filter(card => card.character === cards[1].character).length
+          cards.filter((card) => card.character === cards[1].character).length
         ).toBe(2);
         expect(
-          cards.filter(card => card.character === cards[2].character).length
+          cards.filter((card) => card.character === cards[2].character).length
         ).toBe(2);
         expect(
-          cards.filter(card => card.character === cards[3].character).length
+          cards.filter((card) => card.character === cards[3].character).length
         ).toBe(2);
       }
     ));
@@ -83,11 +83,11 @@ describe('GameService', () => {
 
         const subscription = service.flipCard(cards[0]);
 
-        subscription.subscribe(result => {
+        subscription.subscribe((result) => {
           expect(result).toEqual({
             tryCount: 0,
             flippedCount: 1,
-            gameStatus: GameStatus.Playing
+            gameStatus: GameStatus.Playing,
           });
         });
       }
@@ -99,7 +99,7 @@ describe('GameService', () => {
         const cards = service.startGame(4);
 
         const sameCards = cards.filter(
-          card => card.character === cards[0].character
+          (card) => card.character === cards[0].character
         );
 
         // Flip first card
@@ -109,7 +109,7 @@ describe('GameService', () => {
         const subscription = service.flipCard(sameCards[1]);
 
         let count = 0;
-        subscription.subscribe(result => {
+        subscription.subscribe((result) => {
           count++;
           // Check the value when the second event comes
           if (count === 2) {
@@ -117,7 +117,7 @@ describe('GameService', () => {
               tryCount: 1,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
-              result: Result.Correct
+              result: Result.Correct,
             });
           }
         });
@@ -131,10 +131,10 @@ describe('GameService', () => {
 
         // Get two different cards
         const card1 = cards.filter(
-          card => card.character === cards[0].character
+          (card) => card.character === cards[0].character
         )[0];
         const card2 = cards.filter(
-          card => card.character === cards[1].character
+          (card) => card.character === cards[1].character
         )[0];
 
         // Flip a card which has 1
@@ -144,7 +144,7 @@ describe('GameService', () => {
         const subscription = service.flipCard(card2);
 
         let count = 0;
-        subscription.subscribe(result => {
+        subscription.subscribe((result) => {
           count++;
           // Check the value when the second event comes
           if (count === 2) {
@@ -152,7 +152,7 @@ describe('GameService', () => {
               tryCount: 2,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
-              result: Result.Wrong
+              result: Result.Wrong,
             });
           }
         });
@@ -166,11 +166,11 @@ describe('GameService', () => {
       (service: GameService) => {
         const cards = service.startGame(4);
 
-        service.cheat().subscribe(numOfCheating => {
+        service.cheat().subscribe((numOfCheating) => {
           expect(numOfCheating).toBe(1);
         });
 
-        service.cheat().subscribe(numOfCheating => {
+        service.cheat().subscribe((numOfCheating) => {
           expect(numOfCheating).toBe(2);
         });
       }

@@ -16,14 +16,14 @@ import gameDifficulty from '../../constants/game-difficulty';
     trigger('switchView', [
       transition(':enter', [
         style({ transform: 'translateY(20%)', opacity: 0 }),
-        animate('200ms', style({ transform: 'translateY(0)', opacity: 1 }))
+        animate('200ms', style({ transform: 'translateY(0)', opacity: 1 })),
       ]),
       transition(':leave', [
         style({ transform: 'translateY(0)', opacity: 1 }),
-        animate('200ms', style({ transform: 'translateY(-20%)', opacity: 0 }))
-      ])
-    ])
-  ]
+        animate('200ms', style({ transform: 'translateY(-20%)', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent, { static: true })
@@ -87,18 +87,18 @@ export class GameComponent implements OnInit, OnDestroy {
           this.flipResult.showResult(result);
         }
       },
-      e => console.error(e),
+      (e) => console.error(e),
       () => (this.canFlip = true)
     );
   }
 
   setupGame() {
-    this.sub = this.route.params.subscribe(params => {
+    this.sub = this.route.params.subscribe((params) => {
       this.canFlip = true;
       this.gameStatus = this.gameService.getGameStatus();
       this.initializeConditions();
       const level = +params['level'];
-      const difficulty = gameDifficulty.find(d => d.level === level);
+      const difficulty = gameDifficulty.find((d) => d.level === level);
       this.cards = this.gameService.startGame(difficulty.num);
       this.gameStatus = this.gameService.getGameStatus();
     });
@@ -122,10 +122,10 @@ export class GameComponent implements OnInit, OnDestroy {
 
     this.canFlip = false;
     this.gameService.cheat().subscribe(
-      cheatedCount => {
+      (cheatedCount) => {
         this.numOfCheating = cheatedCount;
       },
-      e => console.error(e),
+      (e) => console.error(e),
       () => (this.canFlip = true)
     );
   }

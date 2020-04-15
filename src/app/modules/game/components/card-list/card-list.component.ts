@@ -4,7 +4,7 @@ import { Card } from '../../models/card';
 @Component({
   selector: 'co-card-list',
   templateUrl: './card-list.component.html',
-  styleUrls: ['./card-list.component.sass']
+  styleUrls: ['./card-list.component.sass'],
 })
 export class CardListComponent implements OnInit {
   @Input()

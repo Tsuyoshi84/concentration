@@ -16,10 +16,10 @@ import { environment } from '../environments/environment';
     GameModule,
     AppRoutingModule,
     ServiceWorkerModule.register('/concentration/ngsw-worker.js', {
-      enabled: environment.production
-    })
+      enabled: environment.production,
+    }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

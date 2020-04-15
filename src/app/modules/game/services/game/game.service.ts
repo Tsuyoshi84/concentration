@@ -99,7 +99,7 @@ export class GameService {
       observer.next({
         flippedCount: this.flippedCount,
         tryCount: this.tryCount,
-        gameStatus: this.gameStatus
+        gameStatus: this.gameStatus,
       });
 
       if (this.flippedCards.length === 2) {
@@ -110,13 +110,13 @@ export class GameService {
             result: result,
             flippedCount: this.flippedCount,
             tryCount: this.tryCount,
-            gameStatus: this.gameStatus
+            gameStatus: this.gameStatus,
           });
 
           if (result === Result.Wrong) {
             setTimeout(() => {
               // If wrong, wait certain time before unflipping cards
-              this.flippedCards.forEach(c => c.setBack());
+              this.flippedCards.forEach((c) => c.setBack());
               this.flippedCards.length = 0;
               observer.complete();
             }, this.CARD_HOLD_DURATION);
@@ -138,10 +138,10 @@ export class GameService {
   cheat(): Observable<number> {
     this.cheatedCount++;
     // Flip unflipped cards
-    const unflippedCards = this.cards.filter(card => {
-      return !this.flippedCards.find(c => c.id === card.id) && !card.done;
+    const unflippedCards = this.cards.filter((card) => {
+      return !this.flippedCards.find((c) => c.id === card.id) && !card.done;
     });
-    unflippedCards.forEach(c => c.flip());
+    unflippedCards.forEach((c) => c.flip());
 
     return Observable.create(
       (observer: { next: (arg0: number) => void; complete: () => void }) => {
@@ -149,7 +149,7 @@ export class GameService {
 
         setTimeout(() => {
           // Unflip the cards to get the game condition back
-          unflippedCards.forEach(c => c.flip());
+          unflippedCards.forEach((c) => c.flip());
 
           setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
         }, this.CHEAT_DURATION);
@@ -180,8 +180,8 @@ export class GameService {
 
   private check(): Result {
     if (this.flippedCards[0].character === this.flippedCards[1].character) {
-      this.flippedCards.forEach(card => (card.done = true));
-      if (this.cards.filter(c => !c.done).length === 0) {
+      this.flippedCards.forEach((card) => (card.done = true));
+      if (this.cards.filter((c) => !c.done).length === 0) {
         this.gameStatus = GameStatus.Clear;
       }
 
