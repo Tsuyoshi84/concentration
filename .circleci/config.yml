@@ -42,6 +42,7 @@ jobs:
     steps:
       - checkout
       - restore_npm_cache
+      - run: npm install
       - run: git config --global user.name $GIT_USER_NAME
       - run: git config --global user.email $GIT_USER_EMAIL
       - run: npm run deploy
