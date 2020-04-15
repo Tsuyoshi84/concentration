@@ -37,7 +37,7 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
-      expect(resultElement.nativeElement.textContent).toEqual('');
+      expect(resultElement.nativeElement.textContent.trim()).toEqual('');
     });
 
     it('should show "Correct" message when Result.Correct is passed', () => {
@@ -45,7 +45,9 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
-      expect(resultElement.nativeElement.textContent).toEqual('Correct!');
+      expect(resultElement.nativeElement.textContent.trim()).toEqual(
+        'Correct!'
+      );
       expect(resultElement.classes['correct']).toBeTruthy();
     });
 
@@ -54,7 +56,7 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
-      expect(resultElement.nativeElement.textContent).toEqual(
+      expect(resultElement.nativeElement.textContent.trim()).toEqual(
         `Congrats!\nYou've finished!!`
       );
       expect(resultElement.classes['finish']).toBeTruthy();
