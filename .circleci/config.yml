@@ -20,7 +20,7 @@ jobs:
   build_test:
     parallelism: 1
     docker:
-      - image: circleci/node:12.13-browsers
+      - image: circleci/node:12.17-browsers
     working_directory: ~/repo
     steps:
       - checkout
@@ -37,7 +37,7 @@ jobs:
   deploy:
     parallelism: 1
     docker:
-      - image: circleci/node:12.13-browsers
+      - image: circleci/node:12.17-browsers
     working_directory: ~/repo
     steps:
       - checkout
