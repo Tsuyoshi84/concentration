@@ -1,5 +1,11 @@
 {
-  "extends": [
-    "config:base"
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "packageNames": ["angular"],
+      "packagePatterns": ["^@angular/"],
+      "groupName": "Angular",
+      "schedule": ["after 1am on sunday"]
+    }
   ]
 }
