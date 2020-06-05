@@ -1,5 +1,11 @@
 {
-  "extends": ["config:base"],
+  "extends": [
+    "config:js-app",
+    "packages:linters",
+    "packages:jsTest",
+    "schedule:earlyMondays",
+    ":automergeMinor"
+  ],
   "packageRules": [
     {
       "packageNames": ["angular"],
@@ -8,7 +14,5 @@
       "schedule": ["after 1am on sunday"]
     }
   ],
-  "minor": {
-    "groupName": "all dependencies"
-  }
+  "ignoreDeps": ["typescript"]
 }
