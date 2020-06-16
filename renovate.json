@@ -1,17 +1,15 @@
 {
   "extends": [
     "config:js-app",
-    "packages:linters",
-    "packages:jsTest",
-    "schedule:earlyMondays",
+    "group:allNonMajor",
+    "schedule:monthly",
     ":automergeMinor"
   ],
   "packageRules": [
     {
       "packageNames": ["angular"],
       "packagePatterns": ["^@angular/"],
-      "groupName": "Angular",
-      "schedule": ["after 1am on sunday"]
+      "groupName": "Angular"
     }
   ],
   "ignoreDeps": ["typescript"]
