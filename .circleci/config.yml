@@ -2,14 +2,14 @@ version: 2.1
 
 commands:
   restore_npm_cache:
-    description: 'Restore npm cache'
+    description: "Restore npm cache"
     steps:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
   save_npm_cache:
-    description: 'Save npm cache'
+    description: "Save npm cache"
     steps:
       - save_cache:
           paths:
@@ -27,6 +27,7 @@ jobs:
       - restore_npm_cache
       - run: npm install
       - run: npm rebuild node-sass
+      - run: npm run build
       - run: npm run test_without_watch
       # - run: npm run e2e
       - run: npm run coveralls
