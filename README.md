@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg)](https://coveralls.io/github/Tsuyoshi84/concentration)
 [![codebeat badge](https://codebeat.co/badges/4f17cdc6-e6be-42ea-907a-c4e4164f2588)](https://codebeat.co/projects/github-com-tsuyoshi84-concentration-master)
 
-神経衰弱ゲームです。[ここで](https://tsuyoshi84.github.io/concentration/)プレイできます。
+It is a Concentration game. You can play [here](https://tsuyoshi84.github.io/concentration/).
 
 ## Development server
 
