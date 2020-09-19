@@ -1,3 +1,5 @@
+@import '~style/_variables.sass'
+
 .container
   height: 100vh
   display: flex
@@ -6,10 +8,10 @@
 
   .inner-container
     text-align: center
-    width: 280px
+    width: clamp(280px, calc(100vw - 32px), 480px)
 
 .title
-  font-size: 2rem
+  font-size: 2.5rem
   font-weight: bold
   margin-bottom: 1rem
 
@@ -23,30 +25,42 @@
     animation: rotate-anime 1.5s ease-in-out infinite alternate forwards
 
   @keyframes rotate-anime
-    0% 
+    0%
       transform: rotate(-20deg)
-    100% 
+    100%
       transform: rotate(20deg)
 
 .start-button
   color: #444
-  font-size: 2rem
+  font-size: 4rem
   background-color: #fff
   width: 100%
-  height: 3rem
-  margin: 0.4rem 0
+  margin: 1rem 0
+  padding: 0.5rem
   transition: transform 0.2s
-  cursor: pointer
-  box-shadow: 1px 1px 2px 0 hsla(0, 99%, 0%, 0.5)
+  box-shadow: 1px 1px 3px 0 hsla(0, 99%, 0%, 0.5)
   border: none
-  &:hover 
+  border-radius: 1rem
+  cursor: pointer
+  &:hover
     transform: scale(1.05, 1.05)
-    box-shadow: 1px 1px 5px 0 hsla(0, 99%, 0%, 0.5)
     .icon
       transform: rotate(20deg)
 
   .icon
     transition: transform 0.2s
     display: inline-block
-      
+
+@media only screen and (min-width: $device-tablet)
+  .title
+    font-size: 2rem
+  .start-button
+    font-size: 5rem
+    box-shadow: 1px 1px 5px 0 hsla(0, 99%, 0%, 0.5)
+
+@media only screen and (min-width: $device-tablet)
+  .title
+    font-size: 4rem
+
+
 
