@@ -1,4 +1,4 @@
-import { async, TestBed, inject } from '@angular/core/testing';
+import { TestBed, inject, waitForAsync } from '@angular/core/testing';
 
 import { GameService } from './game.service';
 import { Card } from '../../models/card';

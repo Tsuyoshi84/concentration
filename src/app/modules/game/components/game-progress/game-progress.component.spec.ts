@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { GameProgressComponent } from './game-progress.component';
 import { By } from '@angular/platform-browser';
 import { GameStatus } from '../../enums/game-status.enum';
@@ -11,7 +11,7 @@ describe('GameProgressComponent', () => {
   let playBtn;
   const expectedNumOfFlipping = 10;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [GameProgressComponent],
     }).compileComponents();

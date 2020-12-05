@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { FlipResultComponent } from './flip-result.component';
 import { Result } from '../../enums/result.enum';
@@ -8,7 +8,7 @@ describe('FlipResultComponent', () => {
   let component: FlipResultComponent;
   let fixture: ComponentFixture<FlipResultComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [FlipResultComponent],
     }).compileComponents();
