@@ -2,6 +2,7 @@
 
 $card-size-sm: 50px
 $card-size-md: 100px
+$color-border: #ccc
 
 .container
   width: 100%
@@ -9,7 +10,7 @@ $card-size-md: 100px
   position: relative
   perspective: 800px
 .card
-  border: 1px solid #ccc
+  border: 1px solid $color-border
   border-radius: 5px
   width: 100%
   height: 100%
@@ -21,13 +22,13 @@ $card-size-md: 100px
   transform-style: preserve-3d
   @media (hover: hover)
     &:not(.flipped):hover
-      box-shadow: 5px 5px 10px #ccc
+      box-shadow: 5px 5px 10px $color-border
       transform: scale(1.1, 1.1)
   &:not(.flipped)
-    box-shadow: 1px 1px 2px #ccc
+    box-shadow: 1px 1px 2px $color-border
   &.flipped
     transform: rotateY(180deg)
-    box-shadow: -1px 1px 2px #ccc
+    box-shadow: -1px 1px 2px $color-border
     cursor: default
   .front, .back
     background-color: #fff
@@ -35,7 +36,6 @@ $card-size-md: 100px
     height: 100%
     width: 100%
     text-align: center
-    font-weight: bold
     position: absolute
     backface-visibility: hidden
     transition: transform, color 0.3s ease-in-out
@@ -43,6 +43,9 @@ $card-size-md: 100px
     background-color: #f0f0f0
     cursor: pointer
   .back
+    display: flex
+    justify-content: center
+    align-items: center
     transform: rotateY(180deg)
     &.done
       color: #8fd08f
