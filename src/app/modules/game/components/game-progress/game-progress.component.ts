@@ -8,9 +8,9 @@ import { GameStatus } from '../../enums/game-status.enum';
 })
 export class GameProgressComponent implements OnInit {
   @Input()
-  numOfTry: number;
+  numOfTry!: number;
   @Input()
-  gameStatus: GameStatus;
+  gameStatus!: GameStatus;
 
   constructor() {}
 

@@ -32,11 +32,11 @@ export class GameService {
   /** Flipped card array */
   private flippedCards: Card[] = [];
   /** Total number of flipping cards */
-  private flippedCount: number;
+  private flippedCount: number = 0;
   /** トライした回数 */
-  private tryCount: number;
+  private tryCount: number = 0;
   /** Total number of cheating */
-  private cheatedCount: number;
+  private cheatedCount: number = 0;
   /** Game status */
   private gameStatus: GameStatus;
   /** Emojis */

@@ -6,6 +6,7 @@ interface Difficulty {
   label: string;
   num: number;
   level: number;
+  icon: string;
 }
 
 @Component({
@@ -17,13 +18,14 @@ export class TopComponent implements OnInit {
   @Output()
   started = new EventEmitter<number>();
   /** List of difficulties that user can select from */
-  difficulties: Difficulty[];
+  difficulties!: Difficulty[];
   /** Number of cards selected by a user */
-  numOfCard: number;
+  numOfCard!: number;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
+    console.log({ gameDifficulty });
     this.difficulties = gameDifficulty;
     this.numOfCard = this.difficulties[1].num;
   }

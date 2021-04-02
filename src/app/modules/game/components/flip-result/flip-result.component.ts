@@ -10,11 +10,11 @@ export class FlipResultComponent implements OnInit {
   /** Animation duration in ms */
   private readonly ANIMATION_DURATION = 1000;
   /** Result message */
-  message: string;
+  message!: string;
   /** Classes that controll animation */
   animateClasses: string[] = [];
   /** Indicate if the result messsage should be shown */
-  showsMessage: boolean;
+  showsMessage: boolean = false;
   /** Timer */
   timer: any;
 

@@ -11,11 +11,13 @@ describe('GameProgressComponent', () => {
   let playBtn;
   const expectedNumOfFlipping = 10;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [GameProgressComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [GameProgressComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(GameProgressComponent);
