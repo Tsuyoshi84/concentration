@@ -1,5 +1,16 @@
 version: 2.1
 
+orbs:
+  browser-tools: circleci/browser-tools@1.1.0
+
+executors:
+  default:
+    docker:
+      - image: cimg/node:12.22.0-browsers
+        auth:
+          username: nayoro84
+          password: $DOCKERHUB_ACCESS_TOKEN
+
 commands:
   restore_npm_cache:
     description: "Restore npm cache"
@@ -18,11 +29,11 @@ commands:
 
 jobs:
   build_test:
+    executor: default
     parallelism: 1
-    docker:
-      - image: circleci/node:12.21-browsers
     working_directory: ~/repo
     steps:
+      - browser-tools/install-browser-tools
       - checkout
       - restore_npm_cache
       - run: npm install
@@ -36,11 +47,11 @@ jobs:
           destination: coverage
 
   deploy:
+    executor: default
     parallelism: 1
-    docker:
-      - image: circleci/node:12.21-browsers
     working_directory: ~/repo
     steps:
+      - browser-tools/install-browser-tools
       - checkout
       - restore_npm_cache
       - run: npm install
