@@ -27,21 +27,21 @@ import gameDifficulty from '../../constants/game-difficulty';
 })
 export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent, { static: true })
-  flipResult: FlipResultComponent;
+  flipResult!: FlipResultComponent;
 
   /** Store GameStatus enum to a variable so that it can be accessed from the view */
   readonly GameStatus = GameStatus;
 
   /** Number of try */
-  numOfTry: number;
+  numOfTry: number = 0;
   /** Number of cheating */
-  numOfCheating: number;
+  numOfCheating: number = 0;
   /** Game status */
-  gameStatus: GameStatus;
+  gameStatus!: GameStatus;
   /** Cards used for the game */
   cards: Card[] = [];
   /** Indicate if a user can flip cards  */
-  canFlip: boolean;
+  canFlip: boolean = false;
   sub: any;
 
   constructor(
@@ -94,11 +94,15 @@ export class GameComponent implements OnInit, OnDestroy {
 
   setupGame() {
     this.sub = this.route.params.subscribe((params) => {
+      const level = +params['level'];
+      const difficulty = gameDifficulty.find((d) => d.level === level);
+
+      if (difficulty === undefined) return;
+
       this.canFlip = true;
       this.gameStatus = this.gameService.getGameStatus();
       this.initializeConditions();
-      const level = +params['level'];
-      const difficulty = gameDifficulty.find((d) => d.level === level);
+
       this.cards = this.gameService.startGame(difficulty.num);
       this.gameStatus = this.gameService.getGameStatus();
     });

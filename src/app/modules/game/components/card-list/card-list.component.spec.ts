@@ -8,11 +8,13 @@ describe('CardListComponent', () => {
   let component: CardListComponent;
   let fixture: ComponentFixture<CardListComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [CardListComponent, CardComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [CardListComponent, CardComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardListComponent);

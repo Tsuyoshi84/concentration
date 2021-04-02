@@ -8,11 +8,13 @@ describe('FlipResultComponent', () => {
   let component: FlipResultComponent;
   let fixture: ComponentFixture<FlipResultComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [FlipResultComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [FlipResultComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FlipResultComponent);

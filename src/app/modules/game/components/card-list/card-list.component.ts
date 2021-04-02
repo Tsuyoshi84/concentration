@@ -8,11 +8,11 @@ import { Card } from '../../models/card';
 })
 export class CardListComponent implements OnInit {
   @Input()
-  cards: Card[];
+  cards!: Card[];
   @Output()
   cardClicked = new EventEmitter<Card>();
 
-  cardsClass: string;
+  cardsClass!: string;
 
   constructor() {}
 

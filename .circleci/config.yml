@@ -6,15 +6,15 @@ commands:
     steps:
       - restore_cache:
           keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
+            - v2-dependencies-{{ checksum "package-lock.json" }}
+            - v2-dependencies-
   save_npm_cache:
     description: "Save npm cache"
     steps:
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2-dependencies-{{ checksum "package-lock.json" }}
 
 jobs:
   build_test:

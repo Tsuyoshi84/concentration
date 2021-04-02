@@ -8,7 +8,7 @@ import { Card } from '../../models/card';
 })
 export class CardComponent implements OnInit {
   @Input()
-  card: Card;
+  card!: Card;
   @Output()
   clicked = new EventEmitter<Card>();
 

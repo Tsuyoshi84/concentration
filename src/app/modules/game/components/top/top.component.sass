@@ -1,5 +1,5 @@
-@import '~style/_variables.sass'
-@import '~style/_mixins.sass'
+@import '~src/style/_variables.sass'
+@import '~src/style/_mixins.sass'
 
 .container
   height: 100vh
@@ -73,8 +73,8 @@
     display: grid
     width: calc(#{$button-size} * 2 + #{$button-gap})
     margin: 0 auto
-    grid-template-columns: auto auto 
-    grid-template-rows: auto auto 
+    grid-template-columns: auto auto
+    grid-template-rows: auto auto
     column-gap: $button-gap
     row-gap: $button-gap
   .start-button
@@ -91,6 +91,3 @@
 @media only screen and (min-width: $device-laptop)
   .title
     font-size: 6rem
-
-
-
