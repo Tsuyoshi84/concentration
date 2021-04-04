@@ -7,14 +7,10 @@ import { Card } from '../../models/card';
   styleUrls: ['./card-list.component.sass'],
 })
 export class CardListComponent implements OnInit {
-  @Input()
-  cards!: Card[];
-  @Output()
-  cardClicked = new EventEmitter<Card>();
+  @Input() cards!: Card[];
+  @Output() cardClicked = new EventEmitter<Card>();
 
   cardsClass!: string;
-
-  constructor() {}
 
   ngOnInit() {
     this.cardsClass = this.cards.length < 30 ? 'four-cards' : 'six-cards';

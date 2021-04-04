@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Card } from '../../models/card';
 
 @Component({
@@ -6,15 +6,9 @@ import { Card } from '../../models/card';
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.sass'],
 })
-export class CardComponent implements OnInit {
-  @Input()
-  card!: Card;
-  @Output()
-  clicked = new EventEmitter<Card>();
-
-  constructor() {}
-
-  ngOnInit() {}
+export class CardComponent {
+  @Input() card!: Card;
+  @Output() clicked = new EventEmitter<Card>();
 
   /**
    * Handler called when a card is clicked.

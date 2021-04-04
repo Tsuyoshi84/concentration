@@ -7,12 +7,8 @@ import { GameStatus } from '../../enums/game-status.enum';
   styleUrls: ['./game-progress.component.sass'],
 })
 export class GameProgressComponent implements OnInit {
-  @Input()
-  numOfTry!: number;
-  @Input()
-  gameStatus!: GameStatus;
-
-  constructor() {}
+  @Input() numOfTry!: number;
+  @Input() gameStatus!: GameStatus;
 
   ngOnInit() {}
 }

@@ -15,8 +15,7 @@ interface Difficulty {
   styleUrls: ['./top.component.sass'],
 })
 export class TopComponent implements OnInit {
-  @Output()
-  started = new EventEmitter<number>();
+  @Output() started = new EventEmitter<number>();
   /** List of difficulties that user can select from */
   difficulties!: Difficulty[];
   /** Number of cards selected by a user */
