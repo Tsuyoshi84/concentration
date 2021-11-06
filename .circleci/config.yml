@@ -13,14 +13,14 @@ executors:
 
 commands:
   restore_npm_cache:
-    description: "Restore npm cache"
+    description: 'Restore npm cache'
     steps:
       - restore_cache:
           keys:
             - v2-dependencies-{{ checksum "package-lock.json" }}
             - v2-dependencies-
   save_npm_cache:
-    description: "Save npm cache"
+    description: 'Save npm cache'
     steps:
       - save_cache:
           paths:
@@ -67,11 +67,11 @@ workflows:
           filters:
             branches:
               ignore:
-                - master
+                - main
                 - gh-pages
   deploy:
     jobs:
       - deploy:
           filters:
             branches:
-              only: master
+              only: main
