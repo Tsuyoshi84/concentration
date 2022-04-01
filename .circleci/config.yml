@@ -1,12 +1,12 @@
 version: 2.1
 
 orbs:
-  browser-tools: circleci/browser-tools@1.2.4
+  browser-tools: circleci/browser-tools@1.2.5
 
 executors:
   default:
     docker:
-      - image: cimg/node:17.6.0-browsers
+      - image: cimg/node:17.8.0-browsers
         auth:
           username: nayoro84
           password: $DOCKERHUB_ACCESS_TOKEN
