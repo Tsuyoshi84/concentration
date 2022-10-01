@@ -6,7 +6,7 @@ orbs:
 executors:
   default:
     docker:
-      - image: cimg/node:18.7.0-browsers
+      - image: cimg/node:18.9.1-browsers
         auth:
           username: nayoro84
           password: $DOCKERHUB_ACCESS_TOKEN
