@@ -30,6 +30,9 @@
             "tsConfig": "tsconfig.app.json",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/style/styles.sass"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/style"]
+            },
             "scripts": [],
             "vendorChunk": true,
             "extractLicenses": false,
@@ -94,6 +97,9 @@
             "karmaConfig": "karma.conf.js",
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.sass"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/style"]
+            },
             "scripts": []
           }
         },
