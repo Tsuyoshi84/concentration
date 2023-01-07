@@ -1,5 +1,5 @@
 <div class="container" [ngClass]="cardsClass">
   <div class="card-box" *ngFor="let card of cards">
-    <co-card [card]="card" (clicked)="onClicked($event)"></co-card>
+    <app-card [card]="card" (clicked)="onClicked($event)"></app-card>
   </div>
 </div>
