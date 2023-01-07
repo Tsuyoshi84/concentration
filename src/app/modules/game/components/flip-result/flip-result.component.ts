@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Result } from '../../enums/result.enum';
 
 @Component({
-  selector: 'co-flip-result',
+  selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
   styleUrls: ['./flip-result.component.sass'],
 })
@@ -11,12 +11,12 @@ export class FlipResultComponent implements OnInit {
   private readonly ANIMATION_DURATION = 1000;
   /** Result message */
   message!: string;
-  /** Classes that controll animation */
+  /** Classes that control animation */
   animateClasses: string[] = [];
-  /** Indicate if the result messsage should be shown */
-  showsMessage: boolean = false;
+  /** Indicate if the result message should be shown */
+  showsMessage = false;
   /** Timer */
-  timer: any;
+  timer: ReturnType<typeof setTimeout> | undefined;
 
   constructor(private ref: ChangeDetectorRef) {}
 

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Card } from '../../models/card';
 
 @Component({
-  selector: 'co-card-list',
+  selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.sass'],
 })

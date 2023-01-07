@@ -7,9 +7,10 @@ import { FlipResultComponent } from '../../components/flip-result/flip-result.co
 import { GameStatus } from '../../enums/game-status.enum';
 import { Router, ActivatedRoute } from '@angular/router';
 import gameDifficulty from '../../constants/game-difficulty';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'co-game',
+  selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.sass'],
   animations: [
@@ -33,16 +34,16 @@ export class GameComponent implements OnInit, OnDestroy {
   readonly GameStatus = GameStatus;
 
   /** Number of try */
-  numOfTry: number = 0;
+  numOfTry = 0;
   /** Number of cheating */
-  numOfCheating: number = 0;
+  numOfCheating = 0;
   /** Game status */
   gameStatus!: GameStatus;
   /** Cards used for the game */
   cards: Card[] = [];
   /** Indicate if a user can flip cards  */
-  canFlip: boolean = false;
-  sub: any;
+  canFlip = false;
+  sub: Subscription | undefined;
 
   constructor(
     private gameService: GameService,
@@ -117,7 +118,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Flip all the unflipped card.
+   * Flip all the un-flipped card.
    */
   cheat(): void {
     if (!this.canFlip) {

@@ -10,7 +10,7 @@ interface Difficulty {
 }
 
 @Component({
-  selector: 'co-top',
+  selector: 'app-top',
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.sass'],
 })

@@ -3,7 +3,7 @@ import { Card } from '../../models/card';
 import { Result } from '../../enums/result.enum';
 import { GameStatus } from '../../enums/game-status.enum';
 import { shuffle } from 'lodash-es';
-import { Observable } from 'rxjs';
+import { Observable, Subscriber } from 'rxjs';
 
 /**
  * Bundle information related to card flipping.
@@ -32,11 +32,11 @@ export class GameService {
   /** Flipped card array */
   private flippedCards: Card[] = [];
   /** Total number of flipping cards */
-  private flippedCount: number = 0;
+  private flippedCount = 0;
   /** トライした回数 */
-  private tryCount: number = 0;
+  private tryCount = 0;
   /** Total number of cheating */
-  private cheatedCount: number = 0;
+  private cheatedCount = 0;
   /** Game status */
   private gameStatus: GameStatus;
   /** Emojis */
@@ -95,7 +95,7 @@ export class GameService {
     this.flippedCount++;
     this.flippedCards.push(card);
 
-    return Observable.create((observer: any) => {
+    return Observable.create((observer: Subscriber<FlipResult>) => {
       observer.next({
         flippedCount: this.flippedCount,
         tryCount: this.tryCount,

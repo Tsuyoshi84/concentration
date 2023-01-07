@@ -1,7 +1,5 @@
-import { TestBed, inject, waitForAsync } from '@angular/core/testing';
-
+import { TestBed, inject } from '@angular/core/testing';
 import { GameService } from './game.service';
-import { Card } from '../../models/card';
 import { GameStatus } from '../../enums/game-status.enum';
 import { Result } from '../../enums/result.enum';
 
@@ -56,7 +54,7 @@ describe('GameService', () => {
       (service: GameService) => {
         expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
 
-        const cards = service.startGame(10);
+        service.startGame(10);
         expect(service.getGameStatus()).toBe(GameStatus.Playing);
 
         service.reset();
@@ -164,8 +162,6 @@ describe('GameService', () => {
     it('should increase the number of cheating', inject(
       [GameService],
       (service: GameService) => {
-        const cards = service.startGame(4);
-
         service.cheat().subscribe((numOfCheating) => {
           expect(numOfCheating).toBe(1);
         });
