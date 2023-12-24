@@ -3,11 +3,11 @@
  */
 export enum Result {
   /** Indicate that check was not required */
-  None,
+  None = 0,
   /** Indicate that a user flipped correct card */
-  Correct,
+  Correct = 1,
   /** Indicate that a user flipped wrong card */
-  Wrong,
+  Wrong = 2,
   /** Indicate that a user finished the game */
-  Finish,
+  Finish = 3,
 }

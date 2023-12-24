@@ -1,8 +1,8 @@
+import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { GameProgressComponent } from './game-progress.component';
 import { By } from '@angular/platform-browser';
 import { GameStatus } from '../../enums/game-status.enum';
-import { DebugElement } from '@angular/core';
+import { GameProgressComponent } from './game-progress.component';
 
 describe('GameProgressComponent', () => {
   let component: GameProgressComponent;

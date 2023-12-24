@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { GameService } from './game.service';
 import { GameStatus } from '../../enums/game-status.enum';
 import { Result } from '../../enums/result.enum';
+import { GameService } from './game.service';
 
 describe('GameService', () => {
   beforeEach(() => {

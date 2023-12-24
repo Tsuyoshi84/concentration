@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Card } from '../../models/card';
-import { Result } from '../../enums/result.enum';
-import { GameStatus } from '../../enums/game-status.enum';
 import { shuffle } from 'lodash-es';
 import { Observable, Subscriber } from 'rxjs';
+import { GameStatus } from '../../enums/game-status.enum';
+import { Result } from '../../enums/result.enum';
+import { Card } from '../../models/card';
 
 /**
  * Bundle information related to card flipping.
@@ -23,7 +23,7 @@ interface FlipResult {
 export class GameService {
   /** Flipping card time duration in ms */
   private readonly FLIPPING_DURATION = 300;
-  /** Time duration before unflipping when flipped cards are wrong */
+  /** Time duration before un-flipping when flipped cards are wrong */
   private readonly CARD_HOLD_DURATION = 500;
   /** Cheating duration in ms */
   private readonly CHEAT_DURATION = 1000;
@@ -115,7 +115,7 @@ export class GameService {
 
           if (result === Result.Wrong) {
             setTimeout(() => {
-              // If wrong, wait certain time before unflipping cards
+              // If wrong, wait a certain time before un-flipping cards.
               this.flippedCards.forEach((c) => c.setBack());
               this.flippedCards.length = 0;
               observer.complete();
@@ -132,8 +132,8 @@ export class GameService {
   }
 
   /**
-   * Flip all the unflipped cards temporarily.
-   * This returns the number of cheating after unflipping via promise.
+   * Flip all the un-flipped cards temporarily.
+   * This returns the number of cheating after un-flipping via promise.
    */
   cheat(): Observable<number> {
     this.cheatedCount++;
@@ -153,7 +153,7 @@ export class GameService {
 
           setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
         }, this.CHEAT_DURATION);
-      },
+      }
     );
   }
 
