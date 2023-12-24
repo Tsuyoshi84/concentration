@@ -153,7 +153,7 @@ export class GameService {
 
           setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
         }, this.CHEAT_DURATION);
-      }
+      },
     );
   }
 

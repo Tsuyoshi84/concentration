@@ -48,7 +48,7 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -89,7 +89,7 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       },
       (e) => console.error(e),
-      () => (this.canFlip = true)
+      () => (this.canFlip = true),
     );
   }
 
@@ -131,7 +131,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.numOfCheating = cheatedCount;
       },
       (e) => console.error(e),
-      () => (this.canFlip = true)
+      () => (this.canFlip = true),
     );
   }
 
