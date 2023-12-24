@@ -14,8 +14,8 @@
     "format": "biome format . --write",
     "format:check": "biome format .",
     "check": "biome check . --apply",
-    "fmt": "prettier --write './src/**/*.{ts,js,html}' --ignore-path .prettierignore",
-    "fmt:check": "prettier --list-different './src/**/*.{ts,js,html}' --ignore-path .prettierignore ",
+    "fmt": "prettier --write './src/**/*.html' --ignore-path .prettierignore",
+    "fmt:check": "prettier --list-different './src/**/*.html' --ignore-path .prettierignore ",
     "e2e": "ng e2e",
     "deploy": "ng deploy --repo=https://github.com/Tsuyoshi84/concentration.git --base-href \"/concentration/\" --message \"/[ci skip] Auto generated./\"",
     "ghpage": "angular-cli-ghpages"
