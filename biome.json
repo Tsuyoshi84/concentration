@@ -6,7 +6,12 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": ["./dist/**/*", "./.angular/**/*", "./tsconfig.*"]
+    "ignore": [
+      "./dist/**/*",
+      "./.angular/**/*",
+      "./tsconfig.*",
+      "./coverage/**/*"
+    ]
   },
   "organizeImports": {
     "enabled": true

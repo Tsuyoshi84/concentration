@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { By } from '@angular/platform-browser';
 import { Result } from '../../enums/result.enum';
 import { FlipResultComponent } from './flip-result.component';
@@ -46,7 +45,7 @@ describe('FlipResultComponent', () => {
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        'Correct!',
+        'Correct!'
       );
       expect(resultElement.classes['correct']).toBeTruthy();
     });
@@ -57,9 +56,9 @@ describe('FlipResultComponent', () => {
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        `Congrats!\nYou've finished!!`,
+        `Congrats!\nYou've finished!!`
       );
-      expect(resultElement.classes['finish']).toBeTruthy();
+      expect(resultElement.classes.finish).toBeTruthy();
     });
   });
 });

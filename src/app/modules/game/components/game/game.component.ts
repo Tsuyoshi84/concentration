@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
@@ -48,7 +47,7 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -89,7 +88,7 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       },
       (e) => console.error(e),
-      () => (this.canFlip = true),
+      () => (this.canFlip = true)
     );
   }
 
@@ -131,7 +130,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.numOfCheating = cheatedCount;
       },
       (e) => console.error(e),
-      () => (this.canFlip = true),
+      () => (this.canFlip = true)
     );
   }
 
