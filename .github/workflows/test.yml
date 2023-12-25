@@ -35,10 +35,10 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
 
       - name: Run tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+        run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage
 
-      # - name: Upload coverage
-      #   run: npm run coveralls
+      - name: Upload coverage
+        run: npm run coveralls
 
       - name: Build
         run: npm run build
