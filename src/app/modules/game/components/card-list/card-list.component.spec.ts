@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CardListComponent } from './card-list.component';
-import { CardComponent } from '../card/card.component';
 import { Card } from '../../models/card';
+import { CardComponent } from '../card/card.component';
+import { CardListComponent } from './card-list.component';
 
 describe('CardListComponent', () => {
   let component: CardListComponent;
