@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
+import gameDifficulty from '../../constants/game-difficulty';
+import { GameStatus } from '../../enums/game-status.enum';
 import { Card } from '../../models/card';
 import { GameService } from '../../services/game/game.service';
-import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
-import { GameStatus } from '../../enums/game-status.enum';
-import { Router, ActivatedRoute } from '@angular/router';
-import gameDifficulty from '../../constants/game-difficulty';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-game',
@@ -48,7 +48,7 @@ export class GameComponent implements OnInit, OnDestroy {
   constructor(
     private gameService: GameService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {}
 
   ngOnInit() {
@@ -89,7 +89,7 @@ export class GameComponent implements OnInit, OnDestroy {
         }
       },
       (e) => console.error(e),
-      () => (this.canFlip = true)
+      () => (this.canFlip = true),
     );
   }
 
@@ -131,7 +131,7 @@ export class GameComponent implements OnInit, OnDestroy {
         this.numOfCheating = cheatedCount;
       },
       (e) => console.error(e),
-      () => (this.canFlip = true)
+      () => (this.canFlip = true),
     );
   }
 

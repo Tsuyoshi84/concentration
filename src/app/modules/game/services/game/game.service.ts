@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Card } from '../../models/card';
-import { Result } from '../../enums/result.enum';
-import { GameStatus } from '../../enums/game-status.enum';
 import { shuffle } from 'lodash-es';
 import { Observable, Subscriber } from 'rxjs';
+import { GameStatus } from '../../enums/game-status.enum';
+import { Result } from '../../enums/result.enum';
+import { Card } from '../../models/card';
 
 /**
  * Bundle information related to card flipping.
@@ -153,7 +153,7 @@ export class GameService {
 
           setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
         }, this.CHEAT_DURATION);
-      }
+      },
     );
   }
 

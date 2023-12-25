@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { CardComponent } from './card.component';
-import { Card } from '../../models/card';
-import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { Card } from '../../models/card';
+import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {
   let component: CardComponent;
@@ -11,13 +11,11 @@ describe('CardComponent', () => {
   let cardEl: DebugElement;
   let card: Card;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [CardComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [CardComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);

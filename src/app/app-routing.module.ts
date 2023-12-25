@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { GameComponent } from './modules/game/components/game/game.component';
 import { TopComponent } from './modules/game/components/top/top.component';
 
@@ -18,8 +18,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, {
-    useHash: true
-}),
+      useHash: true,
+    }),
   ],
   exports: [RouterModule],
 })

@@ -1,20 +1,18 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import { FlipResultComponent } from './flip-result.component';
-import { Result } from '../../enums/result.enum';
 import { By } from '@angular/platform-browser';
+import { Result } from '../../enums/result.enum';
+import { FlipResultComponent } from './flip-result.component';
 
 describe('FlipResultComponent', () => {
   let component: FlipResultComponent;
   let fixture: ComponentFixture<FlipResultComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [FlipResultComponent],
-      }).compileComponents();
-    })
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [FlipResultComponent],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FlipResultComponent);
@@ -48,7 +46,7 @@ describe('FlipResultComponent', () => {
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        'Correct!'
+        'Correct!',
       );
       expect(resultElement.classes['correct']).toBeTruthy();
     });
@@ -59,7 +57,7 @@ describe('FlipResultComponent', () => {
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        `Congrats!\nYou've finished!!`
+        `Congrats!\nYou've finished!!`,
       );
       expect(resultElement.classes['finish']).toBeTruthy();
     });

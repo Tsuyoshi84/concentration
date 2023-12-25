@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Result } from '../../enums/result.enum';
 
 @Component({
@@ -70,7 +70,7 @@ export class FlipResultComponent implements OnInit {
   private showAnimationMessage(
     message: string,
     animateClasses: string[],
-    fadeOutClass: string
+    fadeOutClass: string,
   ): void {
     this.message = message;
     this.animateClasses = animateClasses;

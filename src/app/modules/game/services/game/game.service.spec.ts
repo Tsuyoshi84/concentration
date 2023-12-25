@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { GameService } from './game.service';
 import { GameStatus } from '../../enums/game-status.enum';
 import { Result } from '../../enums/result.enum';
+import { GameService } from './game.service';
 
 describe('GameService', () => {
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe('GameService', () => {
       (service: GameService) => {
         const cards = service.startGame(10);
         expect(cards.length).toBe(10);
-      }
+      },
     ));
 
     it('should generate pairs of cards which have the same numbers', inject(
@@ -33,18 +33,18 @@ describe('GameService', () => {
         const cards = service.startGame(4);
 
         expect(
-          cards.filter((card) => card.character === cards[0].character).length
+          cards.filter((card) => card.character === cards[0].character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[1].character).length
+          cards.filter((card) => card.character === cards[1].character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[2].character).length
+          cards.filter((card) => card.character === cards[2].character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[3].character).length
+          cards.filter((card) => card.character === cards[3].character).length,
         ).toBe(2);
-      }
+      },
     ));
   });
 
@@ -59,7 +59,7 @@ describe('GameService', () => {
 
         service.reset();
         expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
-      }
+      },
     ));
   });
 
@@ -71,7 +71,7 @@ describe('GameService', () => {
         service.flipCard(cards[0]);
 
         expect(cards[0].flipped).toBeTruthy();
-      }
+      },
     ));
 
     it('should return appropriate result when flipping the first card', inject(
@@ -88,7 +88,7 @@ describe('GameService', () => {
             gameStatus: GameStatus.Playing,
           });
         });
-      }
+      },
     ));
 
     it('should return appropriate result when flipping two correct cards', inject(
@@ -97,7 +97,7 @@ describe('GameService', () => {
         const cards = service.startGame(4);
 
         const sameCards = cards.filter(
-          (card) => card.character === cards[0].character
+          (card) => card.character === cards[0].character,
         );
 
         // Flip first card
@@ -119,7 +119,7 @@ describe('GameService', () => {
             });
           }
         });
-      }
+      },
     ));
 
     it('should return appropriate result when flipping two wrong cards', inject(
@@ -129,10 +129,10 @@ describe('GameService', () => {
 
         // Get two different cards
         const card1 = cards.filter(
-          (card) => card.character === cards[0].character
+          (card) => card.character === cards[0].character,
         )[0];
         const card2 = cards.filter(
-          (card) => card.character === cards[1].character
+          (card) => card.character === cards[1].character,
         )[0];
 
         // Flip a card which has 1
@@ -154,7 +154,7 @@ describe('GameService', () => {
             });
           }
         });
-      }
+      },
     ));
   });
 
@@ -169,7 +169,7 @@ describe('GameService', () => {
         service.cheat().subscribe((numOfCheating) => {
           expect(numOfCheating).toBe(2);
         });
-      }
+      },
     ));
   });
 });
