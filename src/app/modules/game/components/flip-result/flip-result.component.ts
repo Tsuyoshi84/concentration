@@ -70,7 +70,7 @@ export class FlipResultComponent implements OnInit {
   private showAnimationMessage(
     message: string,
     animateClasses: string[],
-    fadeOutClass: string
+    fadeOutClass: string,
   ): void {
     this.message = message;
     this.animateClasses = animateClasses;
