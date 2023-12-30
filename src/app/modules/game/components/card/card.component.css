@@ -15,7 +15,9 @@
   -webkit-transition: -webkit-transform 1s;
   -moz-transition: -moz-transform 1s;
   -o-transition: -o-transform 1s;
-  transition: box-shadow, transform 0.5s;
+  transition:
+    box-shadow,
+    transform 0.5s;
   transform-style: preserve-3d;
 }
 
@@ -46,7 +48,9 @@
   text-align: center;
   position: absolute;
   backface-visibility: hidden;
-  transition: transform, color 0.3s ease-in-out;
+  transition:
+    transform,
+    color 0.3s ease-in-out;
 }
 
 .card .front {
