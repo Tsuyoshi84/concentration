@@ -1,0 +1,47 @@
+.container {
+  --four-grid-item-size-md: 100px;
+  --six-grid-item-size-md: 80px;
+  --four-grid-item-size-sm: 80px;
+  --six-grid-item-size-sm: 55px;
+  display: grid;
+
+  &.four-cards {
+    grid-template-columns: repeat(4, var(--four-grid-item-size-md));
+    grid-auto-rows: var(--four-grid-item-size-md);
+    font-size: 4rem;
+  }
+
+  &.six-cards {
+    grid-template-columns: repeat(6, var(--six-grid-item-size-md));
+    grid-auto-rows: var(--six-grid-item-size-m) d;
+    font-size: 3rem;
+  }
+
+  .card-box {
+    margin: 5px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .container {
+    &.four-cards {
+      grid-template-columns: repeat(4, var(--four-grid-item-size-sm));
+      grid-auto-rows: var(--four-grid-item-size-sm);
+      font-size: 3rem;
+
+      .card-box {
+        margin: 5px;
+      }
+    }
+
+    &.six-cards {
+      grid-template-columns: repeat(6, var(--six-grid-item-size-sm));
+      grid-auto-rows: var(--six-grid-item-size-sm);
+      font-size: 2rem;
+
+      .card-box {
+        margin: 3px;
+      }
+    }
+  }
+}
