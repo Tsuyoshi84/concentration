@@ -24,10 +24,13 @@ jobs:
         run: npm install
 
       - name: Build
-        run: npm run build
+        run: npm run deploy
 
       - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v4
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: 'dist/concentration/browser' # The folder the action should deploy.
+        run: npm run ghpage
+
+      # - name: Deploy
+      #   uses: JamesIves/github-pages-deploy-action@releases/v4
+      #   with:
+      #     branch: gh-pages # The branch the action should deploy to.
+      #     folder: 'dist/concentration' # The folder the action should deploy.
