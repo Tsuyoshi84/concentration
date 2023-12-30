@@ -1,6 +1,5 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
@@ -12,7 +11,7 @@ import { GameService } from '../../services/game/game.service';
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.sass'],
+  styleUrls: ['./game.component.css'],
   animations: [
     trigger('switchView', [
       transition(':enter', [

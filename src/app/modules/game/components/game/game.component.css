@@ -1,0 +1,39 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.controller-container {
+  width: 100%;
+}
+.game-container {
+  position: relative;
+}
+.progress-container {
+  margin-bottom: 15px;
+}
+.functions {
+  margin-top: 15px;
+  text-align: right;
+}
+.icon-container {
+  text-align: center;
+}
+.icon-btn {
+  font-size: 3rem;
+  color: #aaa;
+  margin: 1rem;
+  padding: 0.5rem;
+}
+.cards-board {
+  max-width: 800px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media only screen and (max-width: 700px) {
+  .cards-board {
+    max-width: 100%;
+  }
+}
