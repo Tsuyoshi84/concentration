@@ -32,16 +32,16 @@ describe('GameService', () => {
         const cards = service.cards();
 
         expect(
-          cards.filter((card) => card.character === cards[0].character).length,
+          cards.filter((card) => card.character === cards[0]?.character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[1].character).length,
+          cards.filter((card) => card.character === cards[1]?.character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[2].character).length,
+          cards.filter((card) => card.character === cards[2]?.character).length,
         ).toBe(2);
         expect(
-          cards.filter((card) => card.character === cards[3].character).length,
+          cards.filter((card) => card.character === cards[3]?.character).length,
         ).toBe(2);
       },
     ));
@@ -67,9 +67,10 @@ describe('GameService', () => {
       [GameService],
       async (service: GameService) => {
         service.startGame(4);
-        await service.flipCard(service.cards()[0]);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(service.cards()[0]!);
 
-        expect(service.cards()[0].flipped).toBe(true);
+        expect(service.cards()[0]?.flipped).toBe(true);
       },
     ));
 
@@ -77,7 +78,8 @@ describe('GameService', () => {
       [GameService],
       async (service: GameService) => {
         service.startGame(4);
-        await service.flipCard(service.cards()[0]);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(service.cards()[0]!);
 
         expect(service.numOfTry()).toBe(0);
         expect(service.flippedResult()).toBe('None');
@@ -92,13 +94,15 @@ describe('GameService', () => {
 
         const sameCards = service
           .cards()
-          .filter((card) => card.character === service.cards()[0].character);
+          .filter((card) => card.character === service.cards()[0]?.character);
 
-        await service.flipCard(sameCards[0]);
-        await service.flipCard(sameCards[1]);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(sameCards[0]!);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(sameCards[1]!);
 
-        expect(sameCards[0].done).toBe(true);
-        expect(sameCards[1].done).toBe(true);
+        expect(sameCards[0]?.done).toBe(true);
+        expect(sameCards[1]?.done).toBe(true);
         expect(service.numOfTry()).toBe(1);
         expect(service.selectedCards()).toHaveSize(0);
       },
@@ -112,13 +116,15 @@ describe('GameService', () => {
         // Get two different cards
         const card1 = service
           .cards()
-          .filter((card) => card.character === service.cards()[0].character)[0];
+          .filter((_) => _.character === service.cards()[0]?.character)[0];
         const card2 = service
           .cards()
-          .filter((card) => card.character === service.cards()[1].character)[0];
+          .filter((_) => _.character === service.cards()[1]?.character)[0];
 
-        await service.flipCard(card1);
-        await service.flipCard(card2);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(card1!);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        await service.flipCard(card2!);
 
         expect(service.numOfTry()).toBe(1);
         expect(service.selectedCards()).toHaveSize(0);

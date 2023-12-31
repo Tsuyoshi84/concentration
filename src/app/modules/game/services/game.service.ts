@@ -1,6 +1,8 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { shuffle } from 'lodash-es';
 import type { Card, GameStatus, Result } from '../types';
+import { assertDefined } from '../utils/assertDefined';
+import { assertHasAtLeast } from '../utils/hasAtLeast';
 
 @Injectable()
 export class GameService {
@@ -40,8 +42,11 @@ export class GameService {
     const emojis = getEmojiArray(numOfCard / 2);
 
     for (let i = 1; i <= numOfCard / 2; i++) {
+      const character = emojis[i - 1];
+      assertDefined(character);
+
       const card = {
-        character: emojis[i - 1],
+        character,
         flipped: false,
         done: false,
       };
@@ -82,7 +87,10 @@ export class GameService {
 
     // Check the result
     this.numOfTry.update((count) => count + 1);
-    const [{ character: first }, { character: second }] = this.selectedCards();
+    const cards = this.selectedCards();
+    assertHasAtLeast(cards, 2);
+
+    const [{ character: first }, { character: second }] = cards;
     this.flippedResult.set(first === second ? 'Correct' : 'Wrong');
 
     if (this.flippedResult() === 'Correct') {
@@ -137,13 +145,5 @@ function getEmojiArray(length: number): Array<string> {
 }
 
 function emojiStringToArray(str: string): Array<string> {
-  const split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-  const arr = [];
-  for (let i = 0; i < split.length; i++) {
-    const char = split[i];
-    if (char !== '') {
-      arr.push(char);
-    }
-  }
-  return arr;
+  return str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/).filter((c) => c !== '');
 }

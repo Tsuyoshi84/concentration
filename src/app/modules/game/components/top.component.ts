@@ -20,7 +20,7 @@ export class TopComponent implements OnInit {
   ngOnInit() {
     console.log({ GAME_DIFFICULTY });
     this.difficulties = GAME_DIFFICULTY;
-    this.numOfCard = this.difficulties[1].num;
+    this.numOfCard = 0;
   }
 
   /**
