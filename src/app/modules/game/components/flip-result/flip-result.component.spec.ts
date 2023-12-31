@@ -48,7 +48,7 @@ describe('FlipResultComponent', () => {
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
         'Correct!',
       );
-      expect(resultElement.classes['correct']).toBeTruthy();
+      expect(resultElement.classes.correct).toBeTruthy();
     });
 
     it('should show "Congrats" message when Result.Finish is passed', () => {
@@ -59,7 +59,7 @@ describe('FlipResultComponent', () => {
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
         `Congrats!\nYou've finished!!`,
       );
-      expect(resultElement.classes['finish']).toBeTruthy();
+      expect(resultElement.classes.finish).toBeTruthy();
     });
   });
 });
