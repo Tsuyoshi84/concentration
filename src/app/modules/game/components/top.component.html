@@ -1,0 +1,8 @@
+<section class="container">
+  <div class="inner-container">
+    <app-top-title></app-top-title>
+    <div class="button-container">
+      <app-top-button *ngFor="let diff of difficulties" [difficulty]="diff" (start)="start(diff)"></app-top-button>
+    </div>
+  </div>
+</section>

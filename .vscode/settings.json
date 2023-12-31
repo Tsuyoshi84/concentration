@@ -1,10 +1,13 @@
 {
-  "[javascript]": {
-    "editor.defaultFormatter": "biomejs.biome"
-  },
   "[css]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[javascript]": {
+    "editor.defaultFormatter": "biomejs.biome"
+  },
+  "cssvar.extensions": ["css", "postcss", "jsx", "tsx"],
+  "cssvar.files": ["./node_modules/open-props/open-props.min.css"],
+  "cssvar.ignore": [],
   "editor.codeActionsOnSave": {
     "quickfix.biome": "explicit",
     "source.organizeImports.biome": "explicit"

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
-import type { Difficulty } from '../../types';
+import { GAME_DIFFICULTY } from '../constants/game-difficulty';
+import type { Difficulty } from '../types';
 
 @Component({
   selector: 'app-top',

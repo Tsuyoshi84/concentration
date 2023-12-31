@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  block-size: 100dvh;
+  align-items: center;
+  justify-content: center;
+
+  .inner-container {
+    inline-size: clamp(280px, calc(100vw - 32px), 680px);
+    text-align: center;
+  }
+}
+
+.button-container {
+  --button-gap: var(--size-6);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, 1fr);
+  justify-items: stretch;
+  gap: var(--button-gap) var(--button-gap);
+}
+
+@media only screen and (width >= 768px) {
+  .button-container {
+    --button-size: 29rem;
+    --button-gap: var(--size-8);
+
+    inline-size: calc(var(--button-size) * 2 + var(--button-gap));
+    margin-inline: auto;
+    margin-block: 0;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    justify-items: stretch;
+  }
+}

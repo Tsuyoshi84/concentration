@@ -6,7 +6,7 @@ import { GameProgressComponent } from './game-progress.component';
 describe('GameProgressComponent', () => {
   let component: GameProgressComponent;
   let fixture: ComponentFixture<GameProgressComponent>;
-  let flippingEl: DebugElement;
+  let scoreEl: DebugElement;
   const expectedNumOfFlipping = 10;
 
   beforeEach(waitForAsync(() => {
@@ -18,8 +18,7 @@ describe('GameProgressComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GameProgressComponent);
     component = fixture.componentInstance;
-    const scoreEl = fixture.debugElement.query(By.css('.score'));
-    flippingEl = scoreEl.query(By.css('.flipping'));
+    scoreEl = fixture.debugElement.query(By.css('.score'));
 
     component.numOfTry = expectedNumOfFlipping;
     component.gameStatus = 'Playing';
@@ -31,6 +30,6 @@ describe('GameProgressComponent', () => {
   });
 
   it('should show scores', () => {
-    expect(flippingEl.nativeElement.textContent).toBe('めくり回数: 10');
+    expect(scoreEl.nativeElement.textContent).toBe('Attempt: 10');
   });
 });

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { Card } from '../../types';
+import type { Card } from '../types';
 
 @Component({
   selector: 'app-card',
@@ -18,5 +18,9 @@ export class CardComponent {
     if (!this.card.flipped) {
       this.clicked.emit(this.card);
     }
+  }
+
+  get disabled(): boolean {
+    return this.card.flipped || this.card.done;
   }
 }
