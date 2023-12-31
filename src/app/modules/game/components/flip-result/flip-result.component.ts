@@ -30,9 +30,7 @@ export class FlipResultComponent implements OnInit {
    * @param result Flipped result.
    */
   showResult(result: Result): void {
-    if (result === 'None') {
-      return;
-    }
+    if (result === 'None') return;
 
     if (this.timer) {
       clearTimeout(this.timer);

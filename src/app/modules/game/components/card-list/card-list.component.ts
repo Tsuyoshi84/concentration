@@ -7,10 +7,12 @@ import type { Card } from '../../types';
   styleUrls: ['./card-list.component.css'],
 })
 export class CardListComponent implements OnInit {
-  @Input() cards!: Card[];
+  /** Card array to display */
+  @Input() cards!: readonly Card[];
+  /** Event emitted when a card is clicked */
   @Output() cardClicked = new EventEmitter<Card>();
 
-  cardsClass!: string;
+  cardsClass!: 'four-cards' | 'six-cards';
 
   ngOnInit() {
     this.cardsClass = this.cards.length < 30 ? 'four-cards' : 'six-cards';

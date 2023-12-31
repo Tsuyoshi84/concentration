@@ -1,16 +1,6 @@
 <section class="container">
   <div class="inner-container">
-    <div class="title">
-      <div class="main">
-        <span class="rotate">🤔</span>
-        <span class="rotate" *ngFor="let c of '神経衰弱'.split(''); index as i">{{ c }}</span><span class="rotate">🤔</span>
-      </div>
-      <div class="sub">
-        <span class="rotate">🤔</span>
-        <span class="rotate" *ngFor="let c of 'Concentration'.split(''); index as i">{{ c }}</span>
-        <span class="rotate">🤔</span>
-      </div>
-    </div>
+    <app-top-title></app-top-title>
     <div class="button-container">
       <button class="start-button" *ngFor="let diff of difficulties" (click)="start(diff)">
         <span>{{ diff.label }}</span>
