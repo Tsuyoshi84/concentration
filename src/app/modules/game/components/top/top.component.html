@@ -2,10 +2,7 @@
   <div class="inner-container">
     <app-top-title></app-top-title>
     <div class="button-container">
-      <button class="start-button" *ngFor="let diff of difficulties" (click)="start(diff)">
-        <span class="label">{{ diff.label }}</span>
-        <span class="icon">{{ diff.icon }}</span>
-      </button>
+      <app-top-button *ngFor="let diff of difficulties" [difficulty]="diff" (start)="start(diff)"></app-top-button>
     </div>
   </div>
 </section>

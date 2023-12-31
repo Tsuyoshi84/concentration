@@ -8,6 +8,7 @@ import { CardComponent } from './components/card/card.component';
 import { FlipResultComponent } from './components/flip-result/flip-result.component';
 import { GameProgressComponent } from './components/game-progress/game-progress.component';
 import { GameComponent } from './components/game/game.component';
+import { TopButtonComponent } from './components/top-button.component';
 import { TopTitleComponent } from './components/top-title/top-title.component';
 import { TopComponent } from './components/top/top.component';
 import { GameRoutingModule } from './game-routing.module';
@@ -24,6 +25,7 @@ import { GameService } from './services/game.service';
   declarations: [
     TopComponent,
     TopTitleComponent,
+    TopButtonComponent,
     CardListComponent,
     GameComponent,
     CardComponent,
