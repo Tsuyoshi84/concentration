@@ -1,39 +1,45 @@
 .container {
-  height: 100vh;
   display: flex;
-  justify-content: center;
+  block-size: 100vh;
   align-items: center;
+  justify-content: center;
 }
+
 .controller-container {
-  width: 100%;
+  inline-size: 100%;
 }
+
 .game-container {
   position: relative;
 }
+
 .progress-container {
-  margin-bottom: 15px;
+  margin-block-end: 15px;
 }
+
 .functions {
-  margin-top: 15px;
-  text-align: right;
+  margin-block-start: 15px;
+  text-align: end;
 }
+
 .icon-container {
   text-align: center;
 }
+
 .icon-btn {
-  font-size: 3rem;
-  color: #aaa;
   margin: 1rem;
   padding: 0.5rem;
-}
-.cards-board {
-  max-width: 800px;
-  margin-right: auto;
-  margin-left: auto;
+  font-size: 3rem;
+  color: #aaa;
 }
 
-@media only screen and (max-width: 700px) {
+.cards-board {
+  max-inline-size: 800px;
+  margin-inline: auto;
+}
+
+@media only screen and (width <= 700px) {
   .cards-board {
-    max-width: 100%;
+    max-inline-size: 100%;
   }
 }
