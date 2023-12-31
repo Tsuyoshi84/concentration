@@ -30,7 +30,7 @@ export class FlipResultComponent implements OnInit {
    * @param result Flipped result.
    */
   showResult(result: Result): void {
-    if (result === Result.None) {
+    if (result === 'None') {
       return;
     }
 
@@ -49,17 +49,17 @@ export class FlipResultComponent implements OnInit {
 
     // Decide message, animation classes based on the result
     switch (result) {
-      case Result.Correct:
+      case 'Correct':
         message = 'Correct!';
         animateClasses = ['correct', 'animated', 'swing'];
         fadeOutClass = 'fadeOutUp';
         break;
-      case Result.Wrong:
+      case 'Wrong':
         message = '';
         animateClasses = [];
         fadeOutClass = 'fadeOutDown';
         break;
-      case Result.Finish:
+      case 'Finish':
         message = `Congrats!\nYou've finished!!`;
         animateClasses = ['finish', 'animated', 'tada'];
         fadeOutClass = 'fadeOutUp';

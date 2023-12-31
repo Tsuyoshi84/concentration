@@ -115,7 +115,7 @@ describe('GameService', () => {
               tryCount: 1,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
-              result: Result.Correct,
+              result: 'Correct',
             });
           }
         });
@@ -150,7 +150,7 @@ describe('GameService', () => {
               tryCount: 2,
               flippedCount: 2,
               gameStatus: GameStatus.Playing,
-              result: Result.Wrong,
+              result: 'Wrong',
             });
           }
         });

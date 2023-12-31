@@ -113,7 +113,7 @@ export class GameService {
             gameStatus: this.gameStatus,
           });
 
-          if (result === Result.Wrong) {
+          if (result === 'Wrong') {
             setTimeout(() => {
               // If wrong, wait certain time before unflipping cards
               this.flippedCards.forEach((c) => c.setBack());
@@ -185,12 +185,10 @@ export class GameService {
         this.gameStatus = GameStatus.Clear;
       }
 
-      return this.gameStatus === GameStatus.Clear
-        ? Result.Finish
-        : Result.Correct;
-    } else {
-      return Result.Wrong;
+      return this.gameStatus === GameStatus.Clear ? 'Finish' : 'Correct';
     }
+
+    return 'Wrong';
   }
 
   private getEmojiArray(length: number): Array<string> {
