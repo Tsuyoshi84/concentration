@@ -94,7 +94,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
   setupGame() {
     this.sub = this.route.params.subscribe((params) => {
-      const level = +params['level'];
+      const level = +params.level;
       const difficulty = gameDifficulty.find((d) => d.level === level);
 
       if (difficulty === undefined) return;
