@@ -41,9 +41,9 @@ export class FlipResultComponent implements OnInit {
     this.showsMessage = true;
     this.ref.detectChanges();
 
-    let message: string;
-    let animateClasses: string[];
-    let fadeOutClass: string;
+    let message = '';
+    let animateClasses: string[] = [];
+    let fadeOutClass = '';
 
     // Decide message, animation classes based on the result
     switch (result) {

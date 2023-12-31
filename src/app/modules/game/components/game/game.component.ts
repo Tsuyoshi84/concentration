@@ -1,10 +1,17 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  Signal,
+  ViewChild,
+  WritableSignal,
+  effect,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
 import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
-import { GameService } from '../../services/game/game.service';
+import { GameService } from '../../services/game.service';
 import type { Card, GameStatus } from '../../types';
 
 @Component({
@@ -28,31 +35,47 @@ export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent, { static: true })
   flipResult!: FlipResultComponent;
 
+  level: number;
   /** Number of try */
-  numOfTry = 0;
-  /** Number of cheating */
-  numOfCheating = 0;
+  numOfTry: WritableSignal<number>;
   /** Game status */
-  gameStatus!: GameStatus;
+  gameStatus: WritableSignal<GameStatus>;
   /** Cards used for the game */
-  cards: Card[] = [];
+  cards: WritableSignal<readonly Card[]>;
+  isGameClear: Signal<boolean>;
   /** Indicate if a user can flip cards  */
-  canFlip = false;
-  sub: Subscription | undefined;
+  canFlip: Signal<boolean>;
 
   constructor(
     private gameService: GameService,
     private router: Router,
     private route: ActivatedRoute,
-  ) {}
+  ) {
+    this.level = 1;
+    this.numOfTry = this.gameService.numOfTry;
+    this.gameStatus = this.gameService.gameStatus;
+    this.cards = this.gameService.cards;
+    this.isGameClear = this.gameService.isGameClear;
+    this.canFlip = this.gameService.canFlip;
+
+    effect(() => {
+      const result = this.gameService.flippedResult();
+      if (['Correct', 'Wrong', 'Finish'].includes(result)) {
+        this.flipResult.showResult(result);
+      }
+    });
+  }
 
   ngOnInit() {
+    this.route.paramMap.subscribe((params) => {
+      this.level = Number(params.get('level'));
+    });
+
     this.setupGame();
   }
 
   ngOnDestroy(): void {
     this.gameService.reset();
-    this.initializeConditions();
   }
 
   /**
@@ -67,41 +90,17 @@ export class GameComponent implements OnInit, OnDestroy {
    *
    * @param card Flipped card.
    */
-  onCardClicked(card: Card): void {
-    if (!this.canFlip) {
-      return;
-    }
+  async onCardClicked(card: Card): Promise<void> {
+    if (!this.canFlip()) return;
 
-    // If the given card is not flipped, flip it
-    this.canFlip = false;
-    this.gameService.flipCard(card).subscribe(
-      ({ result, tryCount, gameStatus }) => {
-        this.numOfTry = tryCount;
-        this.gameStatus = gameStatus;
-
-        if (result) {
-          this.flipResult.showResult(result);
-        }
-      },
-      (e) => console.error(e),
-      () => (this.canFlip = true),
-    );
+    await this.gameService.flipCard(card);
   }
 
   setupGame() {
-    this.sub = this.route.params.subscribe((params) => {
-      const level = +params.level;
-      const difficulty = GAME_DIFFICULTY.find((d) => d.level === level);
+    const difficulty = GAME_DIFFICULTY.find((d) => d.level === this.level);
+    if (difficulty === undefined) return;
 
-      if (difficulty === undefined) return;
-
-      this.canFlip = true;
-      this.gameStatus = this.gameService.getGameStatus();
-      this.initializeConditions();
-
-      this.cards = this.gameService.startGame(difficulty.num);
-      this.gameStatus = this.gameService.getGameStatus();
-    });
+    this.gameService.startGame(difficulty.num);
   }
 
   back() {
@@ -110,35 +109,5 @@ export class GameComponent implements OnInit, OnDestroy {
 
   replay() {
     this.setupGame();
-  }
-
-  /**
-   * Flip all the un-flipped card.
-   */
-  cheat(): void {
-    if (!this.canFlip) {
-      return;
-    }
-
-    this.canFlip = false;
-    this.gameService.cheat().subscribe(
-      (cheatedCount) => {
-        this.numOfCheating = cheatedCount;
-      },
-      (e) => console.error(e),
-      () => (this.canFlip = true),
-    );
-  }
-
-  get isGameClear(): boolean {
-    return this.gameStatus === 'Clear';
-  }
-
-  /**
-   * Initialize game conditions.
-   */
-  private initializeConditions(): void {
-    this.numOfTry = 0;
-    this.numOfCheating = 0;
   }
 }
