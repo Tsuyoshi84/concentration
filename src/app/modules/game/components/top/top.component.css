@@ -21,6 +21,16 @@
   }
 }
 
+@keyframes rotate-anime {
+  0% {
+    transform: rotate(-15deg);
+  }
+
+  100% {
+    transform: rotate(15deg);
+  }
+}
+
 .rotate {
   display: inline-block;
   padding-inline: 3px;
@@ -31,16 +41,6 @@
 
   &:nth-child(odd) {
     animation: rotate-anime 1.5s ease-in-out infinite alternate forwards;
-  }
-
-  @keyframes rotate-anime {
-    0% {
-      transform: rotate(-15deg);
-    }
-
-    100% {
-      transform: rotate(15deg);
-    }
   }
 }
 
