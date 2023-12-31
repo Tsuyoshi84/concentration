@@ -20,15 +20,16 @@ describe('GameService', () => {
     it('should generate specified number of cards', inject(
       [GameService],
       (service: GameService) => {
-        const cards = service.startGame(10);
-        expect(cards.length).toBe(10);
+        service.startGame(10);
+        expect(service.cards().length).toBe(10);
       },
     ));
 
     it('should generate pairs of cards which have the same numbers', inject(
       [GameService],
       (service: GameService) => {
-        const cards = service.startGame(4);
+        service.startGame(4);
+        const cards = service.cards();
 
         expect(
           cards.filter((card) => card.character === cards[0].character).length,
@@ -50,13 +51,13 @@ describe('GameService', () => {
     it('should return correct game status', inject(
       [GameService],
       (service: GameService) => {
-        expect(service.getGameStatus()).toBe('NotPlaying');
+        expect(service.gameStatus()).toBe('NotPlaying');
 
         service.startGame(10);
-        expect(service.getGameStatus()).toBe('Playing');
+        expect(service.gameStatus()).toBe('Playing');
 
         service.reset();
-        expect(service.getGameStatus()).toBe('NotPlaying');
+        expect(service.gameStatus()).toBe('NotPlaying');
       },
     ));
   });
@@ -64,109 +65,63 @@ describe('GameService', () => {
   describe('#flipCard', () => {
     it('should change card flipped value', inject(
       [GameService],
-      (service: GameService) => {
-        const cards = service.startGame(4);
-        service.flipCard(cards[0]);
+      async (service: GameService) => {
+        service.startGame(4);
+        await service.flipCard(service.cards()[0]);
 
-        expect(cards[0].flipped).toBeTruthy();
+        expect(service.cards()[0].flipped).toBe(true);
       },
     ));
 
-    it('should return appropriate result when flipping the first card', inject(
+    it('should update selectedCards', inject(
       [GameService],
-      (service: GameService) => {
-        const cards = service.startGame(4);
+      async (service: GameService) => {
+        service.startGame(4);
+        await service.flipCard(service.cards()[0]);
 
-        const subscription = service.flipCard(cards[0]);
-
-        subscription.subscribe((result) => {
-          expect(result).toEqual({
-            tryCount: 0,
-            flippedCount: 1,
-            gameStatus: 'Playing',
-          });
-        });
+        expect(service.numOfTry()).toBe(0);
+        expect(service.flippedResult()).toBe('None');
+        expect(service.selectedCards()[0]).toEqual(service.cards()[0]);
       },
     ));
 
-    it('should return appropriate result when flipping two correct cards', inject(
+    it('should update done value', inject(
       [GameService],
-      (service: GameService) => {
-        const cards = service.startGame(4);
+      async (service: GameService) => {
+        service.startGame(4);
 
-        const sameCards = cards.filter(
-          (card) => card.character === cards[0].character,
-        );
+        const sameCards = service
+          .cards()
+          .filter((card) => card.character === service.cards()[0].character);
 
-        // Flip first card
-        service.flipCard(sameCards[0]);
+        await service.flipCard(sameCards[0]);
+        await service.flipCard(sameCards[1]);
 
-        // Flip second card
-        const subscription = service.flipCard(sameCards[1]);
-
-        let count = 0;
-        subscription.subscribe((result) => {
-          count++;
-          // Check the value when the second event comes
-          if (count === 2) {
-            expect(result).toEqual({
-              tryCount: 1,
-              flippedCount: 2,
-              gameStatus: 'Playing',
-              result: 'Correct',
-            });
-          }
-        });
+        expect(sameCards[0].done).toBe(true);
+        expect(sameCards[1].done).toBe(true);
+        expect(service.numOfTry()).toBe(1);
+        expect(service.selectedCards()).toHaveSize(0);
       },
     ));
 
     it('should return appropriate result when flipping two wrong cards', inject(
       [GameService],
-      (service: GameService) => {
-        const cards = service.startGame(4);
+      async (service: GameService) => {
+        service.startGame(4);
 
         // Get two different cards
-        const card1 = cards.filter(
-          (card) => card.character === cards[0].character,
-        )[0];
-        const card2 = cards.filter(
-          (card) => card.character === cards[1].character,
-        )[0];
+        const card1 = service
+          .cards()
+          .filter((card) => card.character === service.cards()[0].character)[0];
+        const card2 = service
+          .cards()
+          .filter((card) => card.character === service.cards()[1].character)[0];
 
-        // Flip a card which has 1
-        service.flipCard(card1);
+        await service.flipCard(card1);
+        await service.flipCard(card2);
 
-        // Flip a card which has 2
-        const subscription = service.flipCard(card2);
-
-        let count = 0;
-        subscription.subscribe((result) => {
-          count++;
-          // Check the value when the second event comes
-          if (count === 2) {
-            expect(result).toEqual({
-              tryCount: 2,
-              flippedCount: 2,
-              gameStatus: 'Playing',
-              result: 'Wrong',
-            });
-          }
-        });
-      },
-    ));
-  });
-
-  describe('#cheat', () => {
-    it('should increase the number of cheating', inject(
-      [GameService],
-      (service: GameService) => {
-        service.cheat().subscribe((numOfCheating) => {
-          expect(numOfCheating).toBe(1);
-        });
-
-        service.cheat().subscribe((numOfCheating) => {
-          expect(numOfCheating).toBe(2);
-        });
+        expect(service.numOfTry()).toBe(1);
+        expect(service.selectedCards()).toHaveSize(0);
       },
     ));
   });
