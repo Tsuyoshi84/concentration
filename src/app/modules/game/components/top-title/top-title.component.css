@@ -31,3 +31,15 @@
     animation: rotate-anime 1.5s ease-in-out infinite alternate forwards;
   }
 }
+
+@media only screen and (width >= 768px) {
+  .title {
+    font-size: 5rem;
+  }
+}
+
+@media only screen and (width >= 992px) {
+  .title {
+    font-size: 6rem;
+  }
+}
