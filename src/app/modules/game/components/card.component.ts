@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import type { Card } from '../../types';
+import type { Card } from '../types';
 
 @Component({
   selector: 'app-card',

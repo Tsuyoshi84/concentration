@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import type { Result } from '../../types';
+import type { Result } from '../types';
 
 @Component({
   selector: 'app-flip-result',

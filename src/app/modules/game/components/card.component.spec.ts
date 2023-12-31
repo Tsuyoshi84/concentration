@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import type { Card } from '../../types';
+import type { Card } from '../types';
 import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {

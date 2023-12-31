@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import type { GameStatus } from '../../types';
+import type { GameStatus } from '../types';
 
 @Component({
   selector: 'app-game-progress',
