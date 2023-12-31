@@ -29,9 +29,6 @@ export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent, { static: true })
   flipResult!: FlipResultComponent;
 
-  /** Store GameStatus enum to a variable so that it can be accessed from the view */
-  readonly GameStatus = GameStatus;
-
   /** Number of try */
   numOfTry = 0;
   /** Number of cheating */
@@ -135,7 +132,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   get isGameClear(): boolean {
-    return this.gameStatus === GameStatus.Clear;
+    return this.gameStatus === 'Clear';
   }
 
   /**

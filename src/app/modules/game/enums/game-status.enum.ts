@@ -1,11 +1,7 @@
 /**
  * Game status.
+ * - 'NotPlaying': Indicate that a user is not playing the game
+ * - 'Playing': Indicate that a user is playing the game
+ * - 'Clear': Indicate that a user has flipped all the cards correctly
  */
-export enum GameStatus {
-  /** User is not plyaing the game */
-  NotPlaying = 0,
-  /** User is playing the game */
-  Playing = 1,
-  /** User has flipped all the cards correctly */
-  Clear = 2,
-}
+export type GameStatus = 'NotPlaying' | 'Playing' | 'Clear';

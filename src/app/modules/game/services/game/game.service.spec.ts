@@ -1,6 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-import { GameStatus } from '../../enums/game-status.enum';
-import { Result } from '../../enums/result.enum';
 import { GameService } from './game.service';
 
 describe('GameService', () => {
@@ -52,13 +50,13 @@ describe('GameService', () => {
     it('should return correct game status', inject(
       [GameService],
       (service: GameService) => {
-        expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
+        expect(service.getGameStatus()).toBe('NotPlaying');
 
         service.startGame(10);
-        expect(service.getGameStatus()).toBe(GameStatus.Playing);
+        expect(service.getGameStatus()).toBe('Playing');
 
         service.reset();
-        expect(service.getGameStatus()).toBe(GameStatus.NotPlaying);
+        expect(service.getGameStatus()).toBe('NotPlaying');
       },
     ));
   });
@@ -85,7 +83,7 @@ describe('GameService', () => {
           expect(result).toEqual({
             tryCount: 0,
             flippedCount: 1,
-            gameStatus: GameStatus.Playing,
+            gameStatus: 'Playing',
           });
         });
       },
@@ -114,7 +112,7 @@ describe('GameService', () => {
             expect(result).toEqual({
               tryCount: 1,
               flippedCount: 2,
-              gameStatus: GameStatus.Playing,
+              gameStatus: 'Playing',
               result: 'Correct',
             });
           }
@@ -149,7 +147,7 @@ describe('GameService', () => {
             expect(result).toEqual({
               tryCount: 2,
               flippedCount: 2,
-              gameStatus: GameStatus.Playing,
+              gameStatus: 'Playing',
               result: 'Wrong',
             });
           }
