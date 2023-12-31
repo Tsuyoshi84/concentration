@@ -31,7 +31,6 @@ export class FlipResultComponent implements OnInit {
    */
   showResult(result: Result): void {
     if (result === 'None') return;
-    
 
     if (this.timer) {
       clearTimeout(this.timer);
