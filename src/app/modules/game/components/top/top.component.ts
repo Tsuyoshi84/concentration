@@ -2,12 +2,12 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
 
-interface Difficulty {
+type Difficulty = {
   label: string;
   num: number;
   level: number;
   icon: string;
-}
+};
 
 @Component({
   selector: 'app-top',

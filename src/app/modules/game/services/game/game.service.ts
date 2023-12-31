@@ -8,7 +8,7 @@ import { Card } from '../../models/card';
 /**
  * Bundle information related to card flipping.
  */
-interface FlipResult {
+type FlipResult = {
   /** Result of flipping card. */
   result?: Result;
   /** Total number of flipping cards. */
@@ -17,7 +17,7 @@ interface FlipResult {
   tryCount: number;
   /** Game status. */
   gameStatus: GameStatus;
-}
+};
 
 @Injectable()
 export class GameService {
@@ -64,8 +64,18 @@ export class GameService {
     this.cards.length = 0;
     const emojis = this.getEmojiArray(numOfCard / 2);
     for (let i = 1; i <= numOfCard / 2; i++) {
-      this.cards.push(new Card(++id, emojis[i - 1]));
-      this.cards.push(new Card(++id, emojis[i - 1]));
+      this.cards.push({
+        id: ++id,
+        character: emojis[i - 1],
+        flipped: false,
+        done: false,
+      });
+      this.cards.push({
+        id: ++id,
+        character: emojis[i - 1],
+        flipped: false,
+        done: false,
+      });
     }
 
     this.cards = this.shuffle(this.cards);
@@ -91,7 +101,7 @@ export class GameService {
    * @returns Result and total number of flipping.
    */
   flipCard(card: Card): Observable<FlipResult> {
-    card.flip();
+    card.flipped = !card.flipped;
     this.flippedCount++;
     this.flippedCards.push(card);
 
@@ -116,7 +126,7 @@ export class GameService {
           if (result === 'Wrong') {
             setTimeout(() => {
               // If wrong, wait certain time before unflipping cards
-              this.flippedCards.forEach((c) => c.setBack());
+              this.flippedCards.forEach((c) => (c.flipped = false));
               this.flippedCards.length = 0;
               observer.complete();
             }, this.CARD_HOLD_DURATION);
@@ -141,7 +151,7 @@ export class GameService {
     const unflippedCards = this.cards.filter((card) => {
       return !this.flippedCards.find((c) => c.id === card.id) && !card.done;
     });
-    unflippedCards.forEach((c) => c.flip());
+    unflippedCards.forEach((c) => (c.flipped = !c.flipped));
 
     return Observable.create(
       (observer: { next: (arg0: number) => void; complete: () => void }) => {
@@ -149,7 +159,7 @@ export class GameService {
 
         setTimeout(() => {
           // Unflip the cards to get the game condition back
-          unflippedCards.forEach((c) => c.flip());
+          unflippedCards.forEach((c) => (c.flipped = !c.flipped));
 
           setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
         }, this.CHEAT_DURATION);
