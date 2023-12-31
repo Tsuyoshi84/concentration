@@ -1,14 +1,17 @@
-.container {
-  --color-border: #ccc;
+.button {
+  --color-border: var(--gray-5);
 
   position: relative;
   inline-size: 100%;
   block-size: 100%;
+  border: none;
+  background-color: transparent;
   perspective: 800px;
 }
 
 .card {
   position: absolute;
+  inset: 0;
   inline-size: 100%;
   block-size: 100%;
   border: 1px solid var(--color-border);
@@ -20,6 +23,47 @@
   transition:
     box-shadow,
     transform 0.5s;
+
+  &:not(.flipped) {
+    box-shadow: 1px 1px 2px var(--color-border);
+  }
+
+  &.flipped {
+    box-shadow: -1px 1px 2px var(--color-border);
+    transform: rotateY(180deg);
+    cursor: default;
+  }
+
+  .front,
+  .back {
+    position: absolute;
+    display: grid;
+    inline-size: 100%;
+    block-size: 100%;
+    border-radius: 10px;
+    place-items: center;
+    font-size: var(--font-size-8);
+    backface-visibility: hidden;
+    transition:
+      transform,
+      color 0.3s ease-in-out;
+  }
+
+  .front {
+    background-color: var(--gray-2);
+    cursor: pointer;
+  }
+
+  .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotateY(180deg);
+  }
+
+  .back.done {
+    background-color: var(--green-1);
+  }
 }
 
 @media (hover: hover) {
@@ -27,45 +71,4 @@
     box-shadow: 5px 5px 10px var(--color-border);
     transform: scale(1.1, 1.1);
   }
-}
-
-.card:not(.flipped) {
-  box-shadow: 1px 1px 2px var(--color-border);
-}
-
-.card.flipped {
-  box-shadow: -1px 1px 2px var(--color-border);
-  transform: rotateY(180deg);
-  cursor: default;
-}
-
-.card .front,
-.card .back {
-  position: absolute;
-  display: block;
-  inline-size: 100%;
-  block-size: 100%;
-  border-radius: 10px;
-  text-align: center;
-  backface-visibility: hidden;
-  background-color: #fff;
-  transition:
-    transform,
-    color 0.3s ease-in-out;
-}
-
-.card .front {
-  background-color: #f0f0f0;
-  cursor: pointer;
-}
-
-.card .back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform: rotateY(180deg);
-}
-
-.card .back.done {
-  color: #8fd08f;
 }

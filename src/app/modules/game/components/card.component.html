@@ -1,6 +1,6 @@
-<div class="container" (click)="onClicked()">
+<button class="button" (click)="onClicked()">
   <div class="card" [ngClass]="{ flipped: card.flipped }">
     <div class="front"></div>
     <div class="back" [ngClass]="{ done: card.done }">{{ card.character }}</div>
   </div>
-</div>
+</button>
