@@ -4,7 +4,7 @@ import { GameStatus } from '../../enums/game-status.enum';
 @Component({
   selector: 'app-game-progress',
   templateUrl: './game-progress.component.html',
-  styleUrls: ['./game-progress.component.sass'],
+  styleUrls: ['./game-progress.component.css'],
 })
 export class GameProgressComponent {
   @Input() numOfTry!: number;

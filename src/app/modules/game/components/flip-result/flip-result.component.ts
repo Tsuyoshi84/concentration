@@ -4,7 +4,7 @@ import { Result } from '../../enums/result.enum';
 @Component({
   selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
-  styleUrls: ['./flip-result.component.sass'],
+  styleUrls: ['./flip-result.component.css'],
 })
 export class FlipResultComponent implements OnInit {
   /** Animation duration in ms */

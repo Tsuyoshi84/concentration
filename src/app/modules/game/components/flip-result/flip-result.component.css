@@ -1,0 +1,42 @@
+.container {
+  text-align: center;
+  position: absolute;
+  z-index: 100;
+  width: 100%;
+  .result {
+    z-index: 100;
+    font-size: 60px;
+    font-weight: bold;
+    white-space: pre-wrap;
+    &.correct {
+      background: -webkit-linear-gradient(
+        rgba(151, 255, 0, 0.5),
+        rgba(0, 114, 6, 0.7)
+      );
+    }
+    &.wrong {
+      background: -webkit-linear-gradient(
+        rgba(250, 0, 0, 0.2),
+        rgba(255, 0, 0, 0.8)
+      );
+    }
+    &.finish {
+      background: -webkit-linear-gradient(
+        rgba(151, 255, 0, 0.5),
+        rgba(0, 114, 6, 0.7)
+      );
+      font-size: 70px;
+    }
+    &.correct,
+    &.wrong,
+    &.finish {
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+}
+.unclickable {
+  user-select: none;
+  cursor: default;
+  pointer-events: none;
+}
