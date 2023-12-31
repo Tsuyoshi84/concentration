@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Card } from '../../models/card';
+import type { Card } from '../../types';
 import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {
@@ -21,7 +21,7 @@ describe('CardComponent', () => {
     fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
 
-    card = new Card(1, 'A');
+    card = { id: 1, character: 'A', flipped: false, done: false };
     component.card = card;
     fixture.detectChanges();
 

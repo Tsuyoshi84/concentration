@@ -1,6 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
-import { Card } from '../../models/card';
 import { CardComponent } from '../card/card.component';
 import { CardListComponent } from './card-list.component';
 
@@ -17,7 +15,10 @@ describe('CardListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardListComponent);
     component = fixture.componentInstance;
-    component.cards = [new Card(1, 'A'), new Card(2, 'B')];
+    component.cards = [
+      { id: 1, character: 'A', flipped: false, done: false },
+      { id: 2, character: 'B', flipped: false, done: false },
+    ];
     fixture.detectChanges();
   });
 
