@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import type { Card } from '../types';
 import { CardComponent } from './card.component';
@@ -25,7 +24,7 @@ describe('CardComponent', () => {
     component.card = card;
     fixture.detectChanges();
 
-    cardEl = fixture.debugElement.query(By.css('.container'));
+    cardEl = fixture.debugElement.query(By.css('.button'));
   });
 
   it('should create', () => {
