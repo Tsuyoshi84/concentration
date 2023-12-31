@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GameStatus } from '../../enums/game-status.enum';
+import type { GameStatus } from '../../types';
 
 @Component({
   selector: 'app-game-progress',

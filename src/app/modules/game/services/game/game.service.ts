@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { shuffle } from 'lodash-es';
 import { Observable, Subscriber } from 'rxjs';
-import { GameStatus } from '../../enums/game-status.enum';
-import { Result } from '../../enums/result.enum';
-import { Card } from '../../models/card';
+import type { Card, GameStatus, Result } from '../../types';
 
 /**
  * Bundle information related to card flipping.

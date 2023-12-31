@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Result } from '../../enums/result.enum';
+import type { Result } from '../../types';
 
 @Component({
   selector: 'app-flip-result',
