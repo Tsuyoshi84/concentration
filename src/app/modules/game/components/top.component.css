@@ -16,7 +16,7 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(4, 1fr);
-  justify-items: center;
+  justify-items: stretch;
   gap: var(--button-gap) var(--button-gap);
 }
 
@@ -30,5 +30,6 @@
     margin-block: 0;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+    justify-items: stretch;
   }
 }
