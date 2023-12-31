@@ -3,7 +3,7 @@
     <app-top-title></app-top-title>
     <div class="button-container">
       <button class="start-button" *ngFor="let diff of difficulties" (click)="start(diff)">
-        <span>{{ diff.label }}</span>
+        <span class="label">{{ diff.label }}</span>
         <span class="icon">{{ diff.icon }}</span>
       </button>
     </div>
