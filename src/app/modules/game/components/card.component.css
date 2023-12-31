@@ -7,6 +7,10 @@
   border: none;
   background-color: transparent;
   perspective: 800px;
+
+  &:disabled {
+    color: unset;
+  }
 }
 
 .card {
@@ -59,10 +63,6 @@
     align-items: center;
     justify-content: center;
     transform: rotateY(180deg);
-  }
-
-  .back.done {
-    background-color: var(--green-1);
   }
 }
 

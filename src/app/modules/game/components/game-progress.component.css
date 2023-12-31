@@ -2,6 +2,8 @@
   text-align: center;
 
   .score {
-    margin-block-end: 10px;
+    margin-block-end: var(--size-4);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-6);
   }
 }

@@ -19,4 +19,8 @@ export class CardComponent {
       this.clicked.emit(this.card);
     }
   }
+
+  get disabled(): boolean {
+    return this.card.flipped || this.card.done;
+  }
 }
