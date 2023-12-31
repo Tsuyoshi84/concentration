@@ -1,7 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { GameStatus } from '../../enums/game-status.enum';
 import { GameProgressComponent } from './game-progress.component';
 
 describe('GameProgressComponent', () => {
@@ -23,7 +22,7 @@ describe('GameProgressComponent', () => {
     flippingEl = scoreEl.query(By.css('.flipping'));
 
     component.numOfTry = expectedNumOfFlipping;
-    component.gameStatus = GameStatus.Playing;
+    component.gameStatus = 'Playing';
     fixture.detectChanges();
   });
 

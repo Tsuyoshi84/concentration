@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import gameDifficulty from '../../constants/game-difficulty';
+import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
 
 interface Difficulty {
   label: string;
@@ -17,15 +17,15 @@ interface Difficulty {
 export class TopComponent implements OnInit {
   @Output() started = new EventEmitter<number>();
   /** List of difficulties that user can select from */
-  difficulties!: Difficulty[];
+  difficulties!: readonly Difficulty[];
   /** Number of cards selected by a user */
   numOfCard!: number;
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    console.log({ gameDifficulty });
-    this.difficulties = gameDifficulty;
+    console.log({ GAME_DIFFICULTY });
+    this.difficulties = GAME_DIFFICULTY;
     this.numOfCard = this.difficulties[1].num;
   }
 

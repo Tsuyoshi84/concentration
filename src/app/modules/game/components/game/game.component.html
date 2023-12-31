@@ -1,23 +1,14 @@
 <div class="container">
   <div class="game-container" [@switchView]>
     <div class="progress-container">
-      <app-game-progress
-        [numOfTry]="numOfTry"
-        [gameStatus]="gameStatus"
-      ></app-game-progress>
+      <app-game-progress [numOfTry]="numOfTry" [gameStatus]="gameStatus"></app-game-progress>
     </div>
     <app-flip-result></app-flip-result>
     <div class="cards-board">
-      <app-card-list
-        [cards]="cards"
-        (cardClicked)="onCardClicked($event)"
-      ></app-card-list>
+      <app-card-list [cards]="cards" (cardClicked)="onCardClicked($event)"></app-card-list>
     </div>
 
-    <div
-      class="icon-container"
-      [style.visibility]="isGameClear ? 'visible' : 'hidden'"
-    >
+    <div class="icon-container" [style.visibility]="isGameClear ? 'visible' : 'hidden'">
       <button mat-raised-button class="icon-btn" (click)="back()">
         <i class="fa fa-arrow-left"></i>
       </button>

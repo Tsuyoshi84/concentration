@@ -44,7 +44,7 @@ export class GameService {
     '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️🐞💣❤️🐸🍎';
 
   constructor() {
-    this.gameStatus = GameStatus.NotPlaying;
+    this.gameStatus = 'NotPlaying';
   }
 
   /**
@@ -58,7 +58,7 @@ export class GameService {
     this.flippedCount = 0;
     this.tryCount = 0;
     this.cheatedCount = 0;
-    this.gameStatus = GameStatus.Playing;
+    this.gameStatus = 'Playing';
 
     let id = 0;
     this.cards.length = 0;
@@ -81,7 +81,7 @@ export class GameService {
     this.flippedCards.length = 0;
     this.flippedCount = 0;
     this.tryCount = 0;
-    this.gameStatus = GameStatus.NotPlaying;
+    this.gameStatus = 'NotPlaying';
   }
 
   /**
@@ -113,7 +113,7 @@ export class GameService {
             gameStatus: this.gameStatus,
           });
 
-          if (result === Result.Wrong) {
+          if (result === 'Wrong') {
             setTimeout(() => {
               // If wrong, wait certain time before unflipping cards
               this.flippedCards.forEach((c) => c.setBack());
@@ -182,15 +182,13 @@ export class GameService {
     if (this.flippedCards[0].character === this.flippedCards[1].character) {
       this.flippedCards.forEach((card) => (card.done = true));
       if (this.cards.filter((c) => !c.done).length === 0) {
-        this.gameStatus = GameStatus.Clear;
+        this.gameStatus = 'Clear';
       }
 
-      return this.gameStatus === GameStatus.Clear
-        ? Result.Finish
-        : Result.Correct;
-    } else {
-      return Result.Wrong;
+      return this.gameStatus === 'Clear' ? 'Finish' : 'Correct';
     }
+
+    return 'Wrong';
   }
 
   private getEmojiArray(length: number): Array<string> {

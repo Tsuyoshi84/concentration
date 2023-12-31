@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { By } from '@angular/platform-browser';
-import { Result } from '../../enums/result.enum';
 import { FlipResultComponent } from './flip-result.component';
 
 describe('FlipResultComponent', () => {
@@ -26,14 +25,14 @@ describe('FlipResultComponent', () => {
 
   describe('#showResult', () => {
     it('should not show result message when Result.None is passed', () => {
-      component.showResult(Result.None);
+      component.showResult('None');
       const resultElement = fixture.debugElement.query(By.css('.result'));
 
       expect(resultElement).toBeNull();
     });
 
     it('should show nothing message when Result.Wrong is passed', () => {
-      component.showResult(Result.Wrong);
+      component.showResult('Wrong');
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
@@ -41,25 +40,25 @@ describe('FlipResultComponent', () => {
     });
 
     it('should show "Correct" message when Result.Correct is passed', () => {
-      component.showResult(Result.Correct);
+      component.showResult('Correct');
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
         'Correct!',
       );
-      expect(resultElement.classes['correct']).toBeTruthy();
+      expect(resultElement.classes.correct).toBeTruthy();
     });
 
     it('should show "Congrats" message when Result.Finish is passed', () => {
-      component.showResult(Result.Finish);
+      component.showResult('Finish');
       const resultElement = fixture.debugElement.query(By.css('.result'));
       fixture.detectChanges();
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
         `Congrats!\nYou've finished!!`,
       );
-      expect(resultElement.classes['finish']).toBeTruthy();
+      expect(resultElement.classes.finish).toBeTruthy();
     });
   });
 });
