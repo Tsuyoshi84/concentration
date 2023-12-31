@@ -18,30 +18,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
+
+      - name: Lint CSS
+        run: pnpm lint-css:fix
 
       - name: Format code
-        run: npm run format
+        run: pnpm format
 
       - name: Format CSS
-        run: npm run format:css
+        run: pnpm format:css
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
 
       - name: Run tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless --code-coverage
+        run: pnpm test -- --watch=false --browsers=ChromeHeadless --code-coverage
 
       # - name: Upload coverage
-      #   run: npm run coveralls
+      #   run: pnpm run coveralls
 
       - name: Build
-        run: npm run build
+        run: pnpm build
