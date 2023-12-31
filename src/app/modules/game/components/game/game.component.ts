@@ -4,9 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
 import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
-import { GameStatus } from '../../enums/game-status.enum';
-import { Card } from '../../models/card';
 import { GameService } from '../../services/game/game.service';
+import type { Card, GameStatus } from '../../types';
 
 @Component({
   selector: 'app-game',
