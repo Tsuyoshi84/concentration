@@ -1,10 +1,11 @@
 .app-component {
   display: flex;
+  min-block-size: 100%;
   flex-direction: column;
-  min-height: 100%;
 
   main {
-    padding: 20px 20px;
+    padding-inline: 20px;
+    padding-block: 20px;
     flex-grow: 1;
   }
 }
