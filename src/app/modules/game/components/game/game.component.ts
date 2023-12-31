@@ -3,7 +3,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
-import gameDifficulty from '../../constants/game-difficulty';
+import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
 import { GameStatus } from '../../enums/game-status.enum';
 import { Card } from '../../models/card';
 import { GameService } from '../../services/game/game.service';
@@ -95,7 +95,7 @@ export class GameComponent implements OnInit, OnDestroy {
   setupGame() {
     this.sub = this.route.params.subscribe((params) => {
       const level = +params.level;
-      const difficulty = gameDifficulty.find((d) => d.level === level);
+      const difficulty = GAME_DIFFICULTY.find((d) => d.level === level);
 
       if (difficulty === undefined) return;
 
