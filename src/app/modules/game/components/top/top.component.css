@@ -1,0 +1,107 @@
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .inner-container {
+    text-align: center;
+    width: clamp(280px, calc(100vw - 32px), 680px);
+  }
+}
+.title {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  .main {
+    font-size: 1.3em;
+  }
+}
+.rotate {
+  display: inline-block;
+  padding-left: 3px;
+  padding-right: 3px;
+  &:nth-child(even) {
+    animation: rotate-anime 1.5s ease-in-out infinite alternate-reverse forwards;
+  }
+  &:nth-child(odd) {
+    animation: rotate-anime 1.5s ease-in-out infinite alternate forwards;
+  }
+  @keyframes rotate-anime {
+    0% {
+      transform: rotate(-15deg);
+    }
+    100% {
+      transform: rotate(15deg);
+    }
+  }
+}
+.button-container {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: 100%;
+  grid-template-rows: auto auto auto auto;
+  column-gap: 16px;
+  row-gap: 16px;
+}
+.start-button {
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  color: #444;
+  font-size: 4rem;
+  background-color: #fff;
+  width: 100%;
+  padding: 0.5rem;
+  transition: transform 0.2s;
+  box-shadow: 1px 1px 3px 0 hsla(0, 99%, 0%, 0.5);
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.05, 1.05);
+    .icon {
+      transform: rotate(20deg);
+    }
+  }
+  .icon {
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  --button-size: 29rem;
+  --button-gap: 2rem;
+
+  .title {
+    font-size: 5rem;
+  }
+  .button-container {
+    display: grid;
+    width: calc(var(--$button-size) * 2 + var(--$button-gap));
+    margin: 0 auto;
+    grid-template-columns: auto auto;
+    grid-template-rows: auto auto;
+    column-gap: $button-gap;
+    row-gap: $button-gap;
+  }
+  .start-button {
+    font-size: 5rem;
+    width: var(--button-size);
+    height: var(--button-size);
+    box-shadow: 1px 1px 5px 0 hsla(0, 99%, 0%, 0.5);
+    &:hover {
+      box-shadow: 1px 1px 10px 0 hsla(0, 99%, 0%, 0.5);
+    }
+    .icon {
+      display: block;
+      font-size: 10rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .title {
+    font-size: 6rem;
+  }
+}

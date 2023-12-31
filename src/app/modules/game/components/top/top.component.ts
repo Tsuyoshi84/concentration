@@ -12,7 +12,7 @@ interface Difficulty {
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',
-  styleUrls: ['./top.component.sass'],
+  styleUrls: ['./top.component.css'],
 })
 export class TopComponent implements OnInit {
   @Output() started = new EventEmitter<number>();
