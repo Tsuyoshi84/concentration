@@ -38,4 +38,4 @@ export type GameStatus = 'NotPlaying' | 'Playing' | 'Clear';
  * - 'Wrong': Indicate that a user flipped wrong card
  * - 'Finish': Indicate that a user finished the game
  */
-export type Result = 'None' | 'Correct' | 'Wrong' | 'Finish';
+export type Result = 'None' | 'Correct' | 'Wrong' | 'Finish' | 'Unknown';

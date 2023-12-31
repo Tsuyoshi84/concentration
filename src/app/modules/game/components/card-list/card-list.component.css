@@ -14,7 +14,7 @@
 
   &.six-cards {
     grid-template-columns: repeat(6, var(--six-grid-item-size-md));
-    grid-auto-rows: var(--six-grid-item-size-m) d;
+    grid-auto-rows: var(--six-grid-item-size-md);
     font-size: 3rem;
   }
 

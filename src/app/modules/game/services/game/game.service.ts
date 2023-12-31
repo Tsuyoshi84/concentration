@@ -1,49 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, computed, signal } from '@angular/core';
 import { shuffle } from 'lodash-es';
-import { Observable, Subscriber } from 'rxjs';
 import type { Card, GameStatus, Result } from '../../types';
-
-/**
- * Bundle information related to card flipping.
- */
-type FlipResult = {
-  /** Result of flipping card. */
-  result?: Result;
-  /** Total number of flipping cards. */
-  flippedCount: number;
-  /** トライ回数 */
-  tryCount: number;
-  /** Game status. */
-  gameStatus: GameStatus;
-};
 
 @Injectable()
 export class GameService {
   /** Flipping card time duration in ms */
   private readonly FLIPPING_DURATION = 300;
-  /** Time duration before unflipping when flipped cards are wrong */
+  /** Time duration before un-flipping when flipped cards are wrong */
   private readonly CARD_HOLD_DURATION = 500;
-  /** Cheating duration in ms */
-  private readonly CHEAT_DURATION = 1000;
-  /** Cards of the game */
-  private cards: Card[] = [];
-  /** Flipped card array */
-  private flippedCards: Card[] = [];
-  /** Total number of flipping cards */
-  private flippedCount = 0;
-  /** トライした回数 */
-  private tryCount = 0;
-  /** Total number of cheating */
-  private cheatedCount = 0;
-  /** Game status */
-  private gameStatus: GameStatus;
-  /** Emojis */
-  private emo =
-    '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️🐞💣❤️🐸🍎';
 
-  constructor() {
-    this.gameStatus = 'NotPlaying';
-  }
+  /** Cards of the game */
+  cards = signal<readonly Card[]>([]);
+  /** Selected card array */
+  selectedCards = signal<readonly Card[]>([]);
+  /** Number of try */
+  numOfTry = signal(0);
+  /** Card flipped result */
+  flippedResult = signal<Result>('None');
+  /** Game status */
+  gameStatus = signal<GameStatus>('NotPlaying');
+  isGameClear = computed(() => this.gameStatus() === 'Clear');
+  /** Whether user can flip cards or not */
+  canFlip = computed(() => {
+    return this.gameStatus() === 'Playing' && this.selectedCards().length < 2;
+  });
 
   /**
    * Reset the game state and generate cards to play the game.
@@ -51,45 +31,36 @@ export class GameService {
    * @param numOfCard Number of cards to generate.
    * @returns Generated cards.
    */
-  startGame(numOfCard: number): Card[] {
-    this.flippedCards.length = 0;
-    this.flippedCount = 0;
-    this.tryCount = 0;
-    this.cheatedCount = 0;
-    this.gameStatus = 'Playing';
+  startGame(numOfCard: number): void {
+    this.reset();
+    this.gameStatus.set('Playing');
 
+    const newCards: Card[] = [];
     let id = 0;
-    this.cards.length = 0;
-    const emojis = this.getEmojiArray(numOfCard / 2);
+    const emojis = getEmojiArray(numOfCard / 2);
+
     for (let i = 1; i <= numOfCard / 2; i++) {
-      this.cards.push({
-        id: ++id,
+      const card = {
         character: emojis[i - 1],
         flipped: false,
         done: false,
-      });
-      this.cards.push({
-        id: ++id,
-        character: emojis[i - 1],
-        flipped: false,
-        done: false,
-      });
+      };
+      newCards.push({ id: ++id, ...card });
+      newCards.push({ id: ++id, ...card });
     }
 
-    this.cards = this.shuffle(this.cards);
-
-    return this.cards;
+    this.cards.set(shuffle(newCards));
   }
 
   /**
    * Reset the game conditions.
    */
   reset(): void {
-    this.cards.length = 0;
-    this.flippedCards.length = 0;
-    this.flippedCount = 0;
-    this.tryCount = 0;
-    this.gameStatus = 'NotPlaying';
+    this.cards.set([]);
+    this.selectedCards.set([]);
+    this.numOfTry.set(0);
+    this.flippedResult.set('None');
+    this.gameStatus.set('NotPlaying');
   }
 
   /**
@@ -98,121 +69,81 @@ export class GameService {
    * @param card Flipped card.
    * @returns Result and total number of flipping.
    */
-  flipCard(card: Card): Observable<FlipResult> {
+  async flipCard(card: Card): Promise<void> {
     card.flipped = !card.flipped;
-    this.flippedCount++;
-    this.flippedCards.push(card);
+    this.selectedCards.set([...this.selectedCards(), card]);
 
-    return Observable.create((observer: Subscriber<FlipResult>) => {
-      observer.next({
-        flippedCount: this.flippedCount,
-        tryCount: this.tryCount,
-        gameStatus: this.gameStatus,
+    // If flipped cards are less than 2, do nothing
+    if (this.selectedCards().length < 2) return;
+
+    // Wait until the card is flipped
+    this.flippedResult.set('Unknown');
+    await wait(this.FLIPPING_DURATION);
+
+    // Check the result
+    this.numOfTry.update((count) => count + 1);
+    const [{ character: first }, { character: second }] = this.selectedCards();
+    this.flippedResult.set(first === second ? 'Correct' : 'Wrong');
+
+    if (this.flippedResult() === 'Correct') {
+      this.selectedCards.update((cards) => {
+        for (const card of cards) {
+          card.done = true;
+        }
+        return cards;
       });
+      // Check if the game is finished
+      if (this.cards().every(({ done }) => done)) {
+        this.flippedResult.set('Finish');
+        this.gameStatus.set('Clear');
+      }
+    }
 
-      if (this.flippedCards.length === 2) {
-        setTimeout(() => {
-          this.tryCount = Math.floor(this.flippedCount / 2);
-          const result = this.check();
-          observer.next({
-            result: result,
-            flippedCount: this.flippedCount,
-            tryCount: this.tryCount,
-            gameStatus: this.gameStatus,
-          });
+    if (
+      this.flippedResult() === 'Wrong' ||
+      this.flippedResult() === 'Correct'
+    ) {
+      await wait(this.CARD_HOLD_DURATION);
 
-          if (result === 'Wrong') {
-            setTimeout(() => {
-              // If wrong, wait certain time before unflipping cards
-              this.flippedCards.forEach((c) => (c.flipped = false));
-              this.flippedCards.length = 0;
-              observer.complete();
-            }, this.CARD_HOLD_DURATION);
-          } else {
-            this.flippedCards.length = 0;
-            observer.complete();
+      // Un-flip cards if the flipped cards are wrong
+      if (this.flippedResult() === 'Wrong') {
+        this.cards.update((cards) => {
+          for (const card of cards.filter(({ done }) => !done)) {
+            card.flipped = false;
           }
-        }, this.FLIPPING_DURATION);
-      } else {
-        observer.complete();
-      }
-    });
-  }
-
-  /**
-   * Flip all the unflipped cards temporarily.
-   * This returns the number of cheating after unflipping via promise.
-   */
-  cheat(): Observable<number> {
-    this.cheatedCount++;
-    // Flip unflipped cards
-    const unflippedCards = this.cards.filter((card) => {
-      return !this.flippedCards.find((c) => c.id === card.id) && !card.done;
-    });
-    unflippedCards.forEach((c) => (c.flipped = !c.flipped));
-
-    return Observable.create(
-      (observer: { next: (arg0: number) => void; complete: () => void }) => {
-        observer.next(this.cheatedCount);
-
-        setTimeout(() => {
-          // Unflip the cards to get the game condition back
-          unflippedCards.forEach((c) => (c.flipped = !c.flipped));
-
-          setTimeout(() => observer.complete(), this.FLIPPING_DURATION);
-        }, this.CHEAT_DURATION);
-      },
-    );
-  }
-
-  /**
-   * Get the current game status.
-   */
-  getGameStatus(): GameStatus {
-    return this.gameStatus;
-  }
-
-  private shuffle<T>(items: T[]): T[] {
-    let temp: T;
-    let randIndex: number;
-
-    for (let i = 0; i < items.length; i++) {
-      randIndex = Math.floor(Math.random() * items.length);
-      temp = items[i];
-      items[i] = items[randIndex];
-      items[randIndex] = temp;
-    }
-
-    return items;
-  }
-
-  private check(): Result {
-    if (this.flippedCards[0].character === this.flippedCards[1].character) {
-      this.flippedCards.forEach((card) => (card.done = true));
-      if (this.cards.filter((c) => !c.done).length === 0) {
-        this.gameStatus = 'Clear';
+          return cards;
+        });
       }
 
-      return this.gameStatus === 'Clear' ? 'Finish' : 'Correct';
+      this.selectedCards.set([]);
+      this.flippedResult.set('None');
     }
-
-    return 'Wrong';
   }
+}
 
-  private getEmojiArray(length: number): Array<string> {
-    const emojiArray = this.emojiStringToArray(this.emo);
-    return shuffle(emojiArray).slice(0, length);
-  }
+async function wait(ms: number): Promise<void> {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(), ms);
+  });
+}
 
-  private emojiStringToArray(str: string): Array<string> {
-    const split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
-    const arr = [];
-    for (let i = 0; i < split.length; i++) {
-      const char = split[i];
-      if (char !== '') {
-        arr.push(char);
-      }
+/** Emojis */
+const CHARACTERS =
+  '😀😂😎🤔😣😫🙃🤑😲🙁😖😭😨🤯😱😡🤮😇🤠🤡🤓👻👽💩😺🌝⛄️🐞💣❤️🐸🍎' as const;
+
+function getEmojiArray(length: number): Array<string> {
+  const emojiArray = emojiStringToArray(CHARACTERS);
+  return shuffle(emojiArray).slice(0, length);
+}
+
+function emojiStringToArray(str: string): Array<string> {
+  const split = str.split(/([\uD800-\uDBFF][\uDC00-\uDFFF])/);
+  const arr = [];
+  for (let i = 0; i < split.length; i++) {
+    const char = split[i];
+    if (char !== '') {
+      arr.push(char);
     }
-    return arr;
   }
+  return arr;
 }
