@@ -11,7 +11,7 @@ import { GameComponent } from './components/game/game.component';
 import { TopTitleComponent } from './components/top-title/top-title.component';
 import { TopComponent } from './components/top/top.component';
 import { GameRoutingModule } from './game-routing.module';
-import { GameService } from './services/game/game.service';
+import { GameService } from './services/game.service';
 
 @NgModule({
   imports: [

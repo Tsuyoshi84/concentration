@@ -11,7 +11,7 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlipResultComponent } from '../../components/flip-result/flip-result.component';
 import { GAME_DIFFICULTY } from '../../constants/game-difficulty';
-import { GameService } from '../../services/game/game.service';
+import { GameService } from '../../services/game.service';
 import type { Card, GameStatus } from '../../types';
 
 @Component({

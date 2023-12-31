@@ -1,6 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { shuffle } from 'lodash-es';
-import type { Card, GameStatus, Result } from '../../types';
+import type { Card, GameStatus, Result } from '../types';
 
 @Injectable()
 export class GameService {
