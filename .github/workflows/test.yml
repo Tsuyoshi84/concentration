@@ -47,10 +47,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
 
       - name: Run tests
-        run: pnpm test -- --watch=false --browsers=ChromeHeadless --code-coverage
-
-      # - name: Upload coverage
-      #   run: pnpm run coveralls
+        run: pnpm test -- --watch=false --browsers=ChromeHeadless
 
       - name: Build
         run: pnpm build
