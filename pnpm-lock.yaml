@@ -33,7 +33,7 @@ dependencies:
     specifier: 4.17.21
     version: 4.17.21
   open-props:
-    specifier: ^1.6.16
+    specifier: 1.6.16
     version: 1.6.16
   postcss:
     specifier: 8.4.32
@@ -62,7 +62,7 @@ devDependencies:
     specifier: 17.0.8
     version: 17.0.8(@angular/compiler@17.0.8)(typescript@5.2.2)
   '@biomejs/biome':
-    specifier: ^1.4.1
+    specifier: 1.4.1
     version: 1.4.1
   '@types/jasmine':
     specifier: 5.1.4
@@ -110,25 +110,25 @@ devDependencies:
     specifier: 1.7.0
     version: 1.7.0(jasmine-core@5.1.1)(karma-jasmine@4.0.2)(karma@6.4.2)
   prettier:
-    specifier: ^3.1.1
+    specifier: 3.1.1
     version: 3.1.1
   protractor:
     specifier: 7.0.0
     version: 7.0.0
   stylelint:
-    specifier: ^16.1.0
+    specifier: 16.1.0
     version: 16.1.0(typescript@5.2.2)
   stylelint-config-pretty-order:
-    specifier: ^0.4.1
+    specifier: 0.4.1
     version: 0.4.1(stylelint@16.1.0)
   stylelint-config-standard:
-    specifier: ^36.0.0
+    specifier: 36.0.0
     version: 36.0.0(stylelint@16.1.0)
   stylelint-prettier:
-    specifier: ^5.0.0
+    specifier: 5.0.0
     version: 5.0.0(prettier@3.1.1)(stylelint@16.1.0)
   stylelint-use-logical-spec:
-    specifier: ^5.0.1
+    specifier: 5.0.1
     version: 5.0.1(stylelint@16.1.0)
   ts-node:
     specifier: 10.9.2
