@@ -1,6 +1,7 @@
 # Concentration
 
-[![CircleCI](https://circleci.com/gh/Tsuyoshi84/concentration.svg?style=svg)](https://circleci.com/gh/Tsuyoshi84/concentration)
+[![Test](https://github.com/Tsuyoshi84/concentration/actions/workflows/test.yml/badge.svg)](https://github.com/Tsuyoshi84/concentration/actions/workflows/test.yml)
+[![CodeQL](https://github.com/Tsuyoshi84/concentration/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Tsuyoshi84/concentration/actions/workflows/codeql-analysis.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Tsuyoshi84/concentration/badge.svg)](https://coveralls.io/github/Tsuyoshi84/concentration)
 [![codebeat badge](https://codebeat.co/badges/4f17cdc6-e6be-42ea-907a-c4e4164f2588)](https://codebeat.co/projects/github-com-tsuyoshi84-concentration-master)
 
