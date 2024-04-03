@@ -1,6 +1,6 @@
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
-// biome-ignore lint: Don't
 import 'zone.js/testing';
+
 import { getTestBed } from '@angular/core/testing';
 import {
   BrowserDynamicTestingModule,
