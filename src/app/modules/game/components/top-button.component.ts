@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Difficulty } from '../types';
+import type { Difficulty } from '../types';
 
 @Component({
   selector: 'app-top-button',

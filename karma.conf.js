@@ -25,6 +25,7 @@ module.exports = (config) => {
       suppressAll: true, // removes the duplicated traces
     },
     coverageReporter: {
+      // biome-ignore lint/style/useNodejsImportProtocol: <explanation>
       dir: require('path').join(__dirname, './coverage'),
       subdir: '.',
       reporters: [

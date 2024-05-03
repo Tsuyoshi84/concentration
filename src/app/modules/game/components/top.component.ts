@@ -1,5 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, EventEmitter, type OnInit, Output } from '@angular/core';
+import type { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
 
