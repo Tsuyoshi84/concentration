@@ -10,7 +10,6 @@
     "test": "ng test",
     "test_without_watch": "ng test --watch=false --code-coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "lint": "ng lint",
     "format": "biome format . --write",
     "format:check": "biome format .",
     "format:css": "prettier --write './src/**/*.css' --ignore-path .prettierignore",
