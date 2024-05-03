@@ -5,7 +5,7 @@ import {
   type OnInit,
   Output,
 } from '@angular/core';
-import type { Card } from '../types';
+import { Card } from '../types';
 
 @Component({
   selector: 'app-card-list',

@@ -1,4 +1,4 @@
-import type { DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import {
   type ComponentFixture,
   TestBed,

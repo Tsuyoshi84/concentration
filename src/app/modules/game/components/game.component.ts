@@ -1,17 +1,17 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
   Component,
-  type OnDestroy,
-  type OnInit,
-  type Signal,
+  OnDestroy,
+  OnInit,
+  Signal,
   ViewChild,
-  type WritableSignal,
+  WritableSignal,
   effect,
 } from '@angular/core';
-import type { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
-import type { GameService } from '../services/game.service';
-import type { Card, GameStatus } from '../types';
+import { GameService } from '../services/game.service';
+import { Card, GameStatus } from '../types';
 import { FlipResultComponent } from './flip-result.component';
 
 @Component({
