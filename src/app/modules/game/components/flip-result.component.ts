@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, type OnInit } from '@angular/core';
 import type { Result } from '../types';
 
 @Component({
