@@ -22,12 +22,12 @@
     "ghpage": "angular-cli-ghpages --dir=dist/concentration/browser"
   },
   "private": true,
-  "packageManager": "pnpm",
+  "packageManager": "pnpm@9.5.0",
   "engines": {
     "node": ">=20.0.0",
     "npm": "use-pnpm",
     "yarn": "use-pnpm",
-    "pnpm": ">=8.0.0"
+    "pnpm": ">=9.5.0"
   },
   "dependencies": {
     "@angular/animations": "18.0.5",
