@@ -11,8 +11,6 @@
     "test_without_watch": "ng test --watch=false --code-coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "format": "biome format . --write",
-    "format:check": "biome format .",
-    "format:css": "prettier --write './src/**/*.css' --ignore-path .prettierignore",
     "lint-css": "stylelint '**/*.css' --ignore-path .gitignore",
     "lint-css:fix": "stylelint '**/*.css' --ignore-path .gitignore --fix",
     "check": "biome check . --apply",
