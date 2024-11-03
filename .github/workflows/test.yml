@@ -20,12 +20,12 @@ jobs:
 
       - uses: pnpm/action-setup@v2
         with:
-          version: 9.5.0
+          version: 9.12.3
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -39,9 +39,6 @@ jobs:
 
       - name: Format code
         run: pnpm format
-
-      - name: Format CSS
-        run: pnpm format:css
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5

@@ -1,5 +1,5 @@
-@import url('reset-css');
-@import url('open-props/style');
+@import url("reset-css");
+@import url("open-props/style");
 
 html {
   block-size: 100%;

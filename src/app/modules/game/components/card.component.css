@@ -24,9 +24,7 @@
   transition: -webkit-transform 1s;
   transition: -moz-transform 1s;
   transition: -o-transform 1s;
-  transition:
-    box-shadow,
-    transform 0.5s;
+  transition: box-shadow, transform 0.5s;
 
   &:not(.flipped) {
     box-shadow: 1px 1px 2px var(--color-border);
@@ -48,9 +46,7 @@
     place-items: center;
     font-size: var(--font-size-8);
     backface-visibility: hidden;
-    transition:
-      transform,
-      color 0.3s ease-in-out;
+    transition: transform, color 0.3s ease-in-out;
   }
 
   .front {
