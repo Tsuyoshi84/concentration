@@ -6,16 +6,15 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignore": [
-      "./dist/**/*",
-      "./.angular/**/*",
-      "./tsconfig.*",
-      "./coverage/**/*"
+    "includes": [
+      "**",
+      "!dist/**/*",
+      "!.angular/**/*",
+      "!tsconfig.*",
+      "!coverage/**/*"
     ]
   },
-  "organizeImports": {
-    "enabled": true
-  },
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
   "linter": {
     "enabled": true,
     "rules": {
@@ -24,7 +23,17 @@
         "noDuplicateTestHooks": "off"
       },
       "style": {
-        "useImportType": "off"
+        "useImportType": "off",
+        "noParameterAssign": "error",
+        "useAsConstAssertion": "error",
+        "useDefaultParameterLast": "error",
+        "useEnumInitializers": "error",
+        "useSelfClosingElements": "error",
+        "useSingleVarDeclarator": "error",
+        "noUnusedTemplateLiteral": "error",
+        "useNumberNamespace": "error",
+        "noInferrableTypes": "error",
+        "noUselessElse": "error"
       }
     }
   },
