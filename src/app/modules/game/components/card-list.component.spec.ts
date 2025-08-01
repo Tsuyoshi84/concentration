@@ -3,8 +3,8 @@ import {
   TestBed,
   waitForAsync,
 } from '@angular/core/testing';
-import { CardListComponent } from './card-list.component';
 import { CardComponent } from './card.component';
+import { CardListComponent } from './card-list.component';
 
 describe('CardListComponent', () => {
   let component: CardListComponent;

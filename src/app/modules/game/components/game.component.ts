@@ -1,12 +1,12 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
   Component,
+  effect,
   OnDestroy,
   OnInit,
   Signal,
   ViewChild,
   WritableSignal,
-  effect,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
