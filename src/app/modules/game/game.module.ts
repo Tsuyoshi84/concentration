@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CardComponent } from './components/card.component';
 import { CardListComponent } from './components/card-list.component';
 import { FlipResultComponent } from './components/flip-result.component';
@@ -19,8 +17,6 @@ import { GameService } from './services/game.service';
     CommonModule,
     FormsModule,
     GameRoutingModule,
-    BrowserModule,
-    BrowserAnimationsModule,
   ],
   declarations: [
     TopComponent,
