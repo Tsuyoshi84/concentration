@@ -13,11 +13,7 @@ import { GameRoutingModule } from './game-routing.module';
 import { GameService } from './services/game.service';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    GameRoutingModule,
-  ],
+  imports: [CommonModule, FormsModule, GameRoutingModule],
   declarations: [
     TopComponent,
     TopTitleComponent,
