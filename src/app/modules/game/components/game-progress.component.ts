@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import type { GameStatus } from '../types';
 
 @Component({
+  standalone: false,
   selector: 'app-game-progress',
   templateUrl: './game-progress.component.html',
   styleUrls: ['./game-progress.component.css'],

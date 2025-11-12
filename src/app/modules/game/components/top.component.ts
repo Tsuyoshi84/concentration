@@ -4,6 +4,7 @@ import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
 
 @Component({
+  standalone: false,
   selector: 'app-top',
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.css'],
