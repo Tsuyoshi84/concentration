@@ -48,5 +48,10 @@
       "quoteStyle": "single",
       "semicolons": "always"
     }
+  },
+  "html": {
+    "parser": {
+      "interpolation": true
+    }
   }
 }
