@@ -8,6 +8,7 @@ import {
 import { Card } from '../types';
 
 @Component({
+  standalone: false,
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.css'],

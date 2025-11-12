@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, type OnInit } from '@angular/core';
 import type { Result } from '../types';
 
 @Component({
+  standalone: false,
   selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
   styleUrls: ['./flip-result.component.css'],

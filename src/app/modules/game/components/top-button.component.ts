@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import type { Difficulty } from '../types';
 
 @Component({
+  standalone: false,
   selector: 'app-top-button',
   templateUrl: './top-button.component.html',
   styleUrls: ['./top-button.component.css'],

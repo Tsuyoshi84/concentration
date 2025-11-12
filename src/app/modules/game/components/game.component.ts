@@ -15,6 +15,7 @@ import { Card, GameStatus } from '../types';
 import { FlipResultComponent } from './flip-result.component';
 
 @Component({
+  standalone: false,
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
