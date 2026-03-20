@@ -75,6 +75,10 @@ export class FlipResultComponent implements OnInit {
   ): void {
     this.message = message;
     this.animateClasses = animateClasses;
+    // Notify Angular of the updated animation classes so that the view is in
+    // sync before the next change-detection pass (required by Angular 21's
+    // stricter NG0100 check).
+    this.ref.detectChanges();
 
     // Fade out the message after certain time
     this.timer = setTimeout(() => {
