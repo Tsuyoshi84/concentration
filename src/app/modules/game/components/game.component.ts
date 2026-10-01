@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import {
+  ChangeDetectionStrategy,
   Component,
   effect,
   OnDestroy,
@@ -19,6 +20,7 @@ import { FlipResultComponent } from './flip-result.component';
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
+  changeDetection: ChangeDetectionStrategy.Eager,
   animations: [
     trigger('switchView', [
       transition(':enter', [

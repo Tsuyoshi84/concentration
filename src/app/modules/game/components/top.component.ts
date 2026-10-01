@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
@@ -7,6 +13,7 @@ import type { Difficulty } from '../types';
   standalone: false,
   selector: 'app-top',
   templateUrl: './top.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./top.component.css'],
 })
 export class TopComponent implements OnInit {

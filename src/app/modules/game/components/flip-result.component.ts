@@ -1,10 +1,16 @@
-import { ChangeDetectorRef, Component, type OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  type OnInit,
+} from '@angular/core';
 import type { Result } from '../types';
 
 @Component({
   standalone: false,
   selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./flip-result.component.css'],
 })
 export class FlipResultComponent implements OnInit {

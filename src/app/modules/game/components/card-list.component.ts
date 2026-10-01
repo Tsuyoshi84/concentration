@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -11,6 +12,7 @@ import { Card } from '../types';
   standalone: false,
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card-list.component.css'],
 })
 export class CardListComponent implements OnInit {

@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import type { GameStatus } from '../types';
 
 @Component({
   standalone: false,
   selector: 'app-game-progress',
   templateUrl: './game-progress.component.html',
+  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./game-progress.component.css'],
 })
 export class GameProgressComponent {
