@@ -1,3 +1,4 @@
+import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,13 +9,15 @@ import {
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
+import { TopButtonComponent } from './top-button.component';
+import { TopTitleComponent } from './top-title.component';
 
 @Component({
-  standalone: false,
   selector: 'app-top',
   templateUrl: './top.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./top.component.css'],
+  imports: [TopTitleComponent, NgFor, TopButtonComponent],
 })
 export class TopComponent implements OnInit {
   @Output() started = new EventEmitter<number>();

@@ -13,7 +13,7 @@ describe('FlipResultComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [FlipResultComponent],
+      imports: [FlipResultComponent],
     }).compileComponents();
   }));
 

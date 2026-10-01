@@ -13,10 +13,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import { GameService } from '../services/game.service';
 import { Card, GameStatus } from '../types';
+import { CardListComponent } from './card-list.component';
 import { FlipResultComponent } from './flip-result.component';
+import { GameProgressComponent } from './game-progress.component';
 
 @Component({
-  standalone: false,
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
@@ -33,6 +34,7 @@ import { FlipResultComponent } from './flip-result.component';
       ]),
     ]),
   ],
+  imports: [GameProgressComponent, FlipResultComponent, CardListComponent],
 })
 export class GameComponent implements OnInit, OnDestroy {
   @ViewChild(FlipResultComponent, { static: true })

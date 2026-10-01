@@ -1,3 +1,4 @@
+import { NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -7,11 +8,11 @@ import {
 import type { Result } from '../types';
 
 @Component({
-  standalone: false,
   selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./flip-result.component.css'],
+  imports: [NgIf, NgClass],
 })
 export class FlipResultComponent implements OnInit {
   /** Animation duration in ms */

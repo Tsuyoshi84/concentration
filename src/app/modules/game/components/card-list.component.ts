@@ -1,3 +1,4 @@
+import { NgClass, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,13 +8,14 @@ import {
   Output,
 } from '@angular/core';
 import { Card } from '../types';
+import { CardComponent } from './card.component';
 
 @Component({
-  standalone: false,
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card-list.component.css'],
+  imports: [NgClass, NgFor, CardComponent],
 })
 export class CardListComponent implements OnInit {
   /** Card array to display */

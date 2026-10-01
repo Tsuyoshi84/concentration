@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,11 +9,11 @@ import {
 import { Card } from '../types';
 
 @Component({
-  standalone: false,
   selector: 'app-card',
   templateUrl: './card.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card.component.css'],
+  imports: [NgClass],
 })
 export class CardComponent {
   @Input() card!: Card;
