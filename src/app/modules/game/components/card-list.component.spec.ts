@@ -12,7 +12,7 @@ describe('CardListComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [CardListComponent, CardComponent],
+      imports: [CardListComponent, CardComponent],
     }).compileComponents();
   }));
 

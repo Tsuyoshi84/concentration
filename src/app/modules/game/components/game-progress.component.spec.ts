@@ -15,7 +15,7 @@ describe('GameProgressComponent', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [GameProgressComponent],
+      imports: [GameProgressComponent],
     }).compileComponents();
   }));
 

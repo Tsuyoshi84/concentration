@@ -8,7 +8,6 @@ import {
 import type { Difficulty } from '../types';
 
 @Component({
-  standalone: false,
   selector: 'app-top-button',
   templateUrl: './top-button.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
