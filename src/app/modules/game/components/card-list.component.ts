@@ -1,17 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Card } from '../types';
 import { CardComponent } from './card.component';
 
 @Component({
   selector: 'app-card-list',
   templateUrl: './card-list.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card-list.component.css'],
   imports: [CardComponent],
 })
