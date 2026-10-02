@@ -2,7 +2,9 @@
   <div class="inner-container">
     <app-top-title></app-top-title>
     <div class="button-container">
-      <app-top-button *ngFor="let diff of difficulties" [difficulty]="diff" (start)="start(diff)"></app-top-button>
+      @for (diff of difficulties; track diff.level) {
+        <app-top-button [difficulty]="diff" (start)="start(diff)"></app-top-button>
+      }
     </div>
   </div>
 </section>

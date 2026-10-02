@@ -1,5 +1,7 @@
-<div class="container" [ngClass]="cardsClass">
-  <div class="card-box" *ngFor="let card of cards">
-    <app-card [card]="card" (clicked)="onClicked($event)"></app-card>
-  </div>
+<div class="container" [class]="cardsClass">
+  @for (card of cards; track card.id) {
+    <div class="card-box">
+      <app-card [card]="card" (clicked)="onClicked($event)"></app-card>
+    </div>
+  }
 </div>

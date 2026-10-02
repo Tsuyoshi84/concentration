@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -17,7 +16,7 @@ import { TopTitleComponent } from './top-title.component';
   templateUrl: './top.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./top.component.css'],
-  imports: [TopTitleComponent, NgFor, TopButtonComponent],
+  imports: [TopTitleComponent, TopButtonComponent],
 })
 export class TopComponent implements OnInit {
   @Output() started = new EventEmitter<number>();
