@@ -29,13 +29,54 @@
 .icon-btn {
   margin: 1rem;
   padding: 0.5rem;
+  border: none;
   font-size: 3rem;
   color: #aaa;
+  background: transparent;
+  cursor: pointer;
+}
+
+.icon-btn .icon {
+  display: block;
+  inline-size: 1em;
+  block-size: 1em;
 }
 
 .cards-board {
   max-inline-size: 800px;
   margin-inline: auto;
+}
+
+.switch-view-enter {
+  animation: switch-view-enter 200ms;
+}
+
+.switch-view-leave {
+  animation: switch-view-leave 200ms;
+}
+
+@keyframes switch-view-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes switch-view-leave {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
 }
 
 @media only screen and (width <= 700px) {
