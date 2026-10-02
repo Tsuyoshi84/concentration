@@ -9,6 +9,8 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -28,10 +30,10 @@ jobs:
         run: pnpm build
 
       - name: Deploy
-        run: pnpm ghpage
-
-      # - name: Deploy
-      #   uses: JamesIves/github-pages-deploy-action@releases/v4
-      #   with:
-      #     branch: gh-pages # The branch the action should deploy to.
-      #     folder: 'dist/concentration' # The folder the action should deploy.
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: >
+          pnpm exec angular-cli-ghpages
+          --dir=dist/concentration/browser
+          --name="github-actions[bot]"
+          --email="41898282+github-actions[bot]@users.noreply.github.com"
