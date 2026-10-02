@@ -1,5 +1,7 @@
 <div class="container unclickable">
-  <div class="result" [ngClass]="animateClasses" *ngIf="showsMessage">
-    {{ message }}
-  </div>
+  @if (showsMessage) {
+    <div class="result" [class]="animateClasses">
+      {{ message }}
+    </div>
+  }
 </div>

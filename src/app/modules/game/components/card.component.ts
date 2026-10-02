@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -13,7 +12,6 @@ import { Card } from '../types';
   templateUrl: './card.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card.component.css'],
-  imports: [NgClass],
 })
 export class CardComponent {
   @Input() card!: Card;

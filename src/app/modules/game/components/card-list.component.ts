@@ -1,4 +1,3 @@
-import { NgClass, NgFor } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -15,7 +14,7 @@ import { CardComponent } from './card.component';
   templateUrl: './card-list.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./card-list.component.css'],
-  imports: [NgClass, NgFor, CardComponent],
+  imports: [CardComponent],
 })
 export class CardListComponent implements OnInit {
   /** Card array to display */

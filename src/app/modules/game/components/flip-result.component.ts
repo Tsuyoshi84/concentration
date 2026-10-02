@@ -1,4 +1,3 @@
-import { NgClass, NgIf } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,7 +11,6 @@ import type { Result } from '../types';
   templateUrl: './flip-result.component.html',
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./flip-result.component.css'],
-  imports: [NgIf, NgClass],
 })
 export class FlipResultComponent implements OnInit {
   /** Animation duration in ms */
@@ -89,8 +87,8 @@ export class FlipResultComponent implements OnInit {
 
     // Fade out the message after certain time
     this.timer = setTimeout(() => {
-      this.animateClasses.pop();
-      this.animateClasses.push(fadeOutClass);
+      // Replace the array so the class binding sees the fade-out class.
+      this.animateClasses = [...this.animateClasses.slice(0, -1), fadeOutClass];
       this.timer = undefined;
 
       this.timer = setTimeout(() => {
@@ -103,7 +101,7 @@ export class FlipResultComponent implements OnInit {
    * Reset the message and the animation classes.
    */
   private reset(): void {
-    this.animateClasses.length = 0;
+    this.animateClasses = [];
     this.message = '';
     this.showsMessage = false;
   }

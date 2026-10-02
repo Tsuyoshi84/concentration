@@ -1,6 +1,11 @@
-<button class="button" (click)="onClicked()" [disabled]="disabled" aria-label="Open card">
-  <div class="card" [ngClass]="{ flipped: card.flipped }">
+<button
+  class="button"
+  (click)="onClicked()"
+  [disabled]="disabled"
+  aria-label="Open card"
+>
+  <div class="card" [class.flipped]="card.flipped">
     <div class="front"></div>
-    <div class="back" [ngClass]="{ done: card.done }">{{ card.character }}</div>
+    <div class="back" [class.done]="card.done">{{ card.character }}</div>
   </div>
 </button>
