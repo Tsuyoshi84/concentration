@@ -95,14 +95,18 @@ describe('GameService', () => {
         const sameCards = service
           .cards()
           .filter((card) => card.character === service.cards()[0]?.character);
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        const firstId = sameCards[0]!.id;
+        // biome-ignore lint/style/noNonNullAssertion: Ignore
+        const secondId = sameCards[1]!.id;
 
         // biome-ignore lint/style/noNonNullAssertion: Ignore
         await service.flipCard(sameCards[0]!);
         // biome-ignore lint/style/noNonNullAssertion: Ignore
-        await service.flipCard(sameCards[1]!);
+        await service.flipCard(service.cards().find((c) => c.id === secondId)!);
 
-        expect(sameCards[0]?.done).toBe(true);
-        expect(sameCards[1]?.done).toBe(true);
+        expect(service.cards().find((c) => c.id === firstId)?.done).toBe(true);
+        expect(service.cards().find((c) => c.id === secondId)?.done).toBe(true);
         expect(service.numOfTry()).toBe(1);
         expect(service.selectedCards()).toHaveSize(0);
       },
@@ -128,6 +132,7 @@ describe('GameService', () => {
 
         expect(service.numOfTry()).toBe(1);
         expect(service.selectedCards()).toHaveSize(0);
+        expect(service.cards().every((c) => !c.flipped || c.done)).toBe(true);
       },
     ));
   });
