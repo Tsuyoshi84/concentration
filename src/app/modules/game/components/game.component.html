@@ -3,7 +3,7 @@
     <div class="progress-container">
       <app-game-progress [gameStatus]="gameStatus()" [numOfTry]="numOfTry()"></app-game-progress>
     </div>
-    <app-flip-result></app-flip-result>
+    <app-flip-result [result]="flippedResult()"></app-flip-result>
     <div class="cards-board">
       <app-card-list [cards]="cards()" (cardClicked)="onCardClicked($event)"></app-card-list>
     </div>

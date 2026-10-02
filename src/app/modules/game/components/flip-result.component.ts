@@ -1,10 +1,20 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
+  computed,
+  DestroyRef,
+  effect,
   inject,
+  input,
+  signal,
 } from '@angular/core';
 import type { Result } from '../types';
+
+const FEEDBACK_RESULTS: ReadonlySet<Result> = new Set([
+  'Correct',
+  'Wrong',
+  'Finish',
+]);
 
 @Component({
   selector: 'app-flip-result',
@@ -13,92 +23,78 @@ import type { Result } from '../types';
   styleUrls: ['./flip-result.component.css'],
 })
 export class FlipResultComponent {
-  private readonly ref = inject(ChangeDetectorRef);
+  private readonly destroyRef = inject(DestroyRef);
 
   /** Animation duration in ms */
   private readonly ANIMATION_DURATION = 1000;
-  /** Result message */
-  message = '';
-  /** Classes that control animation */
-  animateClasses: string[] = [];
+  private timers: ReturnType<typeof setTimeout>[] = [];
+
+  /** Flipped result from the game service */
+  readonly result = input.required<Result>();
+
+  /** Latched result used for the visible feedback message */
+  readonly displayResult = signal<Result>('None');
+  /** Whether the fade-out animation class should be applied */
+  private readonly fading = signal(false);
   /** Indicate if the result message should be shown */
-  showsMessage = false;
-  /** Timer */
-  timer: ReturnType<typeof setTimeout> | undefined;
+  readonly showsMessage = signal(false);
 
-  /**
-   * Show a message depending on the given result.
-   *
-   * @param result Flipped result.
-   */
-  showResult(result: Result): void {
-    if (result === 'None') return;
+  /** Classes that control animation */
+  readonly animateClasses = computed(() => {
+    const result = this.displayResult();
+    const fading = this.fading();
 
-    if (this.timer) {
-      clearTimeout(this.timer);
-    }
-
-    // Rest animation classes. Use detectChanges to notify that the classes were changed.
-    this.reset();
-    this.showsMessage = true;
-    this.ref.detectChanges();
-
-    let message = '';
-    let animateClasses: string[] = [];
-    let fadeOutClass = '';
-
-    // Decide message, animation classes based on the result
     switch (result) {
       case 'Correct':
-        message = 'Correct!';
-        animateClasses = ['correct', 'animated', 'swing'];
-        fadeOutClass = 'fadeOutUp';
-        break;
+        return fading
+          ? ['correct', 'animated', 'fadeOutUp']
+          : ['correct', 'animated', 'swing'];
       case 'Wrong':
-        message = '';
-        animateClasses = [];
-        fadeOutClass = 'fadeOutDown';
-        break;
+        return fading ? ['fadeOutDown'] : [];
       case 'Finish':
-        message = `Congrats!\nYou've finished!!`;
-        animateClasses = ['finish', 'animated', 'tada'];
-        fadeOutClass = 'fadeOutUp';
-        break;
+        return fading
+          ? ['finish', 'animated', 'fadeOutUp']
+          : ['finish', 'animated', 'tada'];
+      default:
+        return [];
     }
+  });
 
-    this.showAnimationMessage(message, animateClasses, fadeOutClass);
+  constructor() {
+    this.destroyRef.onDestroy(() => this.clearTimers());
+
+    effect(() => {
+      const result = this.result();
+      if (!FEEDBACK_RESULTS.has(result)) {
+        return;
+      }
+
+      this.startFeedback(result);
+    });
   }
 
-  private showAnimationMessage(
-    message: string,
-    animateClasses: string[],
-    fadeOutClass: string,
-  ): void {
-    this.message = message;
-    this.animateClasses = animateClasses;
-    // Notify Angular of the updated animation classes so that the view is in
-    // sync before the next change-detection pass (required by Angular 21's
-    // stricter NG0100 check).
-    this.ref.detectChanges();
+  private startFeedback(result: Result): void {
+    this.clearTimers();
+    this.fading.set(false);
+    this.displayResult.set(result);
+    this.showsMessage.set(true);
 
-    // Fade out the message after certain time
-    this.timer = setTimeout(() => {
-      // Replace the array so the class binding sees the fade-out class.
-      this.animateClasses = [...this.animateClasses.slice(0, -1), fadeOutClass];
-      this.timer = undefined;
-
-      this.timer = setTimeout(() => {
-        this.showsMessage = false;
-      }, this.ANIMATION_DURATION);
-    }, this.ANIMATION_DURATION);
+    this.timers.push(
+      setTimeout(() => {
+        this.fading.set(true);
+        this.timers.push(
+          setTimeout(() => {
+            this.showsMessage.set(false);
+          }, this.ANIMATION_DURATION),
+        );
+      }, this.ANIMATION_DURATION),
+    );
   }
 
-  /**
-   * Reset the message and the animation classes.
-   */
-  private reset(): void {
-    this.animateClasses = [];
-    this.message = '';
-    this.showsMessage = false;
+  private clearTimers(): void {
+    for (const timer of this.timers) {
+      clearTimeout(timer);
+    }
+    this.timers = [];
   }
 }

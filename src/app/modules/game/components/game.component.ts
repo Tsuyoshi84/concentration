@@ -8,13 +8,12 @@ import {
   numberAttribute,
   type OnDestroy,
   type Signal,
-  viewChild,
   type WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import { GameService } from '../services/game.service';
-import type { Card, GameStatus } from '../types';
+import type { Card, GameStatus, Result } from '../types';
 import { CardListComponent } from './card-list.component';
 import { FlipResultComponent } from './flip-result.component';
 import { GameProgressComponent } from './game-progress.component';
@@ -42,7 +41,6 @@ export class GameComponent implements OnDestroy {
   private readonly gameService = inject(GameService);
   private readonly router = inject(Router);
 
-  readonly flipResult = viewChild.required(FlipResultComponent);
   /** Difficulty level from the `:level` route param */
   readonly level = input.required({ transform: numberAttribute });
 
@@ -55,18 +53,14 @@ export class GameComponent implements OnDestroy {
   readonly isGameClear: Signal<boolean> = this.gameService.isGameClear;
   /** Indicate if a user can flip cards  */
   readonly canFlip: Signal<boolean> = this.gameService.canFlip;
+  /** Card flip feedback result */
+  readonly flippedResult: WritableSignal<Result> =
+    this.gameService.flippedResult;
 
   constructor() {
     effect(() => {
       this.level();
       this.setupGame();
-    });
-
-    effect(() => {
-      const result = this.gameService.flippedResult();
-      if (['Correct', 'Wrong', 'Finish'].includes(result)) {
-        this.flipResult().showResult(result);
-      }
     });
   }
 

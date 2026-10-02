@@ -1,7 +1,15 @@
 <div class="container unclickable">
-  @if (showsMessage) {
-    <div class="result" [class]="animateClasses">
-      {{ message }}
+  @if (showsMessage()) {
+    <div class="result" [class]="animateClasses()">
+      @switch (displayResult()) {
+        @case ('Correct') {
+          Correct!
+        }
+        @case ('Finish') {
+          {{ "Congrats!\nYou've finished!!" }}
+        }
+        @case ('Wrong') {}
+      }
     </div>
   }
 </div>
