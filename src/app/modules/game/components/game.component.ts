@@ -3,16 +3,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   effect,
-  OnDestroy,
-  OnInit,
-  Signal,
-  ViewChild,
-  WritableSignal,
+  inject,
+  input,
+  numberAttribute,
+  type OnDestroy,
+  type Signal,
+  viewChild,
+  type WritableSignal,
 } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import { GameService } from '../services/game.service';
-import { Card, GameStatus } from '../types';
+import type { Card, GameStatus } from '../types';
 import { CardListComponent } from './card-list.component';
 import { FlipResultComponent } from './flip-result.component';
 import { GameProgressComponent } from './game-progress.component';
@@ -36,47 +38,36 @@ import { GameProgressComponent } from './game-progress.component';
   ],
   imports: [GameProgressComponent, FlipResultComponent, CardListComponent],
 })
-export class GameComponent implements OnInit, OnDestroy {
-  @ViewChild(FlipResultComponent, { static: true })
-  flipResult!: FlipResultComponent;
+export class GameComponent implements OnDestroy {
+  private readonly gameService = inject(GameService);
+  private readonly router = inject(Router);
 
-  level: number;
+  readonly flipResult = viewChild.required(FlipResultComponent);
+  /** Difficulty level from the `:level` route param */
+  readonly level = input.required({ transform: numberAttribute });
+
   /** Number of try */
-  numOfTry: WritableSignal<number>;
+  readonly numOfTry: WritableSignal<number> = this.gameService.numOfTry;
   /** Game status */
-  gameStatus: WritableSignal<GameStatus>;
+  readonly gameStatus: WritableSignal<GameStatus> = this.gameService.gameStatus;
   /** Cards used for the game */
-  cards: WritableSignal<readonly Card[]>;
-  isGameClear: Signal<boolean>;
+  readonly cards: WritableSignal<readonly Card[]> = this.gameService.cards;
+  readonly isGameClear: Signal<boolean> = this.gameService.isGameClear;
   /** Indicate if a user can flip cards  */
-  canFlip: Signal<boolean>;
+  readonly canFlip: Signal<boolean> = this.gameService.canFlip;
 
-  constructor(
-    private gameService: GameService,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {
-    this.level = 1;
-    this.numOfTry = this.gameService.numOfTry;
-    this.gameStatus = this.gameService.gameStatus;
-    this.cards = this.gameService.cards;
-    this.isGameClear = this.gameService.isGameClear;
-    this.canFlip = this.gameService.canFlip;
+  constructor() {
+    effect(() => {
+      this.level();
+      this.setupGame();
+    });
 
     effect(() => {
       const result = this.gameService.flippedResult();
       if (['Correct', 'Wrong', 'Finish'].includes(result)) {
-        this.flipResult.showResult(result);
+        this.flipResult().showResult(result);
       }
     });
-  }
-
-  ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      this.level = Number(params.get('level'));
-    });
-
-    this.setupGame();
   }
 
   ngOnDestroy(): void {
@@ -102,7 +93,7 @@ export class GameComponent implements OnInit, OnDestroy {
   }
 
   setupGame() {
-    const difficulty = GAME_DIFFICULTY.find((d) => d.level === this.level);
+    const difficulty = GAME_DIFFICULTY.find((d) => d.level === this.level());
     if (difficulty === undefined) return;
 
     this.gameService.startGame(difficulty.num);

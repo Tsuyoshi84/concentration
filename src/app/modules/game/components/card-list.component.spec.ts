@@ -19,10 +19,10 @@ describe('CardListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CardListComponent);
     component = fixture.componentInstance;
-    component.cards = [
+    fixture.componentRef.setInput('cards', [
       { id: 1, character: 'A', flipped: false, done: false },
       { id: 2, character: 'B', flipped: false, done: false },
-    ];
+    ]);
     fixture.detectChanges();
   });
 

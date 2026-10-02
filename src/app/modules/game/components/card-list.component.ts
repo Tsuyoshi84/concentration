@@ -1,10 +1,9 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  type OnInit,
-  Output,
+  computed,
+  input,
+  output,
 } from '@angular/core';
 import { Card } from '../types';
 import { CardComponent } from './card.component';
@@ -16,17 +15,15 @@ import { CardComponent } from './card.component';
   styleUrls: ['./card-list.component.css'],
   imports: [CardComponent],
 })
-export class CardListComponent implements OnInit {
+export class CardListComponent {
   /** Card array to display */
-  @Input() cards!: readonly Card[];
+  readonly cards = input.required<readonly Card[]>();
   /** Event emitted when a card is clicked */
-  @Output() cardClicked = new EventEmitter<Card>();
+  readonly cardClicked = output<Card>();
 
-  cardsClass!: 'four-cards' | 'six-cards';
-
-  ngOnInit() {
-    this.cardsClass = this.cards.length < 30 ? 'four-cards' : 'six-cards';
-  }
+  readonly cardsClass = computed(() =>
+    this.cards().length < 30 ? 'four-cards' : 'six-cards',
+  );
 
   /**
    * Notify to the parent component that the given card is clicked.

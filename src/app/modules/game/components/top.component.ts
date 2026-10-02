@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
@@ -18,20 +12,13 @@ import { TopTitleComponent } from './top-title.component';
   styleUrls: ['./top.component.css'],
   imports: [TopTitleComponent, TopButtonComponent],
 })
-export class TopComponent implements OnInit {
-  @Output() started = new EventEmitter<number>();
+export class TopComponent {
+  private readonly router = inject(Router);
+
   /** List of difficulties that user can select from */
-  difficulties!: readonly Difficulty[];
+  readonly difficulties: readonly Difficulty[] = GAME_DIFFICULTY;
   /** Number of cards selected by a user */
-  numOfCard!: number;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    console.log({ GAME_DIFFICULTY });
-    this.difficulties = GAME_DIFFICULTY;
-    this.numOfCard = 0;
-  }
+  numOfCard = 0;
 
   /**
    * Notify parent component that starting the game.

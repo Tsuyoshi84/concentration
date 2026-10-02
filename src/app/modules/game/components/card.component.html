@@ -4,8 +4,8 @@
   [disabled]="disabled"
   aria-label="Open card"
 >
-  <div class="card" [class.flipped]="card.flipped">
+  <div class="card" [class.flipped]="card().flipped">
     <div class="front"></div>
-    <div class="back" [class.done]="card.done">{{ card.character }}</div>
+    <div class="back" [class.done]="card().done">{{ card().character }}</div>
   </div>
 </button>

@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  type OnInit,
+  inject,
 } from '@angular/core';
 import type { Result } from '../types';
 
@@ -12,23 +12,19 @@ import type { Result } from '../types';
   changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./flip-result.component.css'],
 })
-export class FlipResultComponent implements OnInit {
+export class FlipResultComponent {
+  private readonly ref = inject(ChangeDetectorRef);
+
   /** Animation duration in ms */
   private readonly ANIMATION_DURATION = 1000;
   /** Result message */
-  message!: string;
+  message = '';
   /** Classes that control animation */
   animateClasses: string[] = [];
   /** Indicate if the result message should be shown */
   showsMessage = false;
   /** Timer */
   timer: ReturnType<typeof setTimeout> | undefined;
-
-  constructor(private ref: ChangeDetectorRef) {}
-
-  ngOnInit() {
-    this.reset();
-  }
 
   /**
    * Show a message depending on the given result.

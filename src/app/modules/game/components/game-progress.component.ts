@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import type { GameStatus } from '../types';
 
 @Component({
@@ -8,6 +8,6 @@ import type { GameStatus } from '../types';
   styleUrls: ['./game-progress.component.css'],
 })
 export class GameProgressComponent {
-  @Input() numOfTry!: number;
-  @Input() gameStatus!: GameStatus;
+  readonly numOfTry = input.required<number>();
+  readonly gameStatus = input.required<GameStatus>();
 }

@@ -22,11 +22,11 @@ describe('GameProgressComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(GameProgressComponent);
     component = fixture.componentInstance;
-    scoreEl = fixture.debugElement.query(By.css('.score'));
 
-    component.numOfTry = expectedNumOfFlipping;
-    component.gameStatus = 'Playing';
+    fixture.componentRef.setInput('numOfTry', expectedNumOfFlipping);
+    fixture.componentRef.setInput('gameStatus', 'Playing');
     fixture.detectChanges();
+    scoreEl = fixture.debugElement.query(By.css('.score'));
   });
 
   it('should create', () => {

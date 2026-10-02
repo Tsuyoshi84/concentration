@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  input,
+  output,
 } from '@angular/core';
 import type { Difficulty } from '../types';
 
@@ -14,6 +13,6 @@ import type { Difficulty } from '../types';
   styleUrls: ['./top-button.component.css'],
 })
 export class TopButtonComponent {
-  @Input() difficulty!: Difficulty;
-  @Output() start = new EventEmitter<Difficulty>();
+  readonly difficulty = input.required<Difficulty>();
+  readonly start = output<Difficulty>();
 }
