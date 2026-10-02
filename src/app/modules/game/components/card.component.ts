@@ -1,9 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
-  Input,
-  Output,
+  input,
+  output,
 } from '@angular/core';
 import { Card } from '../types';
 
@@ -14,20 +13,22 @@ import { Card } from '../types';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-  @Input() card!: Card;
-  @Output() clicked = new EventEmitter<Card>();
+  readonly card = input.required<Card>();
+  readonly clicked = output<Card>();
 
   /**
    * Handler called when a card is clicked.
    * Raise an event to notify the click event.
    */
   onClicked(): void {
-    if (!this.card.flipped) {
-      this.clicked.emit(this.card);
+    const card = this.card();
+    if (!card.flipped) {
+      this.clicked.emit(card);
     }
   }
 
   get disabled(): boolean {
-    return this.card.flipped || this.card.done;
+    const card = this.card();
+    return card.flipped || card.done;
   }
 }
