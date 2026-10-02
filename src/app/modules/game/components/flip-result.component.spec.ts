@@ -1,11 +1,4 @@
-import {
-  type ComponentFixture,
-  fakeAsync,
-  TestBed,
-  tick,
-  waitForAsync,
-} from '@angular/core/testing';
-
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FlipResultComponent } from './flip-result.component';
 
@@ -13,17 +6,16 @@ describe('FlipResultComponent', () => {
   let component: FlipResultComponent;
   let fixture: ComponentFixture<FlipResultComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [FlipResultComponent],
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(FlipResultComponent);
     component = fixture.componentInstance;
     fixture.componentRef.setInput('result', 'None');
     fixture.detectChanges();
+    await fixture.whenStable();
   });
 
   it('should create', () => {
@@ -69,7 +61,9 @@ describe('FlipResultComponent', () => {
       expect(resultElement.classes.finish).toBeTruthy();
     });
 
-    it('should keep showing feedback after result resets to None', fakeAsync(() => {
+    it('should keep showing feedback after result resets to None', async () => {
+      vi.useFakeTimers();
+
       fixture.componentRef.setInput('result', 'Correct');
       fixture.detectChanges();
 
@@ -81,13 +75,15 @@ describe('FlipResultComponent', () => {
         'Correct!',
       );
 
-      tick(1000);
+      await vi.advanceTimersByTimeAsync(1000);
       fixture.detectChanges();
       expect(resultElement.classes.fadeOutUp).toBeTruthy();
 
-      tick(1000);
+      await vi.advanceTimersByTimeAsync(1000);
       fixture.detectChanges();
       expect(fixture.debugElement.query(By.css('.result'))).toBeNull();
-    }));
+
+      vi.useRealTimers();
+    });
   });
 });

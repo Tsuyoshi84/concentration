@@ -1,8 +1,4 @@
-import {
-  type ComponentFixture,
-  TestBed,
-  waitForAsync,
-} from '@angular/core/testing';
+import { type ComponentFixture, TestBed } from '@angular/core/testing';
 import { CardComponent } from './card.component';
 
 describe('CardComponent', () => {
@@ -10,13 +6,11 @@ describe('CardComponent', () => {
   let fixture: ComponentFixture<CardComponent>;
   let comp: CardComponent;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
       imports: [CardComponent],
     }).compileComponents();
-  }));
 
-  beforeEach(() => {
     fixture = TestBed.createComponent(CardComponent);
     comp = fixture.componentInstance;
   });
@@ -33,7 +27,11 @@ describe('CardComponent', () => {
 
   it('should raise flipped event when clicked', () => {
     fixture.componentRef.setInput('card', card);
-    comp.clicked.subscribe((c) => expect(c).toBe(card));
+    let emitted: typeof card | undefined;
+    comp.clicked.subscribe((c) => {
+      emitted = c;
+    });
     comp.onClicked();
+    expect(emitted).toBe(card);
   });
 });
