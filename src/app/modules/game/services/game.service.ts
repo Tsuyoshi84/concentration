@@ -1,8 +1,8 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { shuffle } from 'lodash-es';
 import type { Card, GameStatus, Result } from '../types';
 import { assertDefined } from '../utils/assertDefined';
 import { assertHasAtLeast } from '../utils/hasAtLeast';
+import { shuffle } from '../utils/shuffle';
 
 @Injectable()
 export class GameService {
@@ -75,8 +75,11 @@ export class GameService {
    * @returns Result and total number of flipping.
    */
   async flipCard(card: Card): Promise<void> {
-    card.flipped = !card.flipped;
-    this.selectedCards.set([...this.selectedCards(), card]);
+    const flippedCard: Card = { ...card, flipped: !card.flipped };
+    this.cards.update((cards) =>
+      cards.map((c) => (c.id === card.id ? flippedCard : c)),
+    );
+    this.selectedCards.set([...this.selectedCards(), flippedCard]);
 
     // If flipped cards are less than 2, do nothing
     if (this.selectedCards().length < 2) return;
@@ -87,19 +90,20 @@ export class GameService {
 
     // Check the result
     this.numOfTry.update((count) => count + 1);
-    const cards = this.selectedCards();
-    assertHasAtLeast(cards, 2);
+    const selected = this.selectedCards();
+    assertHasAtLeast(selected, 2);
 
-    const [{ character: first }, { character: second }] = cards;
+    const [{ character: first }, { character: second }] = selected;
     this.flippedResult.set(first === second ? 'Correct' : 'Wrong');
 
     if (this.flippedResult() === 'Correct') {
-      this.selectedCards.update((cards) => {
-        for (const card of cards) {
-          card.done = true;
-        }
-        return cards;
-      });
+      const selectedIds = new Set(selected.map(({ id }) => id));
+      this.cards.update((cards) =>
+        cards.map((c) => (selectedIds.has(c.id) ? { ...c, done: true } : c)),
+      );
+      this.selectedCards.update((cards) =>
+        cards.map((c) => ({ ...c, done: true })),
+      );
       // Check if the game is finished
       if (this.cards().every(({ done }) => done)) {
         this.flippedResult.set('Finish');
@@ -115,12 +119,9 @@ export class GameService {
 
       // Un-flip cards if the flipped cards are wrong
       if (this.flippedResult() === 'Wrong') {
-        this.cards.update((cards) => {
-          for (const card of cards.filter(({ done }) => !done)) {
-            card.flipped = false;
-          }
-          return cards;
-        });
+        this.cards.update((cards) =>
+          cards.map((c) => (c.done ? c : { ...c, flipped: false })),
+        );
       }
 
       this.selectedCards.set([]);
