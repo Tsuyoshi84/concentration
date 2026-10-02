@@ -25,6 +25,16 @@ Run `ng test` to execute the unit tests via [Vitest](https://vitest.dev/).
 
 CI runs the same unit tests and a production build. End-to-end tests are not configured; the former Protractor target was removed because Protractor is end-of-life.
 
+## Linting
+
+Use Biome for TypeScript/JavaScript/HTML linting and formatting, and Stylelint for CSS:
+
+- `pnpm check` — lint and apply safe fixes with [Biome](https://biomejs.dev/)
+- `pnpm format` — format with Biome
+- `pnpm lint-css` — lint CSS with [Stylelint](https://stylelint.io/)
+
+`ng lint` is not configured. The former `@angular-eslint` target was removed because the required packages were never installed and Biome already covers the project's lint needs.
+
 ## Deploy
 
 Run `npm run-script deploy` to deploy the app to the github page.
