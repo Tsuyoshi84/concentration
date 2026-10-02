@@ -35,6 +35,17 @@ Use Biome for TypeScript/JavaScript/HTML linting and formatting, and Stylelint f
 
 `ng lint` is not configured. The former `@angular-eslint` target was removed because the required packages were never installed and Biome already covers the project's lint needs.
 
+## Fallow
+
+[Fallow](https://fallow.tools/) checks the module graph (dead code, dependency hygiene, duplication, complexity). Biome still owns per-file lint/format.
+
+- `pnpm fallow` — full-repo analysis
+- `pnpm fallow:audit` — changed-file gate (`--gate new-only`)
+
+Pull requests run `fallow audit --gate new-only` and fail only on a `fail` verdict for findings the PR introduced.
+
+Agents: after substantive edits, run `pnpm fallow:audit --format json`, read `verdict` first, then fix only `introduced: true` findings. See `AGENTS.md`.
+
 ## Deploy
 
 Run `npm run-script deploy` to deploy the app to the github page.

@@ -18,7 +18,6 @@ describe('GameProgressComponent', () => {
     component = fixture.componentInstance;
 
     fixture.componentRef.setInput('numOfTry', expectedNumOfFlipping);
-    fixture.componentRef.setInput('gameStatus', 'Playing');
     fixture.detectChanges();
     await fixture.whenStable();
 

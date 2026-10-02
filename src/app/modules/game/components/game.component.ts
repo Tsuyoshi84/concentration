@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import { GameService } from '../services/game.service';
-import type { Card, GameStatus, Result } from '../types';
+import type { Card, Result } from '../types';
 import { CardListComponent } from './card-list.component';
 import { FlipResultComponent } from './flip-result.component';
 import { GameProgressComponent } from './game-progress.component';
@@ -31,8 +31,6 @@ export class GameComponent implements OnDestroy {
 
   /** Number of try */
   readonly numOfTry: WritableSignal<number> = this.gameService.numOfTry;
-  /** Game status */
-  readonly gameStatus: WritableSignal<GameStatus> = this.gameService.gameStatus;
   /** Cards used for the game */
   readonly cards: WritableSignal<readonly Card[]> = this.gameService.cards;
   readonly isGameClear: Signal<boolean> = this.gameService.isGameClear;
