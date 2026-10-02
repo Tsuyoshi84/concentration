@@ -33,7 +33,7 @@ jobs:
         run: pnpm check
 
       - name: Lint CSS
-        run: pnpm lint-css:fix
+        run: pnpm lint-css
 
       - name: Format code
         run: pnpm format

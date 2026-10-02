@@ -233,9 +233,6 @@ importers:
       jsdom:
         specifier: 30.1.1
         version: 30.1.1(@noble/hashes@1.8.0)
-      prettier:
-        specifier: 3.8.1
-        version: 3.8.1
       stylelint:
         specifier: 16.26.1
         version: 16.26.1(supports-color@8.1.1)(typescript@6.0.3)
@@ -245,9 +242,6 @@ importers:
       stylelint-config-standard:
         specifier: 36.0.1
         version: 36.0.1(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
-      stylelint-prettier:
-        specifier: 5.0.3
-        version: 5.0.3(prettier@3.8.1)(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
       stylelint-use-logical-spec:
         specifier: 5.0.1
         version: 5.0.1(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3))
@@ -3004,9 +2998,6 @@ packages:
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
-  fast-diff@1.3.0:
-    resolution: {integrity: sha512-VxPP4NqbUjj6MaAOafWeUn2cXWLcCtljklUtZf0Ind4XQ+QPtmA0b18zZy0jIQx+ExRVCR/ZQpBmik5lXshNsw==}
-
   fast-glob@3.3.3:
     resolution: {integrity: sha512-7MptL8U0cqcFdzIzwOTHoilX9x5BrNqye7Z/LuC7kCMRio1EMSyqRK3BEAUD7sXRq4iT4AzTVuZdhgQ2TCvYLg==}
     engines: {node: '>=8.6.0'}
@@ -4091,15 +4082,6 @@ packages:
     resolution: {integrity: sha512-C+y9x90UElAddDZmV4qOx9W53B61PO7cIqWz2dQsWlwswuq4mr8NEwytdGKboYbQlGZ3awrkTeNvcZiZNHnQ8A==}
     engines: {node: '>=20'}
 
-  prettier-linter-helpers@1.0.1:
-    resolution: {integrity: sha512-SxToR7P8Y2lWmv/kTzVLC1t/GDI2WGjMwNhLLE9qtH8Q13C+aEmuRlzDst4Up4s0Wc8sF2M+J57iB3cMLqftfg==}
-    engines: {node: '>=6.0.0'}
-
-  prettier@3.8.1:
-    resolution: {integrity: sha512-UOnG6LftzbdaHZcKoPFtOcCKztrQ57WkHDeRD9t/PTQtmT0NHSeWWepj6pS0z/N7+08BHFDQVUrfmfMRcZwbMg==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   probe-image-size@7.4.0:
     resolution: {integrity: sha512-cdEprVtZxV+awMde9X+4jILBFYh4CARxVrQaMl4wY4YcPWbul9jntXrIW95NInBDyJwcVUP3U0T6yukN8rMBaQ==}
 
@@ -4563,13 +4545,6 @@ packages:
     resolution: {integrity: sha512-0UuKo4+s1hgQ/uAxlYU4h0o0HS4NiQDud0NAUNI0aa8FJdmYHA5ZZTFHiV5FpmE3071e9pZx5j0QpVJW5zOCUA==}
     peerDependencies:
       stylelint: ^14.0.0 || ^15.0.0 || ^16.0.1
-
-  stylelint-prettier@5.0.3:
-    resolution: {integrity: sha512-B6V0oa35ekRrKZlf+6+jA+i50C4GXJ7X1PPmoCqSUoXN6BrNF6NhqqhanvkLjqw2qgvrS0wjdpeC+Tn06KN3jw==}
-    engines: {node: '>=18.12.0'}
-    peerDependencies:
-      prettier: '>=3.0.0'
-      stylelint: '>=16.0.0'
 
   stylelint-use-logical-spec@5.0.1:
     resolution: {integrity: sha512-UfLB4LW6iG4r3cXxjxkiHQrFyhWFqt8FpNNngD+TyvgMWSokk5TYwTvBHS3atUvZhOogllTOe/PUrGE+4z84AA==}
@@ -7794,8 +7769,6 @@ snapshots:
 
   fast-deep-equal@3.1.3: {}
 
-  fast-diff@1.3.0: {}
-
   fast-glob@3.3.3:
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -8842,12 +8815,6 @@ snapshots:
 
   powershell-utils@0.2.1: {}
 
-  prettier-linter-helpers@1.0.1:
-    dependencies:
-      fast-diff: 1.3.0
-
-  prettier@3.8.1: {}
-
   probe-image-size@7.4.0(supports-color@8.1.1):
     dependencies:
       lodash.merge: 4.6.2
@@ -9308,12 +9275,6 @@ snapshots:
     dependencies:
       postcss: 8.5.23
       postcss-sorting: 8.0.2(postcss@8.5.23)
-      stylelint: 16.26.1(supports-color@8.1.1)(typescript@6.0.3)
-
-  stylelint-prettier@5.0.3(prettier@3.8.1)(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3)):
-    dependencies:
-      prettier: 3.8.1
-      prettier-linter-helpers: 1.0.1
       stylelint: 16.26.1(supports-color@8.1.1)(typescript@6.0.3)
 
   stylelint-use-logical-spec@5.0.1(stylelint@16.26.1(supports-color@8.1.1)(typescript@6.0.3)):
