@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/modules/game/components/game-progress.component.css"],
+  "sourcesContent": [".container {\n  text-align: center;\n\n  .score {\n    margin-block-end: var(--size-4);\n    font-family: var(--font-sans);\n    font-size: var(--font-size-6);\n  }\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,cAAY;AAOd;AARA,CAAC,UAGC,CAAC;AACC,oBAAkB,IAAI;AACtB,eAAa,IAAI;AACjB,aAAW,IAAI;AACjB;",
+  "names": []
+}

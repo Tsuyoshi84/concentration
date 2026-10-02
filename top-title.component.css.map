@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["src/app/modules/game/components/top-title.component.css"],
+  "sourcesContent": [".title {\n  margin-block-end: 2rem;\n  font-family: Roboto, Arial, Helvetica, sans-serif;\n  font-size: 2.5rem;\n  font-weight: bold;\n\n  .main {\n    font-size: 1.3em;\n  }\n}\n\n@keyframes rotate-anime {\n  0% {\n    transform: rotate(-15deg);\n  }\n\n  100% {\n    transform: rotate(15deg);\n  }\n}\n\n.rotate {\n  display: inline-block;\n  padding-inline: 3px;\n\n  &:nth-child(even) {\n    animation: rotate-anime 1.5s ease-in-out infinite alternate-reverse forwards;\n  }\n\n  &:nth-child(odd) {\n    animation: rotate-anime 1.5s ease-in-out infinite alternate forwards;\n  }\n}\n\n@media only screen and (width >= 768px) {\n  .title {\n    font-size: 5rem;\n  }\n}\n\n@media only screen and (width >= 992px) {\n  .title {\n    font-size: 6rem;\n  }\n}\n"],
+  "mappings": ";AAAA,CAAC;AACC,oBAAkB;AAClB;AAAA,IAAa,MAAM;AAAA,IAAE,KAAK;AAAA,IAAE,SAAS;AAAA,IAAE;AACvC,aAAW;AACX,eAAa;AAKf;AATA,CAAC,MAMC,CAAC;AACC,aAAW;AACb;AAGF,WAAW;AACT;AACE,eAAW,OAAO;AACpB;AAEA;AACE,eAAW,OAAO;AACpB;AACF;AAEA,CAAC;AACC,WAAS;AACT,kBAAgB;AASlB;AAXA,CAAC,MAIE;AACC,aAAW,aAAa,KAAK,YAAY,SAAS,kBAAkB;AACtE;AANF,CAAC,MAQE;AACC,aAAW,aAAa,KAAK,YAAY,SAAS,UAAU;AAC9D;AAGF,OAAO,iBAAiB,SAAS;AAC/B,GAnCD;AAoCG,eAAW;AACb;AACF;AAEA,OAAO,iBAAiB,SAAS;AAC/B,GAzCD;AA0CG,eAAW;AACb;AACF;",
+  "names": []
+}
