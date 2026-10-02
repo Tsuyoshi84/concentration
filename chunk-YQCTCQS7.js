@@ -36886,6 +36886,13 @@ function routerFeature(kind, providers) {
     \u0275providers: providers
   };
 }
+function withInMemoryScrolling(options = {}) {
+  const providers = [{
+    provide: ROUTER_SCROLLER,
+    useFactory: () => new RouterScroller(options)
+  }];
+  return routerFeature(4, providers);
+}
 function getBootstrapListener() {
   const injector = inject2(Injector);
   return (bootstrappedComponentRef) => {
@@ -37141,10 +37148,34 @@ function provideRouterInitializer() {
 
 // src/app/modules/game/constants/game-difficulty.ts
 var GAME_DIFFICULTY = [
-  { label: "EASY", num: 8, level: 1, icon: "\u{1F600}" },
-  { label: "NORMAL", num: 16, level: 2, icon: "\u{1F642}" },
-  { label: "DIFFICULT", num: 30, level: 3, icon: "\u{1F641}" },
-  { label: "INSANE", num: 54, level: 4, icon: "\u{1F92E}" }
+  {
+    label: "Easy",
+    num: 8,
+    level: 1,
+    icon: "\u{1F331}",
+    description: "A happy little warm-up."
+  },
+  {
+    label: "Normal",
+    num: 16,
+    level: 2,
+    icon: "\u270C\uFE0F",
+    description: "Find your matching groove."
+  },
+  {
+    label: "Difficult",
+    num: 30,
+    level: 3,
+    icon: "\u{1F525}",
+    description: "Turn up the brain power."
+  },
+  {
+    label: "Insane",
+    num: 54,
+    level: 4,
+    icon: "\u{1F680}",
+    description: "To the memory moon."
+  }
 ];
 
 // src/app/modules/game/utils/assertDefined.ts
@@ -37182,6 +37213,7 @@ var GameService = class _GameService {
   FLIPPING_DURATION = 300;
   /** Time duration before un-flipping when flipped cards are wrong */
   CARD_HOLD_DURATION = 500;
+  session = 0;
   /** Cards of the game */
   cards = signal(
     [],
@@ -37268,11 +37300,29 @@ var GameService = class _GameService {
    * Reset the game conditions.
    */
   reset() {
+    this.session++;
     this.cards.set([]);
     this.selectedCards.set([]);
     this.numOfTry.set(0);
     this.flippedResult.set("None");
     this.gameStatus.set("NotPlaying");
+  }
+  markMatchedCards(selected) {
+    const selectedIds = new Set(selected.map(({ id }) => id));
+    this.cards.update((cards) => cards.map((c) => selectedIds.has(c.id) ? __spreadProps(__spreadValues({}, c), { done: true }) : c));
+    this.selectedCards.update((cards) => cards.map((c) => __spreadProps(__spreadValues({}, c), { done: true })));
+    if (this.cards().every(({ done }) => done)) {
+      this.flippedResult.set("Finish");
+      this.gameStatus.set("Clear");
+    }
+  }
+  getPlayableCard(id) {
+    if (!this.canFlip())
+      return;
+    const card = this.cards().find((candidate) => candidate.id === id);
+    if (!card || card.flipped || card.done)
+      return;
+    return card;
   }
   /**
    * Store flipped card and check if flipped cards have the same number when two cards are flipped.
@@ -37281,35 +37331,37 @@ var GameService = class _GameService {
    * @returns Result and total number of flipping.
    */
   async flipCard(card) {
-    const flippedCard = __spreadProps(__spreadValues({}, card), { flipped: !card.flipped });
+    const currentCard = this.getPlayableCard(card.id);
+    if (!currentCard)
+      return;
+    const session = this.session;
+    const flippedCard = __spreadProps(__spreadValues({}, currentCard), { flipped: true });
     this.cards.update((cards) => cards.map((c) => c.id === card.id ? flippedCard : c));
     this.selectedCards.set([...this.selectedCards(), flippedCard]);
     if (this.selectedCards().length < 2)
       return;
     this.flippedResult.set("Unknown");
     await wait(this.FLIPPING_DURATION);
+    if (session !== this.session)
+      return;
     this.numOfTry.update((count) => count + 1);
     const selected = this.selectedCards();
     assertHasAtLeast(selected, 2);
     const [{ character: first2 }, { character: second }] = selected;
     this.flippedResult.set(first2 === second ? "Correct" : "Wrong");
     if (this.flippedResult() === "Correct") {
-      const selectedIds = new Set(selected.map(({ id }) => id));
-      this.cards.update((cards) => cards.map((c) => selectedIds.has(c.id) ? __spreadProps(__spreadValues({}, c), { done: true }) : c));
-      this.selectedCards.update((cards) => cards.map((c) => __spreadProps(__spreadValues({}, c), { done: true })));
-      if (this.cards().every(({ done }) => done)) {
-        this.flippedResult.set("Finish");
-        this.gameStatus.set("Clear");
-      }
+      this.markMatchedCards(selected);
     }
-    if (this.flippedResult() === "Wrong" || this.flippedResult() === "Correct") {
-      await wait(this.CARD_HOLD_DURATION);
-      if (this.flippedResult() === "Wrong") {
-        this.cards.update((cards) => cards.map((c) => c.done ? c : __spreadProps(__spreadValues({}, c), { flipped: false })));
-      }
-      this.selectedCards.set([]);
-      this.flippedResult.set("None");
+    if (this.isGameClear())
+      return;
+    await wait(this.CARD_HOLD_DURATION);
+    if (session !== this.session)
+      return;
+    if (this.flippedResult() === "Wrong") {
+      this.cards.update((cards) => cards.map((c) => c.done ? c : __spreadProps(__spreadValues({}, c), { flipped: false })));
     }
+    this.selectedCards.set([]);
+    this.flippedResult.set("None");
   }
   static \u0275fac = function GameService_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _GameService)();
@@ -37341,19 +37393,16 @@ export {
   inject2 as inject,
   ɵɵrestoreView,
   ɵɵresetView,
-  ɵɵnamespaceSVG,
-  ɵɵnamespaceHTML,
   DestroyRef,
   signal,
   effect,
   ɵɵadvance,
   ɵɵdefineComponent,
   setClassMetadata,
-  ɵɵanimateEnter,
-  ɵɵanimateLeave,
+  ɵɵattribute,
   ɵɵconditionalCreate,
   ɵɵconditional,
-  ɵɵrepeaterTrackByIndex,
+  ɵɵrepeaterTrackByIdentity,
   ɵɵrepeaterCreate,
   ɵɵrepeater,
   ɵɵproperty,
@@ -37374,6 +37423,7 @@ export {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
+  ɵɵtextInterpolate2,
   ɵsetClassDebugInfo,
   Component,
   Input,
@@ -37387,10 +37437,11 @@ export {
   RouterOutlet,
   Router,
   provideRouter,
+  withInMemoryScrolling,
   withHashLocation,
   withComponentInputBinding,
   GAME_DIFFICULTY,
   GameService
 };
-//# debugId=17422fca-73d9-5fd8-b96c-8d7f171201a4
-//# sourceMappingURL=chunk-2GQ2P2DH.js.map
+//# debugId=85cc6a67-347b-5afd-9dc7-be69fb9482c6
+//# sourceMappingURL=chunk-YQCTCQS7.js.map
