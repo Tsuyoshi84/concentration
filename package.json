@@ -6,7 +6,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --prod --base-href \"https://tsuyoshi84.github.io/concentration/\" --no-progress",
+    "build:prod": "ng build --configuration=production --base-href \"https://tsuyoshi84.github.io/concentration/\" --no-progress",
     "test": "ng test",
     "test_without_watch": "ng test --watch=false --coverage",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
