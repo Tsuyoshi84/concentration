@@ -1,0 +1,5 @@
+      <section class="celebration" aria-labelledby="win-title" role="status">
+        <div class="confetti" aria-hidden="true">@for (piece of confetti; track piece) {<i [style.--i]="piece"></i>}</div>
+        <span class="win-icon" aria-hidden="true">🏆</span><p class="eyebrow">LOOK AT THAT BRAIN GO</p><h2 id="win-title">You’re a match maker!</h2><p class="win-summary">All {{ pairs() }} pairs, found in {{ moves() }} moves. Nicely done.</p>
+        <div class="win-actions"><button class="action primary" type="button" (click)="playAgain.emit()">Play again ↻</button><button class="action" type="button" (click)="chooseDifficulty.emit()">Choose difficulty</button></div>
+      </section>

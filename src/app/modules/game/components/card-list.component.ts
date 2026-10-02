@@ -14,6 +14,8 @@ export class CardListComponent {
   /** Event emitted when a card is clicked */
   readonly cardClicked = output<Card>();
 
+  readonly locked = input(false);
+
   readonly cardsClass = computed(() =>
     this.cards().length < 30 ? 'four-cards' : 'six-cards',
   );

@@ -1,5 +1,6 @@
 import {
   Component,
+  computed,
   effect,
   inject,
   input,
@@ -14,13 +15,19 @@ import { GameService } from '../services/game.service';
 import type { Card, Result } from '../types';
 import { CardListComponent } from './card-list.component';
 import { FlipResultComponent } from './flip-result.component';
+import { GameCelebrationComponent } from './game-celebration.component';
 import { GameProgressComponent } from './game-progress.component';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
-  imports: [GameProgressComponent, FlipResultComponent, CardListComponent],
+  imports: [
+    GameProgressComponent,
+    FlipResultComponent,
+    CardListComponent,
+    GameCelebrationComponent,
+  ],
 })
 export class GameComponent implements OnDestroy {
   private readonly gameService = inject(GameService);
@@ -39,6 +46,14 @@ export class GameComponent implements OnDestroy {
   /** Card flip feedback result */
   readonly flippedResult: WritableSignal<Result> =
     this.gameService.flippedResult;
+
+  readonly difficulty = computed(() =>
+    GAME_DIFFICULTY.find((d) => d.level === this.level()),
+  );
+  readonly pairsFound = computed(
+    () => this.cards().filter((card) => card.done).length / 2,
+  );
+  readonly totalPairs = computed(() => this.cards().length / 2);
 
   constructor() {
     effect(() => {

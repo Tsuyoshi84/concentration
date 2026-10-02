@@ -1,39 +1,49 @@
-.container {
-  position: absolute;
-  z-index: 100;
-  inline-size: 100%;
+.feedback {
+  display: grid;
+  min-block-size: 53px;
+  padding-block: 13px;
+  place-items: center;
   text-align: center;
+}
 
-  .result {
-    z-index: 100;
-    font-size: 60px;
-    font-weight: bold;
-    white-space: pre-wrap;
+.result,
+.hint {
+  font-size: 1.3rem;
+}
 
-    &.correct {
-      background: linear-gradient(rgb(151 255 0 / 50%), rgb(0 114 6 / 70%));
-    }
+.hint {
+  color: var(--muted);
+}
 
-    &.wrong {
-      background: linear-gradient(rgb(250 0 0 / 20%), rgb(255 0 0 / 80%));
-    }
+.result {
+  animation: feedback-in calc(200ms * var(--motion-factor)) ease-out;
+}
 
-    &.finish {
-      font-size: 70px;
-      background: linear-gradient(rgb(151 255 0 / 50%), rgb(0 114 6 / 70%));
-    }
+.correct,
+.finish {
+  font-weight: 800;
+  color: #427455;
+}
 
-    &.correct,
-    &.wrong,
-    &.finish {
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.fade-out-up,
+.fade-out-down {
+  animation: feedback-out calc(1000ms * var(--motion-factor)) forwards;
+}
+
+@keyframes feedback-in {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.unclickable {
-  cursor: default;
-  user-select: none;
-  pointer-events: none;
+@keyframes feedback-out {
+  to {
+    opacity: 0;
+  }
 }

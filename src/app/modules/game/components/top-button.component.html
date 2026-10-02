@@ -1,4 +1,6 @@
-<button class="start-button" (click)="start.emit(difficulty())">
+<button class="start-button" [class]="'level-' + difficulty().level" (click)="start.emit(difficulty())">
+  <span class="card-top"><span class="icon" aria-hidden="true">{{ difficulty().icon }}</span><span class="level-number">0{{ difficulty().level }}</span></span>
   <span class="label">{{ difficulty().label }}</span>
-  <span class="icon">{{ difficulty().icon }}</span>
+  <span class="description">{{ difficulty().description }}</span>
+  <span class="card-bottom"><span>{{ difficulty().num / 2 }} pairs <span class="separator">·</span> {{ difficulty().num }} cards</span><span class="play-arrow" aria-hidden="true">↗</span></span>
 </button>

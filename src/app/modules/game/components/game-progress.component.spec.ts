@@ -29,6 +29,6 @@ describe('GameProgressComponent', () => {
   });
 
   it('should show scores', () => {
-    expect(scoreEl.nativeElement.textContent).toBe('Attempt: 10');
+    expect(scoreEl.nativeElement.textContent).toBe('10');
   });
 });

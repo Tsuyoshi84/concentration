@@ -8,6 +8,8 @@ import { Card } from '../types';
 })
 export class CardComponent {
   readonly card = input.required<Card>();
+  readonly position = input(1);
+  readonly locked = input(false);
   readonly clicked = output<Card>();
 
   /**
@@ -16,13 +18,13 @@ export class CardComponent {
    */
   onClicked(): void {
     const card = this.card();
-    if (!card.flipped) {
+    if (!this.disabled) {
       this.clicked.emit(card);
     }
   }
 
   get disabled(): boolean {
     const card = this.card();
-    return card.flipped || card.done;
+    return this.locked() || card.flipped || card.done;
   }
 }

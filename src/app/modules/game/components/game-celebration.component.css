@@ -1,0 +1,97 @@
+.celebration {
+  position: relative;
+  margin-block: 20px 24px;
+  padding-inline: 20px;
+  padding-block: 25px;
+  border: 1px solid #d1b9ed;
+  border-radius: 20px;
+  overflow: hidden;
+  text-align: center;
+  background: #eee4fd;
+  animation: win-in calc(350ms * var(--motion-factor)) ease-out;
+}
+
+.win-icon {
+  display: block;
+  font-size: 3.8rem;
+}
+
+.celebration .eyebrow {
+  margin-block: 8px;
+  color: #664397;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.win-summary {
+  margin-block-start: 8px;
+  font-size: 1.3rem;
+}
+
+.win-actions {
+  position: relative;
+  display: flex;
+  margin-block-start: 22px;
+  justify-content: center;
+  gap: 12px;
+}
+
+.confetti {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.confetti i {
+  position: absolute;
+  inset-inline-start: calc(var(--i) * 7%);
+  inset-block-start: -20px;
+  inline-size: 7px;
+  block-size: 13px;
+  background: var(--purple);
+  animation: confetti-fall calc(1600ms * var(--motion-factor))
+    calc(var(--i) * calc(45ms * var(--motion-factor))) ease-out both;
+}
+
+.confetti i:nth-child(3n) {
+  background: #eb8865;
+}
+
+.confetti i:nth-child(3n + 1) {
+  border-radius: 50%;
+  background: #dcad32;
+}
+
+@keyframes confetti-fall {
+  from {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(280px) rotate(260deg);
+  }
+}
+
+@keyframes win-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (width <= 600px) {
+  .win-actions {
+    flex-wrap: wrap;
+  }
+}

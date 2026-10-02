@@ -1,15 +1,11 @@
-<div class="container unclickable">
+<div class="feedback" role="status" aria-live="polite" aria-atomic="true">
   @if (showsMessage()) {
-    <div class="result" [class]="animateClasses()">
+    <p class="result" [class]="animateClasses()">
       @switch (displayResult()) {
-        @case ('Correct') {
-          Correct!
-        }
-        @case ('Finish') {
-          {{ "Congrats!\nYou've finished!!" }}
-        }
-        @case ('Wrong') {}
+        @case ('Correct') { A lovely little match! ✦ }
+        @case ('Wrong') { Not quite. You've got this! }
+        @case ('Finish') { Every card found its friend! ✨ }
       }
-    </div>
-  }
+    </p>
+  } @else { <p class="hint">Flip two cards. Find a little connection.</p> }
 </div>

@@ -1,7 +1,5 @@
-<div class="container" [class]="cardsClass()">
-  @for (card of cards(); track card.id) {
-    <div class="card-box">
-      <app-card [card]="card" (clicked)="onClicked($event)"></app-card>
-    </div>
+<div class="container" [class]="cardsClass()" aria-label="Memory cards">
+  @for (card of cards(); track card.id; let position = $index) {
+    <app-card [card]="card" [position]="position + 1" [locked]="locked()" (clicked)="onClicked($event)"></app-card>
   }
 </div>
