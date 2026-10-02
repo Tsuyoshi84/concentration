@@ -1,45 +1,50 @@
-.title {
-  margin-block-end: 2rem;
-  font-family: Roboto, Arial, Helvetica, sans-serif;
-  font-size: 2.5rem;
-  font-weight: bold;
-
-  .main {
-    font-size: 1.3em;
-  }
+h1 > span {
+  color: var(--purple);
 }
 
-@keyframes rotate-anime {
-  0% {
-    transform: rotate(-15deg);
-  }
-
-  100% {
-    transform: rotate(15deg);
-  }
+.intro {
+  display: flex;
+  margin-block-end: 19px;
+  align-items: center;
+  gap: 8px;
+  color: var(--purple);
 }
 
-.rotate {
-  display: inline-block;
-  padding-inline: 3px;
-
-  &:nth-child(even) {
-    animation: rotate-anime 1.5s ease-in-out infinite alternate-reverse forwards;
-  }
-
-  &:nth-child(odd) {
-    animation: rotate-anime 1.5s ease-in-out infinite alternate forwards;
-  }
+.intro > span {
+  font-size: 1.8rem;
 }
 
-@media only screen and (width >= 768px) {
-  .title {
-    font-size: 5rem;
-  }
+h1 {
+  font-size: clamp(3.8rem, 4.8vw, 5.8rem);
+  font-weight: 900;
+  letter-spacing: -2.5px;
+  line-height: 1.08;
 }
 
-@media only screen and (width >= 992px) {
-  .title {
-    font-size: 6rem;
+.japanese {
+  margin-block: 18px 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.japanese > span:first-child {
+  padding-inline: 9px;
+  color: #b5ad9e;
+}
+
+.description {
+  font-size: 1.4rem;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+@media (width <= 700px) {
+  h1 {
+    font-size: clamp(3.8rem, 8vw, 5.8rem);
+  }
+
+  .desktop-break {
+    display: none;
   }
 }

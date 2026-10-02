@@ -11,6 +11,8 @@ export class GameService {
   /** Time duration before un-flipping when flipped cards are wrong */
   private readonly CARD_HOLD_DURATION = 500;
 
+  private session = 0;
+
   /** Cards of the game */
   cards = signal<readonly Card[]>([]);
   /** Selected card array */
@@ -61,11 +63,34 @@ export class GameService {
    * Reset the game conditions.
    */
   reset(): void {
+    this.session++;
     this.cards.set([]);
     this.selectedCards.set([]);
     this.numOfTry.set(0);
     this.flippedResult.set('None');
     this.gameStatus.set('NotPlaying');
+  }
+
+  private markMatchedCards(selected: readonly Card[]): void {
+    const selectedIds = new Set(selected.map(({ id }) => id));
+    this.cards.update((cards) =>
+      cards.map((c) => (selectedIds.has(c.id) ? { ...c, done: true } : c)),
+    );
+    this.selectedCards.update((cards) =>
+      cards.map((c) => ({ ...c, done: true })),
+    );
+    // Check if the game is finished
+    if (this.cards().every(({ done }) => done)) {
+      this.flippedResult.set('Finish');
+      this.gameStatus.set('Clear');
+    }
+  }
+
+  private getPlayableCard(id: number): Card | undefined {
+    if (!this.canFlip()) return;
+    const card = this.cards().find((candidate) => candidate.id === id);
+    if (!card || card.flipped || card.done) return;
+    return card;
   }
 
   /**
@@ -75,7 +100,10 @@ export class GameService {
    * @returns Result and total number of flipping.
    */
   async flipCard(card: Card): Promise<void> {
-    const flippedCard: Card = { ...card, flipped: !card.flipped };
+    const currentCard = this.getPlayableCard(card.id);
+    if (!currentCard) return;
+    const session = this.session;
+    const flippedCard: Card = { ...currentCard, flipped: true };
     this.cards.update((cards) =>
       cards.map((c) => (c.id === card.id ? flippedCard : c)),
     );
@@ -87,6 +115,7 @@ export class GameService {
     // Wait until the card is flipped
     this.flippedResult.set('Unknown');
     await wait(this.FLIPPING_DURATION);
+    if (session !== this.session) return;
 
     // Check the result
     this.numOfTry.update((count) => count + 1);
@@ -97,36 +126,23 @@ export class GameService {
     this.flippedResult.set(first === second ? 'Correct' : 'Wrong');
 
     if (this.flippedResult() === 'Correct') {
-      const selectedIds = new Set(selected.map(({ id }) => id));
+      this.markMatchedCards(selected);
+    }
+
+    if (this.isGameClear()) return;
+
+    await wait(this.CARD_HOLD_DURATION);
+    if (session !== this.session) return;
+
+    // Un-flip cards if the flipped cards are wrong
+    if (this.flippedResult() === 'Wrong') {
       this.cards.update((cards) =>
-        cards.map((c) => (selectedIds.has(c.id) ? { ...c, done: true } : c)),
+        cards.map((c) => (c.done ? c : { ...c, flipped: false })),
       );
-      this.selectedCards.update((cards) =>
-        cards.map((c) => ({ ...c, done: true })),
-      );
-      // Check if the game is finished
-      if (this.cards().every(({ done }) => done)) {
-        this.flippedResult.set('Finish');
-        this.gameStatus.set('Clear');
-      }
     }
 
-    if (
-      this.flippedResult() === 'Wrong' ||
-      this.flippedResult() === 'Correct'
-    ) {
-      await wait(this.CARD_HOLD_DURATION);
-
-      // Un-flip cards if the flipped cards are wrong
-      if (this.flippedResult() === 'Wrong') {
-        this.cards.update((cards) =>
-          cards.map((c) => (c.done ? c : { ...c, flipped: false })),
-        );
-      }
-
-      this.selectedCards.set([]);
-      this.flippedResult.set('None');
-    }
+    this.selectedCards.set([]);
+    this.flippedResult.set('None');
   }
 }
 

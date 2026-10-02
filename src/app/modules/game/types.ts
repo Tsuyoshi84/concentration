@@ -21,6 +21,8 @@ export type Difficulty = {
   level: number;
   /** Icon to show */
   icon: string;
+  /** Short description of the challenge */
+  description: string;
 };
 
 /**

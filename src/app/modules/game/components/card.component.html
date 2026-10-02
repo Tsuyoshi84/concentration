@@ -1,11 +1,6 @@
-<button
-  class="button"
-  (click)="onClicked()"
-  [disabled]="disabled"
-  aria-label="Open card"
->
-  <div class="card" [class.flipped]="card().flipped">
-    <div class="front"></div>
-    <div class="back" [class.done]="card().done">{{ card().character }}</div>
-  </div>
+<button type="button" class="button" (click)="onClicked()" [disabled]="disabled" [class.matched]="card().done" [attr.aria-label]="'Card ' + position() + (card().done ? ', matched: ' + card().character : card().flipped ? ', ' + card().character : ', face down')">
+  <span class="card" [class.flipped]="card().flipped" aria-hidden="true">
+    <span class="front"><span>✳</span></span>
+    <span class="back">{{ card().character }}@if (card().done) {<span class="check">✓</span>}</span>
+  </span>
 </button>

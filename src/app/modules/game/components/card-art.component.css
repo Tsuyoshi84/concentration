@@ -1,0 +1,122 @@
+:host {
+  display: block;
+  container-type: inline-size;
+  inline-size: 100%;
+  max-inline-size: 420px;
+  margin-inline: auto;
+}
+
+.card-illustration {
+  position: relative;
+  inline-size: 100%;
+  aspect-ratio: 420 / 294;
+}
+
+.illustration-card {
+  position: absolute;
+  display: grid;
+  inline-size: 30.5%;
+  block-size: 55.4%;
+  border: 2px solid var(--ink);
+  border-radius: 20px;
+  place-items: center;
+  font-size: 15cqi;
+  box-shadow: 5px 7px 0 rgb(41 35 60 / 12%);
+}
+
+.purple-card {
+  inset-inline-start: 3.3%;
+  inset-block-start: 14.6%;
+  color: #e4d7ff;
+  background: var(--purple);
+  background-image: radial-gradient(#9169e7 1.5px, transparent 1.5px);
+  background-size: 12px 12px;
+  transform: rotate(-17deg);
+}
+
+.purple-card > span {
+  display: grid;
+  inline-size: 60%;
+  aspect-ratio: 1;
+  border: 1px solid #c5a5ff;
+  border-radius: 50%;
+  place-items: center;
+}
+
+.peach-card {
+  inset-inline-start: 30.7%;
+  inset-block-start: 11.6%;
+  background: #ffddd0;
+  transform: rotate(6deg);
+}
+
+.yellow-card {
+  inset-inline-start: 59%;
+  inset-block-start: 26.2%;
+  background: #ffe393;
+  transform: rotate(19deg);
+}
+
+.match-tick {
+  position: absolute;
+  inset-inline-end: -8%;
+  inset-block-start: -8%;
+  display: grid;
+  inline-size: 28%;
+  aspect-ratio: 1;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  place-items: center;
+  font-size: 5cqi;
+  color: var(--ink);
+  background: #b9e8c0;
+}
+
+.tiny-spark {
+  position: absolute;
+  inset-inline-end: 8%;
+  inset-block-start: 4%;
+  font-size: 5cqi;
+}
+
+.orbit {
+  position: absolute;
+  font-size: 10cqi;
+}
+
+.orbit-one {
+  inset-inline-end: 5%;
+  inset-block-start: 0;
+  color: #e27350;
+}
+
+.orbit-two {
+  inset-inline-start: 4%;
+  inset-block-end: 4%;
+  font-size: 8cqi;
+  color: var(--purple);
+}
+
+.mini-label {
+  position: absolute;
+  inset-inline-start: 22.6%;
+  inset-block-start: 0;
+  font-size: 2.2cqi;
+  font-weight: 800;
+  letter-spacing: 2px;
+  transform: rotate(-6deg);
+}
+
+.match-note {
+  position: absolute;
+  inset-inline-start: 35.7%;
+  inset-block-end: 0;
+  font-size: 3.6cqi;
+  font-style: italic;
+  transform: rotate(-5deg);
+}
+
+.match-note > span {
+  margin-inline-start: 10px;
+  font-size: 7cqi;
+}

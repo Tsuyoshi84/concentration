@@ -45,13 +45,13 @@ export class FlipResultComponent {
     switch (result) {
       case 'Correct':
         return fading
-          ? ['correct', 'animated', 'fadeOutUp']
+          ? ['correct', 'animated', 'fade-out-up']
           : ['correct', 'animated', 'swing'];
       case 'Wrong':
-        return fading ? ['fadeOutDown'] : [];
+        return fading ? ['fade-out-down'] : [];
       case 'Finish':
         return fading
-          ? ['finish', 'animated', 'fadeOutUp']
+          ? ['finish', 'animated', 'fade-out-up']
           : ['finish', 'animated', 'tada'];
       default:
         return [];

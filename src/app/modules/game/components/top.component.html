@@ -1,10 +1,25 @@
-<section class="container">
-  <div class="inner-container">
+<div class="arcade-shell">
+  <header class="masthead">
+    <a class="brand" href="#/" aria-label="Concentration home"><span class="brand-mark" aria-hidden="true">✳</span> concentration<span class="quiet">.</span></a>
+    <span class="eyebrow quiet">A little play. A sharper mind.</span>
+  </header>
+  <section class="hero" aria-labelledby="game-title">
     <app-top-title></app-top-title>
+    <app-card-art></app-card-art>
+  </section>
+  <section class="levels" aria-labelledby="level-title">
+    <div class="section-heading"><div><p class="eyebrow quiet">LET'S PLAY</p><h2 id="level-title">Pick your challenge<span>.</span></h2></div><span class="level-note">Small warm-up or a big brain workout?</span></div>
     <div class="button-container">
       @for (diff of difficulties; track diff.level) {
         <app-top-button [difficulty]="diff" (start)="start(diff)"></app-top-button>
       }
     </div>
-  </div>
-</section>
+  </section>
+  <aside class="how-to" aria-label="How to play">
+    <span class="eyebrow">THE LITTLE HOW-TO</span>
+    <p><span class="step">1</span> Flip two cards</p><span class="step-arrow" aria-hidden="true">→</span>
+    <p><span class="step">2</span> Find their match</p><span class="step-arrow" aria-hidden="true">→</span>
+    <p><span class="step">3</span> Collect them all <span aria-hidden="true">✧</span></p>
+  </aside>
+  <footer class="arcade-footer"><span>神経衰弱 · The classic memory game, with a little joy.</span><span>No rush. Just one more pair.</span></footer>
+</div>

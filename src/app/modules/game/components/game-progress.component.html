@@ -1,3 +1,5 @@
-<div class="container">
-  <div class="score">Attempt: {{ numOfTry() }}</div>
+<div class="stats">
+  <div class="stat"><span class="eyebrow quiet">MOVES</span><strong class="score">{{ numOfTry() }}</strong></div>
+  <div class="stat"><span class="eyebrow quiet">PAIRS FOUND</span><strong>{{ pairsFound() }} <span class="total">/ {{ totalPairs() }}</span></strong></div>
+  <div class="progress"><span class="progress-label">A little closer with every match.</span><progress [value]="pairsFound()" [max]="totalPairs() || 1" aria-label="Pairs found"></progress></div>
 </div>

@@ -1,34 +1,14 @@
-<div class="container">
-  <div
-    class="game-container"
-    animate.enter="switch-view-enter"
-    animate.leave="switch-view-leave"
-  >
-    <div class="progress-container">
-      <app-game-progress [numOfTry]="numOfTry()"></app-game-progress>
-    </div>
-    <app-flip-result [result]="flippedResult()"></app-flip-result>
-    <div class="cards-board">
-      <app-card-list [cards]="cards()" (cardClicked)="onCardClicked($event)"></app-card-list>
-    </div>
-
-    <div class="icon-container" [style.visibility]="isGameClear() ? 'visible' : 'hidden'">
-      <button type="button" class="icon-btn" (click)="back()" aria-label="Back to home">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path
-            fill="currentColor"
-            d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"
-          />
-        </svg>
-      </button>
-      <button type="button" class="icon-btn" (click)="replay()" aria-label="Replay">
-        <svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path
-            fill="currentColor"
-            d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"
-          />
-        </svg>
-      </button>
-    </div>
-  </div>
+<div class="arcade-shell">
+  <header class="masthead"><a class="brand" href="#/" aria-label="Concentration home"><span class="brand-mark" aria-hidden="true">✳</span> concentration.</a><span class="eyebrow quiet">FLIP. MATCH. HAPPY DANCE.</span></header>
+  <section class="game-container" aria-labelledby="board-title">
+    <div class="board-heading"><div><p class="eyebrow quiet">{{ difficulty()?.num }} CARDS · {{ totalPairs() }} PAIRS</p><h1 id="board-title"><span aria-hidden="true">{{ difficulty()?.icon }}</span> {{ difficulty()?.label }} mode<span class="title-dot">.</span></h1></div><button type="button" class="text-button" (click)="back()">← Choose difficulty</button></div>
+    <app-game-progress [numOfTry]="numOfTry()" [pairsFound]="pairsFound()" [totalPairs]="totalPairs()"></app-game-progress>
+    @if (!isGameClear()) {<app-flip-result [result]="flippedResult()"></app-flip-result>}
+    @if (isGameClear()) {
+      <app-game-celebration [pairs]="totalPairs()" [moves]="numOfTry()" (playAgain)="replay()" (chooseDifficulty)="back()"></app-game-celebration>
+    }
+    <div class="cards-board"><app-card-list [cards]="cards()" [locked]="!canFlip()" (cardClicked)="onCardClicked($event)"></app-card-list></div>
+    @if (!isGameClear()) {<div class="board-bottom"><span class="quiet">Take your time. Make a match.</span><button type="button" class="text-button" (click)="replay()">↻ Start fresh</button></div>}
+  </section>
+  <footer class="arcade-footer"><span>神経衰弱 · A little focus. A lot of fun.</span><span>One pair at a time.</span></footer>
 </div>

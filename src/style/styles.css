@@ -1,18 +1,158 @@
 @import url("reset-css");
 @import url("open-props/style");
 
+:root {
+  --motion-factor: 1;
+  --ink: #29233c;
+  --muted: #6f687e;
+  --purple: #7042dc;
+  --paper: #fffdf7;
+  --line: #e4dfd5;
+}
+
 html {
-  block-size: 100%;
+  min-block-size: 100%;
   font-size: 62.5%;
 }
 
 body {
-  block-size: 100%;
   margin: 0;
-  font-family: var(--font-sans);
-  color: var(--gray-9);
+  font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  color: var(--ink);
+  background: #f8f5ec;
 }
 
 * {
   box-sizing: border-box;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  font: inherit;
+}
+
+button:enabled {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 5px;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.arcade-shell {
+  max-inline-size: 1120px;
+  margin-inline: auto;
+  padding-inline: 40px;
+  padding-block: 0;
+}
+
+.masthead {
+  display: flex;
+  min-block-size: 100px;
+  border-block-end: 1px solid var(--line);
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  display: grid;
+  inline-size: 34px;
+  block-size: 34px;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  place-items: center;
+  font-size: 25px;
+  background: #f5cb55;
+}
+
+.eyebrow {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.quiet {
+  color: var(--muted);
+}
+
+.arcade-footer {
+  display: flex;
+  padding-block: 25px;
+  border-block-start: 1px solid var(--line);
+  justify-content: space-between;
+  gap: 16px;
+  font-size: 1.2rem;
+  color: var(--muted);
+}
+
+.action {
+  padding-inline: 20px;
+  padding-block: 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  background: var(--paper);
+  transition: transform calc(150ms * var(--motion-factor));
+}
+
+.action:enabled:hover {
+  transform: translateY(-2px);
+}
+
+.action.primary {
+  border-color: var(--purple);
+  color: white;
+  background: var(--purple);
+  box-shadow: 0 4px 0 #4a289a;
+}
+
+@media (width <= 600px) {
+  .arcade-shell {
+    padding-inline: 20px;
+  }
+
+  .masthead {
+    min-block-size: 78px;
+  }
+
+  .masthead > .eyebrow {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+
+  .arcade-footer {
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-factor: 0;
+  }
 }

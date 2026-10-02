@@ -1,35 +1,126 @@
-.container {
-  display: flex;
-  block-size: 100dvh;
-  align-items: center;
-  justify-content: center;
+h2 > span {
+  color: var(--purple);
+}
 
-  .inner-container {
-    inline-size: clamp(280px, calc(100vw - 32px), 680px);
-    text-align: center;
-  }
+.hero > * {
+  min-inline-size: 0;
+}
+
+.hero {
+  display: grid;
+  min-block-size: 355px;
+  padding-block: 45px;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: center;
+  gap: 30px;
+}
+
+.section-heading {
+  display: flex;
+  margin-block-end: 22px;
+  align-items: end;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+h2 {
+  margin-block-start: 6px;
+  font-size: 2.8rem;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.level-note {
+  padding-block-end: 4px;
+  font-size: 1.2rem;
+  color: var(--muted);
 }
 
 .button-container {
-  --button-gap: var(--size-6);
-
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  justify-items: stretch;
-  gap: var(--button-gap) var(--button-gap);
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
-@media only screen and (width >= 768px) {
-  .button-container {
-    --button-size: 29rem;
-    --button-gap: var(--size-8);
+.how-to {
+  display: flex;
+  margin-block: 35px;
+  padding-inline: 25px;
+  padding-block: 23px;
+  border: 1px dashed #ccc4b6;
+  border-radius: 16px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
 
-    inline-size: calc(var(--button-size) * 2 + var(--button-gap));
-    margin-inline: auto;
-    margin-block: 0;
+.how-to p {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.2rem;
+}
+
+.step {
+  display: grid;
+  inline-size: 24px;
+  block-size: 24px;
+  border-radius: 50%;
+  place-items: center;
+  font-size: 1rem;
+  font-weight: 800;
+  background: #eae4db;
+}
+
+.step-arrow {
+  color: #a8a08f;
+}
+
+@media (width <= 950px) {
+  .hero {
+    grid-template-columns: 1fr 0.85fr;
+  }
+
+  .how-to {
+    flex-wrap: wrap;
+  }
+
+  .how-to > .eyebrow {
+    flex-basis: 100%;
+  }
+
+  .level-note {
+    display: none;
+  }
+}
+
+@media (width <= 700px) {
+  .hero {
+    padding-block: 35px 20px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .button-container {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    justify-items: stretch;
+    gap: 12px;
+  }
+
+  .how-to {
+    padding: 20px;
+    align-items: start;
+    gap: 14px;
+  }
+
+  .how-to p {
+    flex-basis: 100%;
+  }
+
+  .step-arrow {
+    display: none;
+  }
+
+  h2 {
+    font-size: 2.5rem;
   }
 }

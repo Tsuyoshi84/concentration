@@ -1,74 +1,106 @@
-.button {
-  --color-border: var(--gray-5);
+:host {
+  display: block;
+  block-size: 100%;
+}
 
+.button {
   position: relative;
+  display: block;
   inline-size: 100%;
   block-size: 100%;
+  padding: 0;
   border: none;
-  background-color: transparent;
+  border-radius: 14px;
+  color: var(--ink);
+  background: transparent;
   perspective: 800px;
-
-  &:disabled {
-    color: unset;
-  }
 }
 
 .card {
   position: absolute;
   inset: 0;
-  inline-size: 100%;
-  block-size: 100%;
-  border: 1px solid var(--color-border);
-  border-radius: 10px;
+  display: block;
+  border-radius: inherit;
   transform-style: preserve-3d;
-  transition:
-    -webkit-transform 1s,
-    -moz-transform 1s,
-    -o-transform 1s,
-    box-shadow 0.5s,
-    transform 0.5s;
+  transition: transform calc(300ms * var(--motion-factor));
+}
 
-  &:not(.flipped) {
-    box-shadow: 1px 1px 2px var(--color-border);
-  }
+.card.flipped {
+  transform: rotateY(180deg);
+}
 
-  &.flipped {
-    box-shadow: -1px 1px 2px var(--color-border);
-    transform: rotateY(180deg);
-    cursor: default;
-  }
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  border: 1.5px solid #5932b0;
+  border-radius: 14px;
+  place-items: center;
+  backface-visibility: hidden;
+}
 
-  .front,
-  .back {
-    position: absolute;
-    display: grid;
-    inline-size: 100%;
-    block-size: 100%;
-    border-radius: 10px;
-    place-items: center;
-    font-size: var(--font-size-8);
-    backface-visibility: hidden;
-    transition:
-      transform,
-      color 0.3s ease-in-out;
-  }
+.front {
+  color: #e5d6ff;
+  background: #7950cd;
+  background-image: radial-gradient(#a17ddf 1px, transparent 1px);
+  background-size: 10px 10px;
+  box-shadow: 0 4px 0 #57369b;
+}
 
-  .front {
-    background-color: var(--gray-2);
-    cursor: pointer;
-  }
+.front > span {
+  display: grid;
+  inline-size: 52%;
+  aspect-ratio: 1;
+  border: 1px solid #bfa0ed;
+  border-radius: 50%;
+  place-items: center;
+  font-size: clamp(2rem, 5vw, 4.3rem);
+}
 
-  .back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transform: rotateY(180deg);
-  }
+.back {
+  border-color: #dfd5c3;
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  background: #fffdf7;
+  transform: rotateY(180deg);
+}
+
+.matched .back {
+  border-color: #93c6a5;
+  background: #e3f2e7;
+  animation: match-pop calc(350ms * var(--motion-factor)) ease-out;
+}
+
+.check {
+  position: absolute;
+  inset-inline-end: 7px;
+  inset-block-start: 4px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #35714d;
 }
 
 @media (hover: hover) {
-  .card:not(.flipped):hover {
-    box-shadow: 5px 5px 10px var(--color-border);
-    transform: scale(1.1, 1.1);
+  .button:enabled:hover {
+    transform: translateY(-4px) rotate(-2deg);
+  }
+}
+
+@keyframes match-pop {
+  50% {
+    scale: 1.06;
+  }
+}
+
+@media (width <= 600px) {
+  .front,
+  .back {
+    border-radius: 9px;
+  }
+
+  .check {
+    inset-inline-end: 3px;
+    inset-block-start: 0;
+    font-size: 0.9rem;
   }
 }

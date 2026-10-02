@@ -31,12 +31,14 @@ describe('FlipResultComponent', () => {
       expect(resultElement).toBeNull();
     });
 
-    it('should show nothing message when Result.Wrong is passed', () => {
+    it('should show encouragement when Result.Wrong is passed', () => {
       fixture.componentRef.setInput('result', 'Wrong');
       fixture.detectChanges();
       const resultElement = fixture.debugElement.query(By.css('.result'));
 
-      expect(resultElement.nativeElement.textContent.trim()).toEqual('');
+      expect(resultElement.nativeElement.textContent.trim()).toEqual(
+        "Not quite. You've got this!",
+      );
     });
 
     it('should show "Correct" message when Result.Correct is passed', () => {
@@ -45,7 +47,7 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        'Correct!',
+        'A lovely little match! ✦',
       );
       expect(resultElement.classes.correct).toBeTruthy();
     });
@@ -56,7 +58,7 @@ describe('FlipResultComponent', () => {
       const resultElement = fixture.debugElement.query(By.css('.result'));
 
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        `Congrats!\nYou've finished!!`,
+        'Every card found its friend! ✨',
       );
       expect(resultElement.classes.finish).toBeTruthy();
     });
@@ -72,12 +74,12 @@ describe('FlipResultComponent', () => {
 
       const resultElement = fixture.debugElement.query(By.css('.result'));
       expect(resultElement.nativeElement.textContent.trim()).toEqual(
-        'Correct!',
+        'A lovely little match! ✦',
       );
 
       await vi.advanceTimersByTimeAsync(1000);
       fixture.detectChanges();
-      expect(resultElement.classes.fadeOutUp).toBeTruthy();
+      expect(resultElement.classes['fade-out-up']).toBeTruthy();
 
       await vi.advanceTimersByTimeAsync(1000);
       fixture.detectChanges();
