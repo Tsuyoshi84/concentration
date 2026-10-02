@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   effect,
   inject,
@@ -21,7 +20,6 @@ import { GameProgressComponent } from './game-progress.component';
   selector: 'app-game',
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
-  changeDetection: ChangeDetectionStrategy.Eager,
   imports: [GameProgressComponent, FlipResultComponent, CardListComponent],
 })
 export class GameComponent implements OnDestroy {

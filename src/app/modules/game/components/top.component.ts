@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
@@ -8,7 +8,6 @@ import { TopTitleComponent } from './top-title.component';
 @Component({
   selector: 'app-top',
   templateUrl: './top.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./top.component.css'],
   imports: [TopTitleComponent, TopButtonComponent],
 })

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   DestroyRef,
@@ -19,7 +18,6 @@ const FEEDBACK_RESULTS: ReadonlySet<Result> = new Set([
 @Component({
   selector: 'app-flip-result',
   templateUrl: './flip-result.component.html',
-  changeDetection: ChangeDetectionStrategy.Eager,
   styleUrls: ['./flip-result.component.css'],
 })
 export class FlipResultComponent {
