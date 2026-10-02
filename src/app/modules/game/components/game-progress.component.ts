@@ -1,5 +1,4 @@
 import { Component, input } from '@angular/core';
-import type { GameStatus } from '../types';
 
 @Component({
   selector: 'app-game-progress',
@@ -8,5 +7,4 @@ import type { GameStatus } from '../types';
 })
 export class GameProgressComponent {
   readonly numOfTry = input.required<number>();
-  readonly gameStatus = input.required<GameStatus>();
 }
