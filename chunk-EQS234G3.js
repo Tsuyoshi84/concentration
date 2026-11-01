@@ -30,27 +30,27 @@ var __objRest = (source, exclude) => {
   return target;
 };
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_effect-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_effect-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
-var activeConsumer = null;
-var inNotificationPhase = false;
+var activeConsumer = [null];
+var inNotificationPhase = [false];
 var epoch = 1;
 var postProducerCreatedFn = null;
 var SIGNAL = /* @__PURE__ */ Symbol("SIGNAL");
 function setActiveConsumer(consumer) {
-  const prev = activeConsumer;
-  activeConsumer = consumer;
+  const prev = activeConsumer[0];
+  activeConsumer[0] = consumer;
   return prev;
 }
 function getActiveConsumer() {
-  return activeConsumer;
+  return activeConsumer[0];
 }
 function isInNotificationPhase() {
-  return inNotificationPhase;
+  return inNotificationPhase[0];
 }
 var REACTIVE_NODE = {
   version: 0,
@@ -73,47 +73,48 @@ var REACTIVE_NODE = {
   }
 };
 function producerAccessed(node) {
-  if (inNotificationPhase) {
+  if (inNotificationPhase[0]) {
     throw new Error(typeof ngDevMode !== "undefined" && ngDevMode ? `Assertion error: signal read during notification phase` : "");
   }
-  if (activeConsumer === null) {
+  const consumer = activeConsumer[0];
+  if (consumer === null) {
     return;
   }
-  activeConsumer.consumerOnSignalRead(node);
-  const prevProducerLink = activeConsumer.producersTail;
+  consumer.consumerOnSignalRead(node);
+  const prevProducerLink = consumer.producersTail;
   if (prevProducerLink !== void 0 && prevProducerLink.producer === node) {
     return;
   }
   let nextProducerLink = void 0;
-  const isRecomputing = activeConsumer.recomputing;
+  const isRecomputing = consumer.recomputing;
   if (isRecomputing) {
-    nextProducerLink = prevProducerLink !== void 0 ? prevProducerLink.nextProducer : activeConsumer.producers;
+    nextProducerLink = prevProducerLink !== void 0 ? prevProducerLink.nextProducer : consumer.producers;
     if (nextProducerLink !== void 0 && nextProducerLink.producer === node) {
-      activeConsumer.producersTail = nextProducerLink;
+      consumer.producersTail = nextProducerLink;
       nextProducerLink.lastReadVersion = node.version;
       nextProducerLink.knownValidAtEpoch = epoch;
       return;
     }
   }
   const prevConsumerLink = node.consumersTail;
-  if (prevConsumerLink !== void 0 && prevConsumerLink.consumer === activeConsumer && (!isRecomputing || prevConsumerLink.knownValidAtEpoch === epoch)) {
+  if (prevConsumerLink !== void 0 && prevConsumerLink.consumer === consumer && (!isRecomputing || prevConsumerLink.knownValidAtEpoch === epoch)) {
     return;
   }
-  const isLive = consumerIsLive(activeConsumer);
+  const isLive = consumerIsLive(consumer);
   const newLink = {
     producer: node,
-    consumer: activeConsumer,
+    consumer,
     nextProducer: nextProducerLink,
     prevConsumer: void 0,
     knownValidAtEpoch: epoch,
     lastReadVersion: node.version,
     nextConsumer: void 0
   };
-  activeConsumer.producersTail = newLink;
+  consumer.producersTail = newLink;
   if (prevProducerLink !== void 0) {
     prevProducerLink.nextProducer = newLink;
   } else {
-    activeConsumer.producers = newLink;
+    consumer.producers = newLink;
   }
   if (isLive) {
     producerAddLiveConsumer(node, newLink);
@@ -140,8 +141,8 @@ function producerNotifyConsumers(node) {
   if (node.consumers === void 0) {
     return;
   }
-  const prev = inNotificationPhase;
-  inNotificationPhase = true;
+  const prev = inNotificationPhase[0];
+  inNotificationPhase[0] = true;
   try {
     for (let link = node.consumers; link !== void 0; link = link.nextConsumer) {
       const consumer = link.consumer;
@@ -150,11 +151,11 @@ function producerNotifyConsumers(node) {
       }
     }
   } finally {
-    inNotificationPhase = prev;
+    inNotificationPhase[0] = prev;
   }
 }
 function producerUpdatesAllowed() {
-  return activeConsumer?.consumerAllowSignalWrites !== false;
+  return activeConsumer[0]?.consumerAllowSignalWrites !== false;
 }
 function consumerMarkDirty(node) {
   node.dirty = true;
@@ -421,19 +422,19 @@ function runEffect(node) {
   }
 }
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_not_found-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_not_found-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
-var _currentInjector = void 0;
+var _currentInjector = [void 0];
 function getCurrentInjector() {
-  return _currentInjector;
+  return _currentInjector[0];
 }
 function setCurrentInjector(injector) {
-  const former = _currentInjector;
-  _currentInjector = injector;
+  const former = _currentInjector[0];
+  _currentInjector[0] = injector;
   return former;
 }
 var NOT_FOUND = /* @__PURE__ */ Symbol("NotFound");
@@ -441,9 +442,16 @@ function isNotFound(e) {
   return e === NOT_FOUND || e?.name === "\u0275NotFound";
 }
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_untracked-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/primitives-di.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
+ * (c) 2010-2026 Google LLC. https://angular.dev/
+ * License: MIT
+ */
+
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_untracked-chunk.mjs
+/**
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -537,9 +545,9 @@ function untracked(nonReactiveReadsFn) {
   }
 }
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/primitives-signals.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/primitives-signals.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -643,13 +651,6 @@ function installDevToolsSignalFormatter() {
 if (typeof ngDevMode === "undefined" || ngDevMode) {
   installDevToolsSignalFormatter();
 }
-
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/primitives-di.mjs
-/**
- * @license Angular v22.2.1
- * (c) 2010-2026 Google LLC. https://angular.dev/
- * License: MIT
- */
 
 // node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/util/isFunction.js
 function isFunction(value) {
@@ -2170,9 +2171,9 @@ function tap(observerOrNext, error, complete) {
   }) : identity;
 }
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_pending_tasks-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_pending_tasks-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -2189,7 +2190,7 @@ var Version = class {
     this.patch = parts.slice(2).join(".");
   }
 };
-var VERSION = /* @__PURE__ */ new Version("22.2.1");
+var VERSION = /* @__PURE__ */ new Version("22.2.4");
 var DOC_PAGE_BASE_URL = (() => {
   const full = VERSION.full;
   const isPreRelease = full.includes("-next") || full.includes("-rc") || full === "0.0.0-PLACEHOLDER";
@@ -3764,7 +3765,7 @@ function SECURITY_SCHEMA() {
   _SECURITY_SCHEMA = createNullObj();
   registerContext(SecurityContext.HTML, void 0, [["iframe", ["srcdoc"]], ["*", ["innerHTML", "outerHTML"]]]);
   registerContext(SecurityContext.STYLE, void 0, [["*", ["style"]]]);
-  registerContext(SecurityContext.URL, void 0, [["*", ["formAction"]], ["area", ["href"]], ["a", ["href", "xlink:href"]], ["form", ["action"]], ["img", ["src"]], ["video", ["src"]]]);
+  registerContext(SecurityContext.URL, void 0, [["*", ["formAction"]], ["area", ["href"]], ["a", ["href", "xlink:href"]], ["form", ["action"]]]);
   registerContext(SecurityContext.URL, MATH_ML_NAMESPACE, [["*", ["href", "xlink:href"]]]);
   registerContext(SecurityContext.RESOURCE_URL, void 0, [["base", ["href"]], ["embed", ["src"]], ["frame", ["src"]], ["iframe", ["src"]], ["link", ["href"]], ["object", ["codebase", "data"]]]);
   registerContext(SecurityContext.URL, SVG_NAMESPACE, [["a", ["href", "xlink:href"]]]);
@@ -5253,9 +5254,9 @@ var PendingTasks = class _PendingTasks {
   });
 };
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_attribute-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_attribute-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -5263,9 +5264,9 @@ var Attribute = {
   JSACTION: "jsaction"
 };
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_debug_node-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -7700,6 +7701,69 @@ var ViewEncapsulation;
   ViewEncapsulation3[ViewEncapsulation3["ShadowDom"] = 3] = "ShadowDom";
   ViewEncapsulation3[ViewEncapsulation3["ExperimentalIsolatedShadowDom"] = 4] = "ExperimentalIsolatedShadowDom";
 })(ViewEncapsulation || (ViewEncapsulation = {}));
+var SafeValueImpl = class {
+  changingThisBreaksApplicationSecurity;
+  constructor(changingThisBreaksApplicationSecurity) {
+    this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
+  }
+  toString() {
+    return `SafeValue must use [property]=binding: ${this.changingThisBreaksApplicationSecurity}` + (ngDevMode ? ` (see ${XSS_SECURITY_URL})` : "");
+  }
+};
+var SafeHtmlImpl = class extends SafeValueImpl {
+  getTypeName() {
+    return "HTML";
+  }
+};
+var SafeStyleImpl = class extends SafeValueImpl {
+  getTypeName() {
+    return "Style";
+  }
+};
+var SafeScriptImpl = class extends SafeValueImpl {
+  getTypeName() {
+    return "Script";
+  }
+};
+var SafeUrlImpl = class extends SafeValueImpl {
+  getTypeName() {
+    return "URL";
+  }
+};
+var SafeResourceUrlImpl = class extends SafeValueImpl {
+  getTypeName() {
+    return "ResourceURL";
+  }
+};
+function unwrapSafeValue(value) {
+  return value instanceof SafeValueImpl ? value.changingThisBreaksApplicationSecurity : value;
+}
+function allowSanitizationBypassAndThrow(value, type) {
+  const actualType = getSanitizationBypassType(value);
+  if (actualType != null && actualType !== type) {
+    if (actualType === "ResourceURL" && type === "URL") return true;
+    throw new Error(`Required a safe ${type}, got a ${actualType} (see ${XSS_SECURITY_URL})`);
+  }
+  return actualType === type;
+}
+function getSanitizationBypassType(value) {
+  return value instanceof SafeValueImpl && value.getTypeName() || null;
+}
+function bypassSanitizationTrustHtml(trustedHtml) {
+  return new SafeHtmlImpl(trustedHtml);
+}
+function bypassSanitizationTrustStyle(trustedStyle) {
+  return new SafeStyleImpl(trustedStyle);
+}
+function bypassSanitizationTrustScript(trustedScript) {
+  return new SafeScriptImpl(trustedScript);
+}
+function bypassSanitizationTrustUrl(trustedUrl) {
+  return new SafeUrlImpl(trustedUrl);
+}
+function bypassSanitizationTrustResourceUrl(trustedResourceUrl) {
+  return new SafeResourceUrlImpl(trustedResourceUrl);
+}
 var CUSTOM_ELEMENTS_SCHEMA = {
   name: "custom-elements"
 };
@@ -7859,69 +7923,6 @@ function trustedScriptFromStringBypass(script) {
 }
 function trustedScriptURLFromStringBypass(url) {
   return getPolicy()?.createScriptURL(url) || url;
-}
-var SafeValueImpl = class {
-  changingThisBreaksApplicationSecurity;
-  constructor(changingThisBreaksApplicationSecurity) {
-    this.changingThisBreaksApplicationSecurity = changingThisBreaksApplicationSecurity;
-  }
-  toString() {
-    return `SafeValue must use [property]=binding: ${this.changingThisBreaksApplicationSecurity} (see ${XSS_SECURITY_URL})`;
-  }
-};
-var SafeHtmlImpl = class extends SafeValueImpl {
-  getTypeName() {
-    return "HTML";
-  }
-};
-var SafeStyleImpl = class extends SafeValueImpl {
-  getTypeName() {
-    return "Style";
-  }
-};
-var SafeScriptImpl = class extends SafeValueImpl {
-  getTypeName() {
-    return "Script";
-  }
-};
-var SafeUrlImpl = class extends SafeValueImpl {
-  getTypeName() {
-    return "URL";
-  }
-};
-var SafeResourceUrlImpl = class extends SafeValueImpl {
-  getTypeName() {
-    return "ResourceURL";
-  }
-};
-function unwrapSafeValue(value) {
-  return value instanceof SafeValueImpl ? value.changingThisBreaksApplicationSecurity : value;
-}
-function allowSanitizationBypassAndThrow(value, type) {
-  const actualType = getSanitizationBypassType(value);
-  if (actualType != null && actualType !== type) {
-    if (actualType === "ResourceURL" && type === "URL") return true;
-    throw new Error(`Required a safe ${type}, got a ${actualType} (see ${XSS_SECURITY_URL})`);
-  }
-  return actualType === type;
-}
-function getSanitizationBypassType(value) {
-  return value instanceof SafeValueImpl && value.getTypeName() || null;
-}
-function bypassSanitizationTrustHtml(trustedHtml) {
-  return new SafeHtmlImpl(trustedHtml);
-}
-function bypassSanitizationTrustStyle(trustedStyle) {
-  return new SafeStyleImpl(trustedStyle);
-}
-function bypassSanitizationTrustScript(trustedScript) {
-  return new SafeScriptImpl(trustedScript);
-}
-function bypassSanitizationTrustUrl(trustedUrl) {
-  return new SafeUrlImpl(trustedUrl);
-}
-function bypassSanitizationTrustResourceUrl(trustedResourceUrl) {
-  return new SafeResourceUrlImpl(trustedResourceUrl);
 }
 function getInertBodyHelper(defaultDoc) {
   const inertDocumentHelper = new InertDocumentHelper(defaultDoc);
@@ -8269,7 +8270,7 @@ function \u0275\u0275sanitizeResourceUrl(unsafeResourceUrl) {
   if (allowSanitizationBypassAndThrow(unsafeResourceUrl, "ResourceURL")) {
     return trustedScriptURLFromStringBypass(unwrapSafeValue(unsafeResourceUrl));
   }
-  throw new RuntimeError(904, ngDevMode && `unsafe value used in a resource URL context (see ${XSS_SECURITY_URL})`);
+  throw new RuntimeError(-904, ngDevMode && `unsafe value used in a resource URL context (see ${XSS_SECURITY_URL})`);
 }
 function \u0275\u0275sanitizeScript(unsafeScript) {
   const sanitizer = getSanitizer();
@@ -9212,14 +9213,16 @@ var AfterRenderImpl = class _AfterRenderImpl {
       (view[AFTER_RENDER_SEQUENCES_TO_ADD] ??= []).push(sequence);
       markAncestorsForTraversal(view);
       view[FLAGS] |= 8192;
-    } else if (!this.executing) {
-      this.addSequence(sequence);
     } else {
-      this.deferredRegistrations.add(sequence);
+      this.addSequence(sequence);
     }
   }
   addSequence(sequence) {
-    this.sequences.add(sequence);
+    if (this.executing) {
+      this.deferredRegistrations.add(sequence);
+    } else {
+      this.sequences.add(sequence);
+    }
     this.scheduler.notify(7);
   }
   unregister(sequence) {
@@ -9330,8 +9333,7 @@ var ANIMATION_QUEUE = new InjectionToken(typeof ngDevMode !== "undefined" && ngD
     };
   }
 });
-function addToAnimationQueue(injector, animationFns, animationData) {
-  const animationQueue = injector.get(ANIMATION_QUEUE);
+function addToAnimationQueue(animationQueue, injector, animationFns, animationData) {
   if (Array.isArray(animationFns)) {
     for (const animateFn of animationFns) {
       animationQueue.queue.add(animateFn);
@@ -9343,8 +9345,7 @@ function addToAnimationQueue(injector, animationFns, animationData) {
   }
   animationQueue.scheduler && animationQueue.scheduler(injector);
 }
-function removeAnimationsFromQueue(injector, animationFns) {
-  const animationQueue = injector.get(ANIMATION_QUEUE);
+function removeAnimationsFromQueue(animationQueue, animationFns) {
   if (Array.isArray(animationFns)) {
     for (const animateFn of animationFns) {
       animationQueue.queue.delete(animateFn);
@@ -9383,8 +9384,9 @@ function initializeAnimationQueueScheduler(injector) {
   animationQueue.scheduler(injector);
 }
 function queueEnterAnimations(injector, enterAnimations) {
+  const queue = injector.get(ANIMATION_QUEUE);
   for (const [_, nodeAnimations] of enterAnimations) {
-    addToAnimationQueue(injector, nodeAnimations.animateFns);
+    addToAnimationQueue(queue, injector, nodeAnimations.animateFns);
   }
 }
 var nodeAnimationRuntime = null;
@@ -9424,14 +9426,15 @@ function maybeQueueEnterAnimationImpl(parentLView, parent, tNode, injector) {
   }
 }
 function runLeaveAnimationsWithCallbackImpl(lView, tNode, injector, callback) {
+  let animationQueue;
   try {
-    injector.get(INJECTOR$1);
+    animationQueue = injector.get(ANIMATION_QUEUE);
   } catch {
     return callback(false);
   }
   const animations = lView ? lView[ANIMATIONS] ??= {} : void 0;
   if (animations?.enter?.has(tNode.index)) {
-    removeAnimationsFromQueue(injector, animations.enter.get(tNode.index).animateFns);
+    removeAnimationsFromQueue(animationQueue, animations.enter.get(tNode.index).animateFns);
   }
   const nodesWithExitAnimations = aggregateDescendantAnimations(lView, tNode, animations);
   if (nodesWithExitAnimations.size === 0) {
@@ -9441,7 +9444,7 @@ function runLeaveAnimationsWithCallbackImpl(lView, tNode, injector, callback) {
     }
   }
   if (lView) allLeavingAnimations.add(lView[ID]);
-  addToAnimationQueue(injector, () => executeLeaveAnimations(lView, tNode, animations, nodesWithExitAnimations, callback), animations);
+  addToAnimationQueue(animationQueue, injector, () => executeLeaveAnimations(lView, tNode, animations, nodesWithExitAnimations, callback), animations);
 }
 function aggregateDescendantAnimations(lView, tNode, animations) {
   const nodesWithExitAnimations = /* @__PURE__ */ new Map();
@@ -10382,12 +10385,22 @@ function setDomProperty(tNode, lView, propName, value, renderer, sanitizer) {
       }
     }
     value = sanitizer != null ? sanitizer(value, tNode.value || "", propName) : value;
+    value = unwrapImgVideoSrcValue(propName, element, value);
     renderer.setProperty(element, propName, value);
   } else if (tNode.type & 12) {
     if (ngDevMode && !matchingSchemas(lView[TVIEW].schemas, tNode.value)) {
       handleUnknownPropertyError(propName, tNode.value, tNode.type, lView);
     }
   }
+}
+function unwrapImgVideoSrcValue(propName, element, value) {
+  if (propName === "src" && (element.tagName === "IMG" || element.tagName === "VIDEO")) {
+    if (value == null) {
+      return "";
+    }
+    return unwrapSafeValue(value);
+  }
+  return value;
 }
 function markDirtyIfOnPush(lView, viewIndex) {
   ngDevMode && assertLView(lView);
@@ -10521,6 +10534,7 @@ function elementAttributeInternal(tNode, lView, name, value, sanitizer, namespac
     assertTNodeType(tNode, 2, `Attempted to set attribute \`${name}\` on a container node. Host bindings are not valid on ng-container or ng-template.`);
   }
   const element = getNativeByTNode(tNode, lView);
+  value = unwrapImgVideoSrcValue(name, element, value);
   setElementAttribute(lView[RENDERER], element, namespace, tNode.value, name, value, sanitizer);
 }
 function setElementAttribute(renderer, element, namespace, tagName, name, value, sanitizer) {
@@ -11063,9 +11077,23 @@ function refreshView(tView, lView, templateFn, context2) {
       lView[FLAGS] &= ~(64 | 8);
     }
   } catch (e) {
-    let handled = false;
-    let errorToHandle = e;
-    let currentLView = lView;
+    handleViewError(lView, e, isInCheckNoChangesPass);
+  } finally {
+    if (currentConsumer !== null) {
+      consumerAfterComputation(currentConsumer, prevConsumer);
+      if (returnConsumerToPool) {
+        maybeReturnReactiveLViewConsumer(currentConsumer);
+      }
+    }
+    leaveView();
+  }
+}
+function handleViewError(lView, e, isInCheckNoChangesPass) {
+  let handled = false;
+  let errorToHandle = e;
+  let currentLView = lView;
+  const prevConsumer = setActiveConsumer(null);
+  try {
     while (currentLView !== null) {
       if (isLContainer(currentLView)) {
         currentLView = currentLView[PARENT];
@@ -11081,7 +11109,12 @@ function refreshView(tView, lView, templateFn, context2) {
             declarationType,
             caughtBy: onError
           };
-          onError(encapsulateBoundaryError(errorToHandle), details);
+          const prevConsumer2 = setActiveConsumer(null);
+          try {
+            onError(encapsulateBoundaryError(errorToHandle), details);
+          } finally {
+            setActiveConsumer(prevConsumer2);
+          }
           handled = true;
           break;
         } catch (boundaryError) {
@@ -11090,20 +11123,14 @@ function refreshView(tView, lView, templateFn, context2) {
       }
       currentLView = currentLView[PARENT];
     }
-    if (!handled) {
-      if (!isInCheckNoChangesPass) {
-        markAncestorsForTraversal(lView);
-      }
-      throw errorToHandle;
-    }
   } finally {
-    if (currentConsumer !== null) {
-      consumerAfterComputation(currentConsumer, prevConsumer);
-      if (returnConsumerToPool) {
-        maybeReturnReactiveLViewConsumer(currentConsumer);
-      }
+    setActiveConsumer(prevConsumer);
+  }
+  if (!handled) {
+    if (!isInCheckNoChangesPass) {
+      markAncestorsForTraversal(lView);
     }
-    leaveView();
+    throw errorToHandle;
   }
 }
 function detectChangesInEmbeddedViews(lView, mode) {
@@ -11161,7 +11188,11 @@ function detectChangesInView(lView, mode) {
     const prevConsumer = setActiveConsumer(null);
     try {
       if (!isInCheckNoChangesPass) {
-        runEffectsInView(lView);
+        try {
+          runEffectsInView(lView);
+        } catch (e) {
+          handleViewError(lView, e, isInCheckNoChangesPass);
+        }
       }
       detectChangesInEmbeddedViews(lView, 1);
       const components = tView.components;
@@ -11839,7 +11870,7 @@ function setTNodeInsertBeforeIndex(tNode, index) {
     setI18nHandling(getInsertInFrontOfRNodeWithI18n, processI18nInsertBefore);
     insertBeforeIndex = tNode.insertBeforeIndex = [null, index];
   } else {
-    assertEqual(Array.isArray(insertBeforeIndex), true, "Expecting array here");
+    ngDevMode && assertEqual(Array.isArray(insertBeforeIndex), true, "Expecting array here");
     insertBeforeIndex.push(index);
   }
 }
@@ -11864,6 +11895,9 @@ function getInstructionFromIcuCreateOpCode(mergedCode) {
 function icuCreateOpCode(opCode, parentIdx, refIdx) {
   ngDevMode && assertGreaterThanOrEqual(parentIdx, 0, "Missing parent index");
   ngDevMode && assertGreaterThan(refIdx, 0, "Missing ref index");
+  if (parentIdx > 32767 || refIdx > 65535) {
+    throw new Error("ICU node index out of range (too many nodes in ICU case)");
+  }
   return opCode | parentIdx << 17 | refIdx << 1;
 }
 function isRootTemplateMessage(subTemplateIndex) {
@@ -12294,13 +12328,7 @@ var DepsTracker = class {
     };
     for (const rawImport of flatten(rawImports ?? [])) {
       const imported = resolveForwardRef(rawImport);
-      try {
-        verifyStandaloneImport(imported, type);
-      } catch (e) {
-        ans.compilation.isPoisoned = true;
-        return ans;
-      }
-      if (isNgModule(imported)) {
+      if (imported && isNgModule(imported)) {
         ans.compilation.ngModules.add(imported);
         const importedScope = this.getNgModuleScope(imported);
         if (importedScope.exported.isPoisoned) {
@@ -12309,10 +12337,15 @@ var DepsTracker = class {
         }
         addSet(importedScope.exported.directives, ans.compilation.directives);
         addSet(importedScope.exported.pipes, ans.compilation.pipes);
-      } else if (isPipe(imported)) {
-        ans.compilation.pipes.add(imported);
-      } else if (isDirective(imported) || isComponent(imported)) {
-        ans.compilation.directives.add(imported);
+      } else if (imported && isStandalone(imported)) {
+        if (isPipe(imported)) {
+          ans.compilation.pipes.add(imported);
+        } else if (isDirective(imported) || isComponent(imported)) {
+          ans.compilation.directives.add(imported);
+        } else {
+          ans.compilation.isPoisoned = true;
+          return ans;
+        }
       } else {
         ans.compilation.isPoisoned = true;
         return ans;
@@ -12645,9 +12678,6 @@ var ControlDirectiveHostImpl = class {
     const modelName = this.tNode.flags & 1024 ? "valueChange" : "checkedChange";
     const directiveDef = this.tView.data[this.tNode.customControlIndex];
     listenToDirectiveOutput(this.tNode, this.lView, directiveDef, modelName, wrapListener(this.tNode, this.lView, listener));
-  }
-  listenToDom(eventName, listener) {
-    listenToDomEvent(this.tNode, this.tView, this.lView, void 0, this.lView[RENDERER], eventName, listener, wrapListener(this.tNode, this.lView, listener));
   }
   setInputOnDirectives(inputName, value, writePredicate) {
     const directiveIndices = this.tNode.inputs?.[inputName];
@@ -13354,7 +13384,7 @@ var ComponentFactory = class {
   }
 };
 function createRootTView(rootSelectorOrNode, componentDef, componentBindings, directives, allowNonStandaloneDirectives) {
-  const tAttributes = rootSelectorOrNode ? ["ng-version", "22.2.1"] : extractAttrsAndClassesFromSelector(componentDef.selectors[0]);
+  const tAttributes = rootSelectorOrNode ? ["ng-version", "22.2.4"] : extractAttrsAndClassesFromSelector(componentDef.selectors[0]);
   let creationBindings = null;
   let updateBindings = null;
   let varsToAllocate = 0;
@@ -16517,7 +16547,7 @@ function getDeepLinkProperties(instance) {
 var eventsStack = [];
 function getBaseDocUrl() {
   const full = VERSION.full;
-  const isPreRelease = full.includes("-next") || full.includes("-rc") || full === "22.2.1";
+  const isPreRelease = full.includes("-next") || full.includes("-rc") || full === "22.2.4";
   const prefix = isPreRelease ? "next" : `v${VERSION.major}`;
   return `https://${prefix}.angular.dev`;
 }
@@ -16685,7 +16715,7 @@ function getTransferState(injector) {
   const doc = injector.get(DOCUMENT);
   const appId = injector.get(APP_ID);
   const transferState = retrieveTransferredState(doc, appId);
-  const filteredEntries = {};
+  const filteredEntries = createDictionary();
   for (const [key, value] of Object.entries(transferState)) {
     if (!isInternalHydrationTransferStateKey(key)) {
       filteredEntries[key] = value;
@@ -17326,7 +17356,7 @@ var IdleScheduler = class _IdleScheduler {
       bucket.idleId = null;
       if (bucket.queue.size > 0) {
         this.scheduleBucket(bucket, options);
-      } else {
+      } else if (this.buckets.get(key) === bucket) {
         this.buckets.delete(key);
       }
     };
@@ -17859,10 +17889,10 @@ function \u0275\u0275deferHydrateWhen(rawValue) {
   }
   if (!shouldAttachTrigger(2, lView, tNode)) return;
   const bindingIndex = nextBindingIndex();
-  const tView = getTView();
-  const hydrateTriggers = getHydrateTriggers(tView, tNode);
-  hydrateTriggers.set(6, null);
   if (bindingUpdated(lView, bindingIndex, rawValue)) {
+    const tView = getTView();
+    const hydrateTriggers = getHydrateTriggers(tView, tNode);
+    hydrateTriggers.set(6, null);
     if (false) {
       triggerDeferBlock(2, lView, tNode);
     } else {
@@ -19907,7 +19937,7 @@ var OpCodeParser = class {
   }
 };
 var BINDING_REGEXP = /�(\d+):?\d*�/gi;
-var ICU_REGEXP = /({\s*�\d+:?\d*�\s*,\s*\S{6}\s*,[\s\S]*})/gi;
+var ICU_REGEXP = /({\s*�\d+:?\d*�\s*,\s*\S{6}\s*,[\s\S]*})/i;
 var NESTED_ICU = /�(\d+)�/;
 var ICU_BLOCK_REGEXP = /^\s*(�\d+:?\d*�)\s*,\s*(select|plural)\s*,/;
 var MARKER = `\uFFFD`;
@@ -20273,6 +20303,10 @@ function walkIcuTree(ast, tView, tIcu, lView, sharedUpdateOpCodes, create, remov
           const elAttrs = element.attributes;
           for (let i = 0; i < elAttrs.length; i++) {
             const attr = elAttrs.item(i);
+            if (ngDevMode && isBindingLikeAttributeName(attr.name)) {
+              console.warn(formatRuntimeError(700, `ICU expressions cannot contain bindings or structural directives. The attribute "${attr.name}" on the <${tagName}> element inside an ICU expression is not supported and will be ignored. Only static attributes are allowed inside ICU cases.`));
+              continue;
+            }
             const lowerAttrName = attr.name.toLowerCase();
             const hasBinding2 = !!attr.value.match(BINDING_REGEXP);
             const namespaceUri = element.namespaceURI;
@@ -20389,6 +20423,9 @@ function i18nResolveSanitizer(attrName, tagName) {
     default:
       return null;
   }
+}
+function isBindingLikeAttributeName(attrName) {
+  return attrName.startsWith("[") || attrName.startsWith("(") || attrName.startsWith("*") || attrName.startsWith("#") || attrName.startsWith("@");
 }
 var ROOT_TEMPLATE_ID = 0;
 var PP_MULTI_VALUE_PLACEHOLDERS_REGEXP = /\[(�.+?�?)\]/;
@@ -23322,9 +23359,9 @@ var MissingTranslationStrategy;
   MissingTranslationStrategy2[MissingTranslationStrategy2["Ignore"] = 2] = "Ignore";
 })(MissingTranslationStrategy || (MissingTranslationStrategy = {}));
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_resource-chunk.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/_resource-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -23426,10 +23463,10 @@ var identityFn = (v) => v;
 function linkedSignal(optionsOrComputation, options) {
   if (typeof optionsOrComputation === "function") {
     const getter = createLinkedSignal(optionsOrComputation, identityFn, options?.equal);
-    return upgradeLinkedSignalGetter(getter, options?.debugName, options?.set);
+    return upgradeLinkedSignalGetter(getter, typeof ngDevMode !== "undefined" && ngDevMode ? options?.debugName : void 0, options?.set);
   } else {
     const getter = createLinkedSignal(optionsOrComputation.source, optionsOrComputation.computation, optionsOrComputation.equal);
-    return upgradeLinkedSignalGetter(getter, optionsOrComputation.debugName, optionsOrComputation.set);
+    return upgradeLinkedSignalGetter(getter, typeof ngDevMode !== "undefined" && ngDevMode ? optionsOrComputation.debugName : void 0, optionsOrComputation.set);
   }
 }
 function upgradeLinkedSignalGetter(getter, debugName, customSet) {
@@ -23451,9 +23488,9 @@ function upgradeLinkedSignalGetter(getter, debugName, customSet) {
   return upgradedGetter;
 }
 
-// node_modules/.pnpm/@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2/node_modules/@angular/core/fesm2022/core.mjs
+// node_modules/.pnpm/@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2/node_modules/@angular/core/fesm2022/core.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -24450,7 +24487,7 @@ var NgZoneChangeDetectionScheduler = class _NgZoneChangeDetectionScheduler {
     }
     this._onMicrotaskEmptySubscription = this.zone.onMicrotaskEmpty.subscribe({
       next: () => {
-        if (this.changeDetectionScheduler.runningTick) {
+        if (this.changeDetectionScheduler.runningTick || this.applicationRef._runningTick) {
           return;
         }
         this.zone.run(() => {
@@ -25292,9 +25329,9 @@ function reflectComponentType(component) {
   };
 }
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_platform_location-chunk.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_platform_location-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -25413,9 +25450,9 @@ var BrowserPlatformLocation = class _BrowserPlatformLocation extends PlatformLoc
   }], () => [], null);
 })();
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_location-chunk.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_location-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -25727,9 +25764,9 @@ function _stripOrigin(baseHref) {
   return baseHref;
 }
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_common_module-chunk.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_common_module-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -28543,9 +28580,9 @@ var CommonModule = class _CommonModule {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_platform_navigation-chunk.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_platform_navigation-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -28574,9 +28611,9 @@ var PlatformNavigation = class _PlatformNavigation {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_xhr-chunk.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/_xhr-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -28645,9 +28682,9 @@ var XhrFactory = class _XhrFactory {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22.2.1_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/common.mjs
+// node_modules/.pnpm/@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22.2.4_rxjs@7.8.2__rxjs@7.8.2/node_modules/@angular/common/fesm2022/common.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -29931,9 +29968,9 @@ function booleanOrUrlAttribute(value) {
   return booleanAttribute(value);
 }
 
-// node_modules/.pnpm/@angular+platform-browser@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+c_29fc8fb89ccf5cf9f7fde60b3e6d1c3e/node_modules/@angular/platform-browser/fesm2022/_dom_renderer-chunk.mjs
+// node_modules/.pnpm/@angular+platform-browser@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+c_ba6246a7f2b4019ef6bc8d4bee6f2a5b/node_modules/@angular/platform-browser/fesm2022/_dom_renderer-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -30662,9 +30699,9 @@ var EmulatedEncapsulationDomRenderer2 = class extends NoneEncapsulationDomRender
   }
 };
 
-// node_modules/.pnpm/@angular+platform-browser@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+c_29fc8fb89ccf5cf9f7fde60b3e6d1c3e/node_modules/@angular/platform-browser/fesm2022/_browser-chunk.mjs
+// node_modules/.pnpm/@angular+platform-browser@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+c_ba6246a7f2b4019ef6bc8d4bee6f2a5b/node_modules/@angular/platform-browser/fesm2022/_browser-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31011,9 +31048,9 @@ var BrowserModule = class _BrowserModule {
   }], () => [], null);
 })();
 
-// node_modules/.pnpm/@angular+platform-browser@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+c_29fc8fb89ccf5cf9f7fde60b3e6d1c3e/node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs
+// node_modules/.pnpm/@angular+platform-browser@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+c_ba6246a7f2b4019ef6bc8d4bee6f2a5b/node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31276,9 +31313,9 @@ var DomSanitizerImpl = class _DomSanitizerImpl extends DomSanitizer {
   }], null, null);
 })();
 
-// node_modules/.pnpm/@angular+router@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22_3ba865bf5b5552c0034bbae05c7f6d7d/node_modules/@angular/router/fesm2022/_router-chunk.mjs
+// node_modules/.pnpm/@angular+router@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22_9b5d622b0bb4adcae376e6f89cd9ca2f/node_modules/@angular/router/fesm2022/_router-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -31613,12 +31650,27 @@ var DefaultUrlSerializer = class {
     return new UrlTree(p.parseRootSegment(), p.parseQueryParams(), p.parseFragment());
   }
   serialize(tree2) {
-    const segment = `/${serializeSegment(tree2.root, true)}`;
+    let segment = `/${serializeSegment(tree2.root, true)}`;
+    if (isProtocolRelative(segment)) {
+      if (typeof ngDevMode === "undefined" || ngDevMode) {
+        console.warn(formatRuntimeError(4019, `Cannot serialize a UrlTree that would produce a protocol-relative URL. Falling back to '/' instead.`));
+      }
+      segment = "/";
+    }
     const query = serializeQueryParams(tree2.queryParams);
     const fragment = typeof tree2.fragment === `string` ? `#${encodeUriFragment(tree2.fragment)}` : "";
     return `${segment}${query}${fragment}`;
   }
 };
+var DUMMY_BASE_URL = "http://fake";
+function isProtocolRelative(url) {
+  try {
+    const resolved = new URL(url, DUMMY_BASE_URL);
+    return resolved.origin !== DUMMY_BASE_URL || resolved.pathname.startsWith("//");
+  } catch {
+    return true;
+  }
+}
 var DEFAULT_SERIALIZER = new DefaultUrlSerializer();
 function serializePaths(segment) {
   return segment.segments.map((p) => serializePath(p)).join("/");
@@ -31637,17 +31689,20 @@ function serializeSegment(segment, root) {
     });
     return children.length > 0 ? `${primary}(${children.join("//")})` : primary;
   } else {
+    if (Object.keys(segment.children).length === 1 && segment.children[PRIMARY_OUTLET] != null) {
+      return `${serializePaths(segment)}/${serializeSegment(segment.children[PRIMARY_OUTLET], false)}`;
+    }
     const children = mapChildrenIntoArray(segment, (v, k) => {
       if (k === PRIMARY_OUTLET) {
-        return [serializeSegment(segment.children[PRIMARY_OUTLET], false)];
+        return [escapeOutletDelimiter(serializeSegment(segment.children[PRIMARY_OUTLET], false))];
       }
       return [`${k}:${serializeSegment(v, false)}`];
     });
-    if (Object.keys(segment.children).length === 1 && segment.children[PRIMARY_OUTLET] != null) {
-      return `${serializePaths(segment)}/${children[0]}`;
-    }
     return `${serializePaths(segment)}/(${children.join("//")})`;
   }
+}
+function escapeOutletDelimiter(serializedPrimary) {
+  return serializedPrimary.replace(SEGMENT_RE, (firstSegment) => firstSegment.replace(/:/g, "%3A"));
 }
 function encodeUriString(s) {
   return encodeURIComponent(s).replace(/%40/g, "@").replace(/%3A/gi, ":").replace(/%24/g, "$").replace(/%2C/gi, ",");
@@ -31947,6 +32002,9 @@ function normalizeQueryParams2(k, v, urlSerializer) {
 function tree(oldRoot, oldSegmentGroup, newSegmentGroup, queryParams, fragment, urlSerializer) {
   const qp = {};
   for (const [key, value] of Object.entries(queryParams ?? {})) {
+    if (value === null || value === void 0) {
+      continue;
+    }
     qp[key] = Array.isArray(value) ? value.map((v) => normalizeQueryParams2(key, v, urlSerializer)) : normalizeQueryParams2(key, value, urlSerializer);
   }
   let rootCandidate;
@@ -32687,6 +32745,7 @@ var RouterOutlet = class _RouterOutlet {
   deactivate() {
     if (this.activated) {
       const c = this.component;
+      this.inputBinder?.unsubscribeFromRouteData(this);
       this.activated.destroy();
       this.activated = null;
       this._activatedRoute = null;
@@ -33620,7 +33679,12 @@ function isEmptyError(e) {
 var INITIAL_VALUE = /* @__PURE__ */ Symbol("INITIAL_VALUE");
 function prioritizedGuardValue() {
   return switchMap((obs) => {
-    return combineLatest(obs.map((o) => o.pipe(take(1), startWith(INITIAL_VALUE)))).pipe(map((results) => {
+    return combineLatest(obs.map((o) => o.pipe(take(1), catchError((e) => {
+      if (e instanceof RedirectCommand) {
+        return of(e);
+      }
+      throw e;
+    }), startWith(INITIAL_VALUE)))).pipe(map((results) => {
       for (const result of results) {
         if (result === true) {
           continue;
@@ -33638,10 +33702,12 @@ function isRedirect(val) {
   return isUrlTree(val) || val instanceof RedirectCommand;
 }
 function abortSignalToObservable(signal2) {
-  if (signal2.aborted) {
-    return of(void 0).pipe(take(1));
-  }
   return new Observable((subscriber) => {
+    if (signal2.aborted) {
+      subscriber.next();
+      subscriber.complete();
+      return;
+    }
     const handler = () => {
       subscriber.next();
       subscriber.complete();
@@ -33734,8 +33800,7 @@ function runCanDeactivate(component, currARS, currRSS, futureRSS) {
   const canDeactivateObservables = canDeactivate.map((c) => {
     const closestInjector = currARS._environmentInjector;
     const guard = getTokenOrFunctionIdentity(c, closestInjector);
-    const guardVal = isCanDeactivate(guard) ? guard.canDeactivate(component, currARS, currRSS, futureRSS) : runInInjectionContext(closestInjector, () => guard(component, currARS, currRSS, futureRSS));
-    return wrapIntoObservable(guardVal).pipe(first());
+    return callGuard(() => isCanDeactivate(guard) ? guard.canDeactivate(component, currARS, currRSS, futureRSS) : runInInjectionContext(closestInjector, () => guard(component, currARS, currRSS, futureRSS))).pipe(first());
   });
   return of(canDeactivateObservables).pipe(prioritizedGuardValue());
 }
@@ -33746,11 +33811,17 @@ function runCanLoadGuards(injector, route, segments, urlSerializer, abortSignal)
   }
   const canLoadObservables = canLoad.map((injectionToken) => {
     const guard = getTokenOrFunctionIdentity(injectionToken, injector);
-    const guardVal = isCanLoad(guard) ? guard.canLoad(route, segments) : runInInjectionContext(injector, () => guard(route, segments));
-    const obs$ = wrapIntoObservable(guardVal);
+    const obs$ = callGuard(() => isCanLoad(guard) ? guard.canLoad(route, segments) : runInInjectionContext(injector, () => guard(route, segments)));
     return abortSignal ? obs$.pipe(takeUntilAbort(abortSignal)) : obs$;
   });
   return of(canLoadObservables).pipe(prioritizedGuardValue(), redirectIfUrlTree(urlSerializer));
+}
+function callGuard(guardFn) {
+  try {
+    return wrapIntoObservable(guardFn());
+  } catch (e) {
+    return new Observable((subscriber) => subscriber.error(e));
+  }
 }
 function redirectIfUrlTree(urlSerializer) {
   return pipe(tap((result) => {
@@ -33763,8 +33834,7 @@ function runCanMatchGuards(injector, route, segments, urlSerializer, currentSnap
   if (!canMatch || canMatch.length === 0) return of(true);
   const canMatchObservables = canMatch.map((injectionToken) => {
     const guard = getTokenOrFunctionIdentity(injectionToken, injector);
-    const guardVal = isCanMatch(guard) ? guard.canMatch(route, segments, currentSnapshot) : runInInjectionContext(injector, () => guard(route, segments, currentSnapshot));
-    return wrapIntoObservable(guardVal).pipe(takeUntilAbort(abortSignal));
+    return callGuard(() => isCanMatch(guard) ? guard.canMatch(route, segments, currentSnapshot) : runInInjectionContext(injector, () => guard(route, segments, currentSnapshot))).pipe(takeUntilAbort(abortSignal));
   });
   return of(canMatchObservables).pipe(prioritizedGuardValue(), redirectIfUrlTree(urlSerializer));
 }
@@ -34042,8 +34112,8 @@ function match(segmentGroup, route, segments) {
     positionalParamSegments: res.posParams ?? {}
   };
 }
-function split(segmentGroup, consumedSegments, slicedSegments, config2, outlet) {
-  if (slicedSegments.length > 0 && containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, config2, outlet)) {
+function split(segmentGroup, consumedSegments, slicedSegments, config2) {
+  if (slicedSegments.length > 0 && containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, config2)) {
     const s2 = new UrlSegmentGroup(consumedSegments, createChildrenForEmptyPaths(config2, new UrlSegmentGroup(slicedSegments, segmentGroup.children)));
     return {
       segmentGroup: s2,
@@ -34084,15 +34154,8 @@ function createChildrenForEmptyPaths(routes, primarySegment) {
   }
   return res;
 }
-function containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, routes, outlet) {
-  return routes.some((r) => {
-    const matchesEmpty = emptyPathMatch(segmentGroup, slicedSegments, r);
-    if (!matchesEmpty) return false;
-    const isNamedOutlet = getOutlet(r) !== PRIMARY_OUTLET;
-    if (!isNamedOutlet) return false;
-    const isSelfEvaluating = outlet !== void 0 && getOutlet(r) === outlet;
-    return !isSelfEvaluating;
-  });
+function containsEmptyPathMatchesWithNamedOutlets(segmentGroup, slicedSegments, routes) {
+  return routes.some((r) => emptyPathMatch(segmentGroup, slicedSegments, r) && getOutlet(r) !== PRIMARY_OUTLET);
 }
 function containsEmptyPathMatches(segmentGroup, slicedSegments, routes) {
   return routes.some((r) => emptyPathMatch(segmentGroup, slicedSegments, r));
@@ -34287,11 +34350,14 @@ var Recognizer = class {
       remainingSegments
     } = result;
     const snapshot = this.createSnapshot(injector, route, consumedSegments, parameters, parentRoute);
+    const matchedOnOutlet = getOutlet(route) === outlet;
     const {
       segmentGroup,
       slicedSegments
-    } = split(rawSegment, consumedSegments, remainingSegments, childConfig, outlet);
-    const matchedOnOutlet = getOutlet(route) === outlet;
+    } = matchedOnOutlet ? split(rawSegment, consumedSegments, remainingSegments, childConfig) : {
+      segmentGroup: rawSegment,
+      slicedSegments: remainingSegments
+    };
     if (matchedOnOutlet && slicedSegments.length === 0 && segmentGroup.hasChildren()) {
       const children = await this.processChildren(childInjector, childConfig, segmentGroup, snapshot);
       return new TreeNode(snapshot, children);
@@ -35313,8 +35379,12 @@ var HistoryStateManager = class _HistoryStateManager extends StateManager {
       if (this.urlUpdateStrategy === "deferred" && !currentTransition.extras.skipLocationChange) {
         this.setBrowserUrl(this.createBrowserPath(currentTransition), currentTransition);
       }
-    } else if (e instanceof NavigationCancel && !isRedirectingEvent(e)) {
-      this.restoreHistory(currentTransition);
+    } else if (e instanceof NavigationCancel) {
+      if (!isRedirectingEvent(e)) {
+        this.restoreHistory(currentTransition);
+      } else if (e.code === NavigationCancellationCode.Redirect && this.routerState === currentTransition.targetRouterState) {
+        this.resetInternalState(currentTransition);
+      }
     } else if (e instanceof NavigationError) {
       this.restoreHistory(currentTransition, true);
     } else if (e instanceof NavigationEnd) {
@@ -35577,9 +35647,6 @@ var Router = class _Router {
       default:
         q = queryParams || null;
     }
-    if (q !== null) {
-      q = this.removeEmptyProps(q);
-    }
     let relativeToUrlSegmentGroup;
     try {
       const relativeToSnapshot = relativeTo ? relativeTo.snapshot : this.routerState.snapshot.root;
@@ -35631,14 +35698,6 @@ var Router = class _Router {
     }
     const urlTree = this.parseUrl(url);
     return containsTree(this.currentUrlTree, urlTree, options);
-  }
-  removeEmptyProps(params) {
-    return Object.entries(params).reduce((result, [key, value]) => {
-      if (value !== null && value !== void 0) {
-        result[key] = value;
-      }
-      return result;
-    }, {});
   }
   scheduleNavigation(rawUrl, source, restoredState, extras, hasUAVisualTransition, priorPromise) {
     if (this.disposed) {
@@ -35699,9 +35758,9 @@ function validateCommands(commands) {
   }
 }
 
-// node_modules/.pnpm/@angular+router@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22_3ba865bf5b5552c0034bbae05c7f6d7d/node_modules/@angular/router/fesm2022/_router_module-chunk.mjs
+// node_modules/.pnpm/@angular+router@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22_9b5d622b0bb4adcae376e6f89cd9ca2f/node_modules/@angular/router/fesm2022/_router_module-chunk.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -36153,12 +36212,13 @@ var RouterLinkActive = class _RouterLinkActive {
     });
   }
   set routerLinkActive(data) {
-    if (data == null) {
-      this.classes = [];
-      return;
+    const classes = data == null ? [] : (Array.isArray(data) ? data : data.split(" ")).filter((c) => !!c);
+    for (const c of this.classes) {
+      if (!classes.includes(c)) {
+        this.renderer.removeClass(this.element.nativeElement, c);
+      }
     }
-    const classes = Array.isArray(data) ? data : data.split(" ");
-    this.classes = classes.filter((c) => !!c);
+    this.classes = classes;
   }
   ngOnChanges(changes) {
     this.update();
@@ -36608,6 +36668,9 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     } else if (e instanceof NavigationCancel || e instanceof NavigationError) {
       const redirectingBeforeUrlCommit = e instanceof NavigationCancel && e.code === NavigationCancellationCode.Redirect && !!this.currentNavigation.commitUrl;
       if (redirectingBeforeUrlCommit) {
+        if (this.currentNavigation.navigationEvent?.navigationType === "traverse") {
+          this.finishNavigation();
+        }
         return;
       }
       void this.cancel(transition, e);
@@ -36657,7 +36720,8 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     }));
   }
   finishNavigation() {
-    this.currentNavigation.commitUrl?.();
+    this.currentNavigation.commitUrl?.()?.catch(() => {
+    });
     this.currentNavigation?.resolveHandler?.();
     this.currentNavigation = {};
   }
@@ -36666,6 +36730,9 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     const clearedState = {};
     this.currentNavigation = clearedState;
     if (isRedirectingEvent(cause)) {
+      if (cause instanceof NavigationCancel && cause.code === NavigationCancellationCode.Redirect && this.routerState === transition.targetRouterState) {
+        this.resetInternalState(transition.finalUrl, false);
+      }
       return;
     }
     const isTraversalReset = this.canceledNavigationResolution === "computed" && this.navigation.currentEntry.key !== this.activeHistoryEntry.key;
@@ -36707,7 +36774,7 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     this.rawUrlTree = traversalReset ? this.stateMemento.rawUrlTree : this.urlHandlingStrategy.merge(this.currentUrlTree, finalUrl ?? this.rawUrlTree);
   }
   handleNavigate(event) {
-    if (!event.canIntercept || event.navigationType === "reload") {
+    if (!event.canIntercept || event.navigationType === "reload" || event.downloadRequest != null) {
       return;
     }
     const routerInfo = event?.info?.\u0275routerInfo;
@@ -36739,7 +36806,9 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     const abortHandler = () => {
       this.currentNavigation.routerTransition?.abort();
     };
-    event.signal.addEventListener("abort", abortHandler);
+    event.signal.addEventListener("abort", abortHandler, {
+      once: true
+    });
     this.currentNavigation.removeAbortListener = () => event.signal.removeEventListener("abort", abortHandler);
     let scroll = this.inMemoryScrollingEnabled ? "manual" : this.currentNavigation.routerTransition?.extras.scroll ?? "after-transition";
     const interceptOptions = {
@@ -36770,12 +36839,10 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
     });
     interceptOptions.handler = () => handlerPromise;
     if (this.deferredCommitSupported(event)) {
+      const isTraverse = event.navigationType === "traverse";
       const redirect = new Promise((resolve) => {
         interceptOptions.precommitHandler = (controller) => {
-          if (this.navigation.transition?.navigationType === "traverse") {
-            resolve(() => {
-            });
-          } else {
+          if (!isTraverse) {
             resolve(controller.redirect.bind(controller));
           }
           return precommitHandlerPromise;
@@ -36784,7 +36851,7 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
       this.currentNavigation.commitUrl = async () => {
         this.currentNavigation.commitUrl = void 0;
         const transition = this.currentNavigation.routerTransition;
-        if (transition && !transition.extras.skipLocationChange) {
+        if (!isTraverse && transition && !transition.extras.skipLocationChange) {
           const internalPath = this.createBrowserPath(transition);
           const history = this.location.isCurrentPathEqualTo(internalPath) || !!transition.extras.replaceUrl ? "replace" : "push";
           const state = __spreadValues(__spreadValues({}, transition.extras.state), this.generateNgRouterState(transition));
@@ -36795,7 +36862,11 @@ var NavigationStateManager = class _NavigationStateManager extends StateManager 
           });
         }
         resolvePrecommitHandler();
-        return await this.navigation.transition?.committed;
+        try {
+          return await this.navigation.transition?.committed;
+        } catch {
+          return;
+        }
       };
     }
     event.intercept(interceptOptions);
@@ -37139,9 +37210,9 @@ function provideRouterInitializer() {
   }];
 }
 
-// node_modules/.pnpm/@angular+router@22.2.1_@angular+common@22.2.1_@angular+core@22.2.1_@angular+compiler@22_3ba865bf5b5552c0034bbae05c7f6d7d/node_modules/@angular/router/fesm2022/router.mjs
+// node_modules/.pnpm/@angular+router@22.2.4_@angular+common@22.2.4_@angular+core@22.2.4_@angular+compiler@22_9b5d622b0bb4adcae376e6f89cd9ca2f/node_modules/@angular/router/fesm2022/router.mjs
 /**
- * @license Angular v22.2.1
+ * @license Angular v22.2.4
  * (c) 2010-2026 Google LLC. https://angular.dev/
  * License: MIT
  */
@@ -37443,5 +37514,5 @@ export {
   GAME_DIFFICULTY,
   GameService
 };
-//# debugId=85cc6a67-347b-5afd-9dc7-be69fb9482c6
-//# sourceMappingURL=chunk-YQCTCQS7.js.map
+//# debugId=d84c7d7d-396e-5bca-b9a0-e2eeeeef47c8
+//# sourceMappingURL=chunk-EQS234G3.js.map

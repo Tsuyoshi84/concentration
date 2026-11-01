@@ -38,7 +38,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-YQCTCQS7.js";
+} from "./chunk-EQS234G3.js";
 
 // src/app/app.component.ts
 var AppComponent = class _AppComponent {
@@ -374,7 +374,7 @@ var routes = [
   },
   {
     path: "game/:level",
-    loadComponent: () => import("./game.component-HIM7AJJE.js").then((m) => m.GameComponent),
+    loadComponent: () => import("./game.component-CBTEQKPN.js").then((m) => m.GameComponent),
     providers: [GameService]
   },
   { path: "**", redirectTo: "" }
