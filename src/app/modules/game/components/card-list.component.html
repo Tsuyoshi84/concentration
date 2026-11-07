@@ -1,5 +1,5 @@
-<div class="container" [class]="cardsClass()" aria-label="Memory cards">
+<section class="container" [class]="cardsClass()" aria-label="Memory cards">
   @for (card of cards(); track card.id; let position = $index) {
     <app-card [card]="card" [position]="position + 1" [locked]="locked()" (clicked)="onClicked($event)"></app-card>
   }
-</div>
+</section>

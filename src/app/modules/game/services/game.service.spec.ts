@@ -128,24 +128,25 @@ describe('GameService round transitions', () => {
 
   afterEach(() => vi.useRealTimers());
 
-  it.each([
-    100, 400,
-  ])('keeps a new round intact when restarting after %i ms', async (delay) => {
-    service.startGame(8);
-    const [first, second] = service.cards();
-    if (!first || !second) throw new Error('Expected cards');
-    await service.flipCard(first);
-    const pendingFlip = service.flipCard(second);
-    await vi.advanceTimersByTimeAsync(delay);
-    service.startGame(16);
-    const freshCards = service.cards();
-    await vi.runAllTimersAsync();
-    await pendingFlip;
-    expect(service.cards()).toBe(freshCards);
-    expect(service.numOfTry()).toBe(0);
-    expect(service.selectedCards()).toEqual([]);
-    expect(service.flippedResult()).toBe('None');
-  });
+  it.each([100, 400])(
+    'keeps a new round intact when restarting after %i ms',
+    async (delay) => {
+      service.startGame(8);
+      const [first, second] = service.cards();
+      if (!first || !second) throw new Error('Expected cards');
+      await service.flipCard(first);
+      const pendingFlip = service.flipCard(second);
+      await vi.advanceTimersByTimeAsync(delay);
+      service.startGame(16);
+      const freshCards = service.cards();
+      await vi.runAllTimersAsync();
+      await pendingFlip;
+      expect(service.cards()).toBe(freshCards);
+      expect(service.numOfTry()).toBe(0);
+      expect(service.selectedCards()).toEqual([]);
+      expect(service.flippedResult()).toBe('None');
+    },
+  );
 
   it('ignores a pending flip after leaving the board', async () => {
     service.startGame(8);
