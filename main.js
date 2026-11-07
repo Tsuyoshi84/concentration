@@ -38,7 +38,7 @@ import {
   ɵɵtext,
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1
-} from "./chunk-EQS234G3.js";
+} from "./chunk-TC33GCSL.js";
 
 // src/app/app.component.ts
 var AppComponent = class _AppComponent {
@@ -123,7 +123,7 @@ var TopButtonComponent = class _TopButtonComponent {
   static \u0275fac = function TopButtonComponent_Factory(__ngFactoryType__) {
     return new (__ngFactoryType__ || _TopButtonComponent)();
   };
-  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TopButtonComponent, selectors: [["app-top-button"]], inputs: { difficulty: [1, "difficulty"] }, outputs: { start: "start" }, decls: 18, vars: 8, consts: [[1, "start-button", 3, "click"], [1, "card-top"], ["aria-hidden", "true", 1, "icon"], [1, "level-number"], [1, "label"], [1, "description"], [1, "card-bottom"], [1, "separator"], ["aria-hidden", "true", 1, "play-arrow"]], template: function TopButtonComponent_Template(rf, ctx) {
+  static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _TopButtonComponent, selectors: [["app-top-button"]], inputs: { difficulty: [1, "difficulty"] }, outputs: { start: "start" }, decls: 18, vars: 8, consts: [["type", "button", 1, "start-button", 3, "click"], [1, "card-top"], ["aria-hidden", "true", 1, "icon"], [1, "level-number"], [1, "label"], [1, "description"], [1, "card-bottom"], [1, "separator"], ["aria-hidden", "true", 1, "play-arrow"]], template: function TopButtonComponent_Template(rf, ctx) {
     if (rf & 1) {
       \u0275\u0275domElementStart(0, "button", 0);
       \u0275\u0275domListener("click", function TopButtonComponent_Template_button_click_0_listener() {
@@ -172,7 +172,7 @@ var TopButtonComponent = class _TopButtonComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(TopButtonComponent, [{
     type: Component,
-    args: [{ selector: "app-top-button", template: `<button class="start-button" [class]="'level-' + difficulty().level" (click)="start.emit(difficulty())">
+    args: [{ selector: "app-top-button", template: `<button type="button" class="start-button" [class]="'level-' + difficulty().level" (click)="start.emit(difficulty())">
   <span class="card-top"><span class="icon" aria-hidden="true">{{ difficulty().icon }}</span><span class="level-number">0{{ difficulty().level }}</span></span>
   <span class="label">{{ difficulty().label }}</span>
   <span class="description">{{ difficulty().description }}</span>
@@ -374,7 +374,7 @@ var routes = [
   },
   {
     path: "game/:level",
-    loadComponent: () => import("./game.component-CBTEQKPN.js").then((m) => m.GameComponent),
+    loadComponent: () => import("./game.component-QZJ6JRYG.js").then((m) => m.GameComponent),
     providers: [GameService]
   },
   { path: "**", redirectTo: "" }
@@ -390,5 +390,5 @@ var appConfig = {
 
 // src/main.ts
 bootstrapApplication(AppComponent, appConfig).catch((err) => console.error(err));
-//# debugId=47a40171-98f3-5dce-a136-7fcb696f8e94
+//# debugId=e902b6a9-7d0b-5580-aff4-6e748090b195
 //# sourceMappingURL=main.js.map

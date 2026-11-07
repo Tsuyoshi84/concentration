@@ -46,7 +46,7 @@ import {
   ɵɵtextInterpolate,
   ɵɵtextInterpolate1,
   ɵɵtextInterpolate2
-} from "./chunk-EQS234G3.js";
+} from "./chunk-TC33GCSL.js";
 
 // src/app/modules/game/components/card.component.ts
 function CardComponent_Conditional_7_Template(rf, ctx) {
@@ -195,7 +195,7 @@ var CardListComponent = class _CardListComponent {
   };
   static \u0275cmp = /* @__PURE__ */ \u0275\u0275defineComponent({ type: _CardListComponent, selectors: [["app-card-list"]], inputs: { cards: [1, "cards"], locked: [1, "locked"] }, outputs: { cardClicked: "cardClicked" }, decls: 3, vars: 2, consts: [["aria-label", "Memory cards", 1, "container"], [3, "card", "position", "locked"], [3, "clicked", "card", "position", "locked"]], template: function CardListComponent_Template(rf, ctx) {
     if (rf & 1) {
-      \u0275\u0275elementStart(0, "div", 0);
+      \u0275\u0275elementStart(0, "section", 0);
       \u0275\u0275repeaterCreate(1, CardListComponent_For_2_Template, 1, 3, "app-card", 1, _forTrack0);
       \u0275\u0275elementEnd();
     }
@@ -209,7 +209,7 @@ var CardListComponent = class _CardListComponent {
 (() => {
   (typeof ngDevMode === "undefined" || ngDevMode) && setClassMetadata(CardListComponent, [{
     type: Component,
-    args: [{ selector: "app-card-list", imports: [CardComponent], template: '<div class="container" [class]="cardsClass()" aria-label="Memory cards">\n  @for (card of cards(); track card.id; let position = $index) {\n    <app-card [card]="card" [position]="position + 1" [locked]="locked()" (clicked)="onClicked($event)"></app-card>\n  }\n</div>\n', styles: ["/* src/app/modules/game/components/card-list.component.css */\n.container {\n  display: grid;\n  gap: 12px;\n}\n.four-cards {\n  max-inline-size: 540px;\n  margin-inline: auto;\n  grid-template-columns: repeat(4, 1fr);\n}\n.six-cards {\n  grid-template-columns: repeat(6, 1fr);\n}\napp-card {\n  min-inline-size: 0;\n  aspect-ratio: 1;\n}\n@media (width <= 600px) {\n  .container {\n    gap: 8px;\n  }\n}\n@media (width <= 450px) {\n  .six-cards {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n/*# sourceMappingURL=card-list.component.css.map */\n"] }]
+    args: [{ selector: "app-card-list", imports: [CardComponent], template: '<section class="container" [class]="cardsClass()" aria-label="Memory cards">\n  @for (card of cards(); track card.id; let position = $index) {\n    <app-card [card]="card" [position]="position + 1" [locked]="locked()" (clicked)="onClicked($event)"></app-card>\n  }\n</section>\n', styles: ["/* src/app/modules/game/components/card-list.component.css */\n.container {\n  display: grid;\n  gap: 12px;\n}\n.four-cards {\n  max-inline-size: 540px;\n  margin-inline: auto;\n  grid-template-columns: repeat(4, 1fr);\n}\n.six-cards {\n  grid-template-columns: repeat(6, 1fr);\n}\napp-card {\n  min-inline-size: 0;\n  aspect-ratio: 1;\n}\n@media (width <= 600px) {\n  .container {\n    gap: 8px;\n  }\n}\n@media (width <= 450px) {\n  .six-cards {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n/*# sourceMappingURL=card-list.component.css.map */\n"] }]
   }], null, { cards: [{ type: Input, args: [{ isSignal: true, alias: "cards", required: true }] }], cardClicked: [{ type: Output, args: ["cardClicked"] }], locked: [{ type: Input, args: [{ isSignal: true, alias: "locked", required: false }] }] });
 })();
 (() => {
@@ -734,5 +734,5 @@ var GameComponent = class _GameComponent {
 export {
   GameComponent
 };
-//# debugId=c79c986f-39a6-573a-9371-62beb99f196a
-//# sourceMappingURL=game.component-CBTEQKPN.js.map
+//# debugId=d0cab395-a355-54cb-ad79-adf6a4e44034
+//# sourceMappingURL=game.component-QZJ6JRYG.js.map
