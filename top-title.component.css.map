@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/modules/game/components/top-title.component.css"],
-  "sourcesContent": ["h1 > span {\n  color: var(--purple);\n}\n\n.intro {\n  display: flex;\n  margin-block-end: 19px;\n  align-items: center;\n  gap: 8px;\n  color: var(--purple);\n}\n\n.intro > span {\n  font-size: 1.8rem;\n}\n\nh1 {\n  font-size: clamp(3.8rem, 4.8vw, 5.8rem);\n  font-weight: 900;\n  letter-spacing: -2.5px;\n  line-height: 1.08;\n}\n\n.japanese {\n  margin-block: 18px 12px;\n  font-size: 1.2rem;\n  font-weight: 700;\n  letter-spacing: 1px;\n}\n\n.japanese > span:first-child {\n  padding-inline: 9px;\n  color: #b5ad9e;\n}\n\n.description {\n  font-size: 1.4rem;\n  line-height: 1.8;\n  color: var(--muted);\n}\n\n@media (width <= 700px) {\n  h1 {\n    font-size: clamp(3.8rem, 8vw, 5.8rem);\n  }\n\n  .desktop-break {\n    display: none;\n  }\n}\n"],
-  "mappings": ";AAAA,GAAG,EAAE;AACH,SAAO,IAAI;AACb;AAEA,CAAC;AACC,WAAS;AACT,oBAAkB;AAClB,eAAa;AACb,OAAK;AACL,SAAO,IAAI;AACb;AAEA,CARC,MAQM,EAAE;AACP,aAAW;AACb;AAEA;AACE,aAAW,MAAM,MAAM,EAAE,KAAK,EAAE;AAChC,eAAa;AACb,kBAAgB;AAChB,eAAa;AACf;AAEA,CAAC;AACC,gBAAc,KAAK;AACnB,aAAW;AACX,eAAa;AACb,kBAAgB;AAClB;AAEA,CAPC,SAOS,EAAE,IAAI;AACd,kBAAgB;AAChB,SAAO;AACT;AAEA,CAAC;AACC,aAAW;AACX,eAAa;AACb,SAAO,IAAI;AACb;AAEA,QAAQ,SAAS;AACf;AACE,eAAW,MAAM,MAAM,EAAE,GAAG,EAAE;AAChC;AAEA,GAAC;AACC,aAAS;AACX;AACF;",
-  "names": []
-}

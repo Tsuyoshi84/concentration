@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/modules/game/components/flip-result.component.css"],
-  "sourcesContent": [".feedback {\n  display: grid;\n  min-block-size: 53px;\n  padding-block: 13px;\n  place-items: center;\n  text-align: center;\n}\n\n.result,\n.hint {\n  font-size: 1.3rem;\n}\n\n.hint {\n  color: var(--muted);\n}\n\n.result {\n  animation: feedback-in calc(200ms * var(--motion-factor)) ease-out;\n}\n\n.correct,\n.finish {\n  font-weight: 800;\n  color: #427455;\n}\n\n.fade-out-up,\n.fade-out-down {\n  animation: feedback-out calc(1000ms * var(--motion-factor)) forwards;\n}\n\n@keyframes feedback-in {\n  from {\n    opacity: 0;\n    transform: translateY(5px);\n  }\n\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n@keyframes feedback-out {\n  to {\n    opacity: 0;\n  }\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,kBAAgB;AAChB,iBAAe;AACf,eAAa;AACb,cAAY;AACd;AAEA,CAAC;AACD,CAAC;AACC,aAAW;AACb;AAEA,CAJC;AAKC,SAAO,IAAI;AACb;AAEA,CATC;AAUC,aAAW,YAAY,KAAK,MAAM,EAAE,IAAI,kBAAkB;AAC5D;AAEA,CAAC;AACD,CAAC;AACC,eAAa;AACb,SAAO;AACT;AAEA,CAAC;AACD,CAAC;AACC,aAAW,aAAa,KAAK,OAAO,EAAE,IAAI,kBAAkB;AAC9D;AAEA,WAda;AAeX;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AAEA;AACE,aAAS;AACT,eAAW,WAAW;AACxB;AACF;AAEA,WAfa;AAgBX;AACE,aAAS;AACX;AACF;",
-  "names": []
-}

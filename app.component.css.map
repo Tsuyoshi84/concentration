@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/app.component.css"],
-  "sourcesContent": [".app-component {\n  min-block-size: 100dvh;\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,kBAAgB;AAClB;",
-  "names": []
-}

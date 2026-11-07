@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["src/app/modules/game/components/card-list.component.css"],
-  "sourcesContent": [".container {\n  display: grid;\n  gap: 12px;\n}\n\n.four-cards {\n  max-inline-size: 540px;\n  margin-inline: auto;\n  grid-template-columns: repeat(4, 1fr);\n}\n\n.six-cards {\n  grid-template-columns: repeat(6, 1fr);\n}\n\napp-card {\n  min-inline-size: 0;\n  aspect-ratio: 1;\n}\n\n@media (width <= 600px) {\n  .container {\n    gap: 8px;\n  }\n}\n\n@media (width <= 450px) {\n  .six-cards {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n"],
-  "mappings": ";AAAA,CAAC;AACC,WAAS;AACT,OAAK;AACP;AAEA,CAAC;AACC,mBAAiB;AACjB,iBAAe;AACf,yBAAuB,OAAO,CAAC,EAAE;AACnC;AAEA,CAAC;AACC,yBAAuB,OAAO,CAAC,EAAE;AACnC;AAEA;AACE,mBAAiB;AACjB,gBAAc;AAChB;AAEA,QAAQ,SAAS;AACf,GArBD;AAsBG,SAAK;AACP;AACF;AAEA,QAAQ,SAAS;AACf,GAhBD;AAiBG,2BAAuB,OAAO,CAAC,EAAE;AACnC;AACF;",
-  "names": []
-}
