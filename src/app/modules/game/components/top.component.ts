@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeToggleComponent } from '../../../theme-toggle.component';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import type { Difficulty } from '../types';
 import { CardArtComponent } from './card-art.component';
@@ -10,7 +11,12 @@ import { TopTitleComponent } from './top-title.component';
   selector: 'app-top',
   templateUrl: './top.component.html',
   styleUrls: ['./top.component.css'],
-  imports: [TopTitleComponent, TopButtonComponent, CardArtComponent],
+  imports: [
+    ThemeToggleComponent,
+    TopTitleComponent,
+    TopButtonComponent,
+    CardArtComponent,
+  ],
 })
 export class TopComponent {
   private readonly router = inject(Router);

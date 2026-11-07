@@ -7,34 +7,34 @@
   inline-size: 100%;
   block-size: 100%;
   padding: 21px;
-  border: 1.5px solid #c7bedb;
+  border: 1.5px solid var(--level-border, #c7bedb);
   border-radius: 19px;
   flex-direction: column;
   text-align: start;
   color: var(--ink);
-  background: #eae0fc;
-  box-shadow: 0 4px 0 #d9cdef;
+  background: var(--level-one, #eae0fc);
+  box-shadow: 0 4px 0 var(--level-shadow, #d9cdef);
   transition:
     transform calc(180ms * var(--motion-factor)),
     box-shadow calc(180ms * var(--motion-factor));
 }
 
 .level-2 {
-  border-color: #b5cfc3;
-  background: #e1f0e7;
-  box-shadow: 0 4px 0 #cbded2;
+  border-color: var(--level-border, #b5cfc3);
+  background: var(--level-two, #e1f0e7);
+  box-shadow: 0 4px 0 var(--level-shadow, #cbded2);
 }
 
 .level-3 {
-  border-color: #ddc59b;
-  background: #fff0cc;
-  box-shadow: 0 4px 0 #eeddb6;
+  border-color: var(--level-border, #ddc59b);
+  background: var(--level-three, #fff0cc);
+  box-shadow: 0 4px 0 var(--level-shadow, #eeddb6);
 }
 
 .level-4 {
-  border-color: #e3b9a7;
-  background: #ffe2d6;
-  box-shadow: 0 4px 0 #f0ccbc;
+  border-color: var(--level-border, #e3b9a7);
+  background: var(--level-four, #ffe2d6);
+  box-shadow: 0 4px 0 var(--level-shadow, #f0ccbc);
 }
 
 .card-top {
@@ -52,7 +52,7 @@
   border-radius: 14px;
   place-items: center;
   font-size: 2.8rem;
-  background: rgb(255 255 255 / 50%);
+  background: var(--tile-icon, rgb(255 255 255 / 50%));
 }
 
 .level-number {
@@ -76,7 +76,7 @@
   display: flex;
   margin-block-start: 25px;
   padding-block-start: 14px;
-  border-block-start: 1px solid rgb(41 35 60 / 14%);
+  border-block-start: 1px solid var(--tile-rule, rgb(41 35 60 / 14%));
   align-items: center;
   justify-content: space-between;
   gap: 6px;

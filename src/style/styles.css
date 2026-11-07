@@ -2,12 +2,50 @@
 @import url("open-props/style");
 
 :root {
+  color-scheme: light;
+
   --motion-factor: 1;
   --ink: #29233c;
   --muted: #6f687e;
   --purple: #7042dc;
   --paper: #fffdf7;
   --line: #e4dfd5;
+  --page: #f8f5ec;
+  --board: #eee9df;
+  --success: #427455;
+  --matched: #e3f2e7;
+  --matched-line: #93c6a5;
+  --celebration: #eee4fd;
+  --celebration-line: #d1b9ed;
+  --celebration-ink: #664397;
+  --progress-track: #eee7f7;
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --ink: #f1ecfb;
+  --muted: #bcb3ce;
+  --purple: #b391ff;
+  --paper: #282332;
+  --line: #50465f;
+  --page: #1a1721;
+  --board: #221e2c;
+  --success: #a0dcaf;
+  --matched: #243d30;
+  --matched-line: #618c70;
+  --celebration: #332744;
+  --celebration-line: #71538d;
+  --celebration-ink: #d5b7fa;
+  --progress-track: #453851;
+  --level-one: #392d50;
+  --level-two: #253f34;
+  --level-three: #463b23;
+  --level-four: #4b302b;
+  --level-border: #776786;
+  --level-shadow: #110e18;
+  --tile-rule: #776786;
+  --tile-icon: rgb(255 255 255 / 10%);
 }
 
 html {
@@ -21,7 +59,7 @@ body {
   font-size: 1.6rem;
   line-height: 1.5;
   color: var(--ink);
-  background: #f8f5ec;
+  background: var(--page);
 }
 
 * {
@@ -67,6 +105,12 @@ button:disabled {
   gap: 20px;
 }
 
+.masthead-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -85,6 +129,7 @@ button:disabled {
   border-radius: 10px;
   place-items: center;
   font-size: 25px;
+  color: #29233c;
   background: #f5cb55;
 }
 
@@ -120,6 +165,10 @@ button:disabled {
   transition: transform calc(150ms * var(--motion-factor));
 }
 
+.masthead-actions .action {
+  white-space: nowrap;
+}
+
 .action:enabled:hover {
   transform: translateY(-2px);
 }
@@ -127,7 +176,7 @@ button:disabled {
 .action.primary {
   border-color: var(--purple);
   color: white;
-  background: var(--purple);
+  background: #7042dc;
   box-shadow: 0 4px 0 #4a289a;
 }
 
@@ -138,11 +187,12 @@ button:disabled {
 
   .masthead {
     min-block-size: 78px;
+    padding-block: 16px;
+    flex-wrap: wrap;
   }
 
-  .masthead > .eyebrow {
-    font-size: 0.9rem;
-    letter-spacing: 1px;
+  .masthead-actions > .eyebrow {
+    display: none;
   }
 
   .arcade-footer {

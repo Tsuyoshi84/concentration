@@ -3,11 +3,11 @@
   margin-block: 20px 24px;
   padding-inline: 20px;
   padding-block: 25px;
-  border: 1px solid #d1b9ed;
+  border: 1px solid var(--celebration-line);
   border-radius: 20px;
   overflow: hidden;
   text-align: center;
-  background: #eee4fd;
+  background: var(--celebration);
   animation: win-in calc(350ms * var(--motion-factor)) ease-out;
 }
 
@@ -18,7 +18,7 @@
 
 .celebration .eyebrow {
   margin-block: 8px;
-  color: #664397;
+  color: var(--celebration-ink);
 }
 
 h2 {

@@ -59,15 +59,15 @@
 }
 
 .back {
-  border-color: #dfd5c3;
+  border-color: var(--line);
   font-size: clamp(2.2rem, 5vw, 4.4rem);
-  background: #fffdf7;
+  background: var(--paper);
   transform: rotateY(180deg);
 }
 
 .matched .back {
-  border-color: #93c6a5;
-  background: #e3f2e7;
+  border-color: var(--matched-line);
+  background: var(--matched);
   animation: match-pop calc(350ms * var(--motion-factor)) ease-out;
 }
 
@@ -77,7 +77,7 @@
   inset-block-start: 4px;
   font-size: 1.2rem;
   font-weight: 800;
-  color: #35714d;
+  color: var(--success);
 }
 
 @media (hover: hover) {
