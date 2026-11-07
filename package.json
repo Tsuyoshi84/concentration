@@ -23,7 +23,7 @@
   "private": true,
   "packageManager": "pnpm@12.16.1",
   "engines": {
-    "node": ">=24.15.0",
+    "node": ">=26.0.0",
     "npm": "use-pnpm",
     "yarn": "use-pnpm",
     "pnpm": ">=12.8.1"
