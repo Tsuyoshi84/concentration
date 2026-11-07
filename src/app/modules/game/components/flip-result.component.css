@@ -22,7 +22,7 @@
 .correct,
 .finish {
   font-weight: 800;
-  color: #427455;
+  color: var(--success);
 }
 
 .fade-out-up,

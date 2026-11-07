@@ -47,7 +47,7 @@ h2 {
   margin-block: 35px;
   padding-inline: 25px;
   padding-block: 23px;
-  border: 1px dashed #ccc4b6;
+  border: 1px dashed var(--line);
   border-radius: 16px;
   align-items: center;
   justify-content: space-between;
@@ -69,7 +69,7 @@ h2 {
   place-items: center;
   font-size: 1rem;
   font-weight: 800;
-  background: #eae4db;
+  background: var(--board);
 }
 
 .step-arrow {

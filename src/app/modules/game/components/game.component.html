@@ -1,5 +1,5 @@
 <div class="arcade-shell">
-  <header class="masthead"><a class="brand" href="#/" aria-label="Concentration home"><span class="brand-mark" aria-hidden="true">✳</span> concentration.</a><span class="eyebrow quiet">FLIP. MATCH. HAPPY DANCE.</span></header>
+  <header class="masthead"><a class="brand" href="#/" aria-label="Concentration home"><span class="brand-mark" aria-hidden="true">✳</span> concentration.</a><div class="masthead-actions"><span class="eyebrow quiet">FLIP. MATCH. HAPPY DANCE.</span><app-theme-toggle></app-theme-toggle></div></header>
   <section class="game-container" aria-labelledby="board-title">
     <div class="board-heading"><div><p class="eyebrow quiet">{{ difficulty()?.num }} CARDS · {{ totalPairs() }} PAIRS</p><h1 id="board-title"><span aria-hidden="true">{{ difficulty()?.icon }}</span> {{ difficulty()?.label }} mode<span class="title-dot">.</span></h1></div><button type="button" class="text-button" (click)="back()">← Choose difficulty</button></div>
     <app-game-progress [numOfTry]="numOfTry()" [pairsFound]="pairsFound()" [totalPairs]="totalPairs()"></app-game-progress>

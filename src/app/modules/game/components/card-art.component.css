@@ -17,7 +17,7 @@
   display: grid;
   inline-size: 30.5%;
   block-size: 55.4%;
-  border: 2px solid var(--ink);
+  border: 2px solid #29233c;
   border-radius: 20px;
   place-items: center;
   font-size: 15cqi;
@@ -64,11 +64,11 @@
   display: grid;
   inline-size: 28%;
   aspect-ratio: 1;
-  border: 2px solid var(--ink);
+  border: 2px solid #29233c;
   border-radius: 50%;
   place-items: center;
   font-size: 5cqi;
-  color: var(--ink);
+  color: #29233c;
   background: #b9e8c0;
 }
 

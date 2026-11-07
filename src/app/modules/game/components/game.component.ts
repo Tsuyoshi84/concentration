@@ -10,6 +10,7 @@ import {
   type WritableSignal,
 } from '@angular/core';
 import { Router } from '@angular/router';
+import { ThemeToggleComponent } from '../../../theme-toggle.component';
 import { GAME_DIFFICULTY } from '../constants/game-difficulty';
 import { GameService } from '../services/game.service';
 import type { Card, Result } from '../types';
@@ -23,6 +24,7 @@ import { GameProgressComponent } from './game-progress.component';
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css'],
   imports: [
+    ThemeToggleComponent,
     GameProgressComponent,
     FlipResultComponent,
     CardListComponent,

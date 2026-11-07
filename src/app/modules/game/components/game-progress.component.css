@@ -45,12 +45,12 @@ progress {
   border-radius: 8px;
   overflow: hidden;
   accent-color: var(--purple);
-  background: #eee7f7;
+  background: var(--progress-track);
 }
 
 progress::-webkit-progress-bar {
   border-radius: 8px;
-  background: #eee7f7;
+  background: var(--progress-track);
 }
 
 progress::-webkit-progress-value {
